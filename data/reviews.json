@@ -1,0 +1,410 @@
+[
+  {
+    "id": "r001",
+    "productId": "p02",
+    "rating": 3,
+    "content": "소재가 부드럽고 가벼워서 매일 입게 됩니다.",
+    "author": "choi4***",
+    "createdAt": "2026-09-02"
+  },
+  {
+    "id": "r002",
+    "productId": "p02",
+    "rating": 5,
+    "content": "생각보다 크게 나와서 한 사이즈 작게 주문하는 것을 추천해요.",
+    "author": "han7***",
+    "createdAt": "2026-09-06"
+  },
+  {
+    "id": "r003",
+    "productId": "p02",
+    "rating": 3,
+    "content": "배송이 빨랐고 마감도 깔끔합니다.",
+    "author": "kim3***",
+    "createdAt": "2026-09-10"
+  },
+  {
+    "id": "r004",
+    "productId": "p04",
+    "rating": 4,
+    "content": "배송이 빨랐고 마감도 깔끔합니다.",
+    "author": "jung3***",
+    "createdAt": "2026-09-04"
+  },
+  {
+    "id": "r005",
+    "productId": "p04",
+    "rating": 4,
+    "content": "가격 대비 만족스러워요. 다른 색상도 사고 싶어요.",
+    "author": "jung6***",
+    "createdAt": "2026-09-08"
+  },
+  {
+    "id": "r006",
+    "productId": "p04",
+    "rating": 4,
+    "content": "핏이 정말 예뻐요. 사진과 색감이 똑같아요.",
+    "author": "jung5***",
+    "createdAt": "2026-09-12"
+  },
+  {
+    "id": "r007",
+    "productId": "p06",
+    "rating": 4,
+    "content": "핏이 정말 예뻐요. 사진과 색감이 똑같아요.",
+    "author": "yoon7***",
+    "createdAt": "2026-09-06"
+  },
+  {
+    "id": "r008",
+    "productId": "p06",
+    "rating": 5,
+    "content": "소재가 부드럽고 가벼워서 매일 입게 됩니다.",
+    "author": "shin0***",
+    "createdAt": "2026-09-10"
+  },
+  {
+    "id": "r009",
+    "productId": "p06",
+    "rating": 3,
+    "content": "생각보다 크게 나와서 한 사이즈 작게 주문하는 것을 추천해요.",
+    "author": "kim3***",
+    "createdAt": "2026-09-14"
+  },
+  {
+    "id": "r010",
+    "productId": "p08",
+    "rating": 4,
+    "content": "생각보다 크게 나와서 한 사이즈 작게 주문하는 것을 추천해요.",
+    "author": "jung4***",
+    "createdAt": "2026-09-08"
+  },
+  {
+    "id": "r011",
+    "productId": "p08",
+    "rating": 4,
+    "content": "배송이 빨랐고 마감도 깔끔합니다.",
+    "author": "choi0***",
+    "createdAt": "2026-09-12"
+  },
+  {
+    "id": "r012",
+    "productId": "p08",
+    "rating": 5,
+    "content": "가격 대비 만족스러워요. 다른 색상도 사고 싶어요.",
+    "author": "lee4***",
+    "createdAt": "2026-09-16"
+  },
+  {
+    "id": "r013",
+    "productId": "p10",
+    "rating": 4,
+    "content": "가격 대비 만족스러워요. 다른 색상도 사고 싶어요.",
+    "author": "shin5***",
+    "createdAt": "2026-09-10"
+  },
+  {
+    "id": "r014",
+    "productId": "p10",
+    "rating": 5,
+    "content": "핏이 정말 예뻐요. 사진과 색감이 똑같아요.",
+    "author": "shin0***",
+    "createdAt": "2026-09-14"
+  },
+  {
+    "id": "r015",
+    "productId": "p10",
+    "rating": 3,
+    "content": "소재가 부드럽고 가벼워서 매일 입게 됩니다.",
+    "author": "choi4***",
+    "createdAt": "2026-09-18"
+  },
+  {
+    "id": "r016",
+    "productId": "p12",
+    "rating": 4,
+    "content": "소재가 부드럽고 가벼워서 매일 입게 됩니다.",
+    "author": "kim4***",
+    "createdAt": "2026-09-12"
+  },
+  {
+    "id": "r017",
+    "productId": "p12",
+    "rating": 5,
+    "content": "생각보다 크게 나와서 한 사이즈 작게 주문하는 것을 추천해요.",
+    "author": "lee2***",
+    "createdAt": "2026-09-16"
+  },
+  {
+    "id": "r018",
+    "productId": "p12",
+    "rating": 4,
+    "content": "배송이 빨랐고 마감도 깔끔합니다.",
+    "author": "kim2***",
+    "createdAt": "2026-09-20"
+  },
+  {
+    "id": "r019",
+    "productId": "p14",
+    "rating": 3,
+    "content": "배송이 빨랐고 마감도 깔끔합니다.",
+    "author": "yoon6***",
+    "createdAt": "2026-09-14"
+  },
+  {
+    "id": "r020",
+    "productId": "p14",
+    "rating": 5,
+    "content": "가격 대비 만족스러워요. 다른 색상도 사고 싶어요.",
+    "author": "jung2***",
+    "createdAt": "2026-09-18"
+  },
+  {
+    "id": "r021",
+    "productId": "p14",
+    "rating": 4,
+    "content": "핏이 정말 예뻐요. 사진과 색감이 똑같아요.",
+    "author": "yoon8***",
+    "createdAt": "2026-09-22"
+  },
+  {
+    "id": "r022",
+    "productId": "p16",
+    "rating": 4,
+    "content": "핏이 정말 예뻐요. 사진과 색감이 똑같아요.",
+    "author": "han0***",
+    "createdAt": "2026-09-16"
+  },
+  {
+    "id": "r023",
+    "productId": "p16",
+    "rating": 3,
+    "content": "소재가 부드럽고 가벼워서 매일 입게 됩니다.",
+    "author": "jung2***",
+    "createdAt": "2026-09-20"
+  },
+  {
+    "id": "r024",
+    "productId": "p16",
+    "rating": 3,
+    "content": "생각보다 크게 나와서 한 사이즈 작게 주문하는 것을 추천해요.",
+    "author": "jung7***",
+    "createdAt": "2026-09-24"
+  },
+  {
+    "id": "r025",
+    "productId": "p18",
+    "rating": 5,
+    "content": "생각보다 크게 나와서 한 사이즈 작게 주문하는 것을 추천해요.",
+    "author": "han7***",
+    "createdAt": "2026-09-18"
+  },
+  {
+    "id": "r026",
+    "productId": "p18",
+    "rating": 4,
+    "content": "배송이 빨랐고 마감도 깔끔합니다.",
+    "author": "han0***",
+    "createdAt": "2026-09-22"
+  },
+  {
+    "id": "r027",
+    "productId": "p18",
+    "rating": 5,
+    "content": "가격 대비 만족스러워요. 다른 색상도 사고 싶어요.",
+    "author": "shin2***",
+    "createdAt": "2026-09-26"
+  },
+  {
+    "id": "r028",
+    "productId": "p20",
+    "rating": 3,
+    "content": "가격 대비 만족스러워요. 다른 색상도 사고 싶어요.",
+    "author": "choi3***",
+    "createdAt": "2026-09-20"
+  },
+  {
+    "id": "r029",
+    "productId": "p20",
+    "rating": 5,
+    "content": "핏이 정말 예뻐요. 사진과 색감이 똑같아요.",
+    "author": "shin5***",
+    "createdAt": "2026-09-24"
+  },
+  {
+    "id": "r030",
+    "productId": "p20",
+    "rating": 3,
+    "content": "소재가 부드럽고 가벼워서 매일 입게 됩니다.",
+    "author": "lee6***",
+    "createdAt": "2026-09-28"
+  },
+  {
+    "id": "r031",
+    "productId": "p22",
+    "rating": 5,
+    "content": "소재가 부드럽고 가벼워서 매일 입게 됩니다.",
+    "author": "lee4***",
+    "createdAt": "2026-09-22"
+  },
+  {
+    "id": "r032",
+    "productId": "p22",
+    "rating": 3,
+    "content": "생각보다 크게 나와서 한 사이즈 작게 주문하는 것을 추천해요.",
+    "author": "yoon1***",
+    "createdAt": "2026-09-26"
+  },
+  {
+    "id": "r033",
+    "productId": "p22",
+    "rating": 3,
+    "content": "배송이 빨랐고 마감도 깔끔합니다.",
+    "author": "han8***",
+    "createdAt": "2026-09-02"
+  },
+  {
+    "id": "r034",
+    "productId": "p24",
+    "rating": 5,
+    "content": "배송이 빨랐고 마감도 깔끔합니다.",
+    "author": "han0***",
+    "createdAt": "2026-09-24"
+  },
+  {
+    "id": "r035",
+    "productId": "p24",
+    "rating": 5,
+    "content": "가격 대비 만족스러워요. 다른 색상도 사고 싶어요.",
+    "author": "kim7***",
+    "createdAt": "2026-09-28"
+  },
+  {
+    "id": "r036",
+    "productId": "p24",
+    "rating": 4,
+    "content": "핏이 정말 예뻐요. 사진과 색감이 똑같아요.",
+    "author": "park2***",
+    "createdAt": "2026-09-04"
+  },
+  {
+    "id": "r037",
+    "productId": "p26",
+    "rating": 5,
+    "content": "핏이 정말 예뻐요. 사진과 색감이 똑같아요.",
+    "author": "shin2***",
+    "createdAt": "2026-09-26"
+  },
+  {
+    "id": "r038",
+    "productId": "p26",
+    "rating": 5,
+    "content": "소재가 부드럽고 가벼워서 매일 입게 됩니다.",
+    "author": "yoon5***",
+    "createdAt": "2026-09-02"
+  },
+  {
+    "id": "r039",
+    "productId": "p26",
+    "rating": 3,
+    "content": "생각보다 크게 나와서 한 사이즈 작게 주문하는 것을 추천해요.",
+    "author": "jung3***",
+    "createdAt": "2026-09-06"
+  },
+  {
+    "id": "r040",
+    "productId": "p28",
+    "rating": 4,
+    "content": "생각보다 크게 나와서 한 사이즈 작게 주문하는 것을 추천해요.",
+    "author": "park4***",
+    "createdAt": "2026-09-28"
+  },
+  {
+    "id": "r041",
+    "productId": "p28",
+    "rating": 5,
+    "content": "배송이 빨랐고 마감도 깔끔합니다.",
+    "author": "park5***",
+    "createdAt": "2026-09-04"
+  },
+  {
+    "id": "r042",
+    "productId": "p28",
+    "rating": 4,
+    "content": "가격 대비 만족스러워요. 다른 색상도 사고 싶어요.",
+    "author": "shin8***",
+    "createdAt": "2026-09-08"
+  },
+  {
+    "id": "r043",
+    "productId": "p30",
+    "rating": 5,
+    "content": "가격 대비 만족스러워요. 다른 색상도 사고 싶어요.",
+    "author": "yoon7***",
+    "createdAt": "2026-09-02"
+  },
+  {
+    "id": "r044",
+    "productId": "p30",
+    "rating": 4,
+    "content": "핏이 정말 예뻐요. 사진과 색감이 똑같아요.",
+    "author": "choi3***",
+    "createdAt": "2026-09-06"
+  },
+  {
+    "id": "r045",
+    "productId": "p30",
+    "rating": 3,
+    "content": "소재가 부드럽고 가벼워서 매일 입게 됩니다.",
+    "author": "park1***",
+    "createdAt": "2026-09-10"
+  },
+  {
+    "id": "r046",
+    "productId": "p32",
+    "rating": 5,
+    "content": "소재가 부드럽고 가벼워서 매일 입게 됩니다.",
+    "author": "han3***",
+    "createdAt": "2026-09-04"
+  },
+  {
+    "id": "r047",
+    "productId": "p32",
+    "rating": 4,
+    "content": "생각보다 크게 나와서 한 사이즈 작게 주문하는 것을 추천해요.",
+    "author": "shin2***",
+    "createdAt": "2026-09-08"
+  },
+  {
+    "id": "r048",
+    "productId": "p32",
+    "rating": 3,
+    "content": "배송이 빨랐고 마감도 깔끔합니다.",
+    "author": "yoon1***",
+    "createdAt": "2026-09-12"
+  },
+  {
+    "id": "r049",
+    "productId": "p34",
+    "rating": 4,
+    "content": "배송이 빨랐고 마감도 깔끔합니다.",
+    "author": "park0***",
+    "createdAt": "2026-09-06"
+  },
+  {
+    "id": "r050",
+    "productId": "p34",
+    "rating": 5,
+    "content": "가격 대비 만족스러워요. 다른 색상도 사고 싶어요.",
+    "author": "yoon2***",
+    "createdAt": "2026-09-10"
+  },
+  {
+    "id": "r051",
+    "productId": "p34",
+    "rating": 4,
+    "content": "핏이 정말 예뻐요. 사진과 색감이 똑같아요.",
+    "author": "jung1***",
+    "createdAt": "2026-09-14"
+  }
+]

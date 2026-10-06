@@ -1,0 +1,88 @@
+{
+  "title": "AUTUMN WINTER 26",
+  "description": "차분한 톤과 구조적인 실루엣으로 완성한 이번 시즌의 룩. 한 장의 컷에서 시작되는 스타일을 만나보세요.",
+  "items": [
+    {
+      "id": "l01",
+      "image": "/images/ph/look-1.svg",
+      "size": "large",
+      "productIds": [
+        "p01",
+        "p02"
+      ]
+    },
+    {
+      "id": "l02",
+      "image": "/images/ph/look-2.svg",
+      "size": "normal",
+      "productIds": [
+        "p08",
+        "p09"
+      ]
+    },
+    {
+      "id": "l03",
+      "image": "/images/ph/look-3.svg",
+      "size": "normal",
+      "productIds": [
+        "p10"
+      ]
+    },
+    {
+      "id": "l04",
+      "image": "/images/ph/look-4.svg",
+      "size": "normal",
+      "productIds": [
+        "p15"
+      ]
+    },
+    {
+      "id": "l05",
+      "image": "/images/ph/look-5.svg",
+      "size": "normal",
+      "productIds": [
+        "p16"
+      ]
+    },
+    {
+      "id": "l06",
+      "image": "/images/ph/look-1.svg",
+      "size": "normal",
+      "productIds": [
+        "p22"
+      ]
+    },
+    {
+      "id": "l07",
+      "image": "/images/ph/look-2.svg",
+      "size": "large",
+      "productIds": [
+        "p23"
+      ]
+    },
+    {
+      "id": "l08",
+      "image": "/images/ph/look-3.svg",
+      "size": "normal",
+      "productIds": [
+        "p24"
+      ]
+    },
+    {
+      "id": "l09",
+      "image": "/images/ph/look-4.svg",
+      "size": "normal",
+      "productIds": [
+        "p29"
+      ]
+    },
+    {
+      "id": "l10",
+      "image": "/images/ph/look-5.svg",
+      "size": "normal",
+      "productIds": [
+        "p30"
+      ]
+    }
+  ]
+}
