@@ -25,7 +25,8 @@
 |---|---|---|
 | 구현 | 공통 레이아웃(헤더, 사이드바, 모바일 드로어, 푸터) | 완전 구현 |
 | 구현 | 메인, 상품 리스트, 상품 상세, 장바구니(드로어 + 페이지) | 완전 구현 |
-| 자리만 | 로그인, 주문내역, 마이페이지, 커뮤니티 3종, 검색 결과 | 제목과 "준비 중" 문구만 있는 페이지. 공통 레이아웃은 적용 |
+| 구현(보여주기용) | 로그인, 커뮤니티 3종 | 로그인: 입력 폼과 안내 메시지만 있고 API 연동 없음. 커뮤니티: 공지 3건, FAQ 3건, 리뷰 3건의 임시 데이터 |
+| 자리만 | 주문내역, 마이페이지, 검색 결과 | 제목과 "준비 중" 문구만 있는 페이지. 공통 레이아웃은 적용 |
 | 제외 | 결제, 회원가입, 관리자, 실제 인증과 DB | 만들지 않는다 |
 
 ## 4. 라우트
@@ -33,16 +34,16 @@
 | 경로 | 페이지 | 사이드바 |
 |---|---|---|
 | `/` | 메인 | 없음 |
-| `/new-arrivals` | 상품 리스트 (신상품) | SHOP 메뉴 |
+| `/new-arrivals` | 상품 리스트 (신상품) | 없음 |
 | `/shop` | 상품 리스트 (ALL) | SHOP 메뉴 |
 | `/shop/[category]` | 상품 리스트 (카테고리) | SHOP 메뉴 |
 | `/product/[id]` | 상품 상세 | 없음 |
 | `/cart` | 장바구니 | 없음 |
 | `/search` | 검색 결과 (자리만) | SHOP 메뉴 |
-| `/login` | 로그인 (자리만) | 없음 |
+| `/login` | 로그인 (보여주기용) | 없음 |
 | `/order` | 주문내역 (자리만) | 없음 |
 | `/mypage` | 마이페이지 (자리만) | 없음 |
-| `/community/notice` `/community/faq` `/community/review` | 커뮤니티 (자리만) | COMMUNITY 메뉴 |
+| `/community/notice` `/community/faq` `/community/review` | 커뮤니티 (임시 데이터) | COMMUNITY 메뉴 |
 
 카테고리 slug: `outerwear`, `top`, `bottom`, `dresses`, `acc`
 
@@ -55,7 +56,7 @@
   - 로그인 상태에서는 `LOGIN`이 `MY PAGE`로 바뀐다. 1차에서는 비로그인 상태로 고정한다.
   - 비로그인 상태에서 `ORDER`를 누르면 `/login`으로 이동한다.
 - `SHOP`을 누르면 `/shop`으로, `COMMUNITY`를 누르면 `/community/notice`로 이동한다.
-- SEARCH는 헤더가 아니라 왼쪽 사이드바 하단에 둔다. 입력 후 Enter를 누르면 `/search?q=검색어`로 이동한다.
+- SEARCH는 PC와 태블릿에서 헤더 맨 오른쪽에 둔다(사이드바에는 두지 않는다). 입력 후 Enter를 누르면 `/search?q=검색어`로 이동한다. 모바일은 메뉴 드로어 안에 둔다.
 
 ## 6. 폴더 구조
 
@@ -81,7 +82,7 @@
   home/      LookbookGrid, NewArrivalsSection
   ui/        Button, Accordion, QuantityStepper, Pagination, ColorChip,
              SizeSelector, IconButton
-/data        products.json, lookbook.json, reviews.json, qna.json
+/data        products.json, lookbook.json, reviews.json, qna.json, community.json
 /lib         api.ts, format.ts (가격 표기), types.ts
 /store       cart.ts, wishlist.ts, ui.ts (드로어 열림 상태)
 /public      logo.svg, images/
@@ -141,28 +142,28 @@ interface CartItem {
 }
 ```
 
-목업 데이터 분량: 상품 30개 이상(카테고리별 5개 이상, 신상품 12개), 룩북 컷 10개, 상품당 리뷰 0~5개, Q&A 0~3개.
+목업 데이터 분량: 상품 22개(OUTERWEAR 6 / TOP 6 / BOTTOM 4 / DRESSES 4 / ACC 2, 신상품 12개), 룩북 컷 10개, 상품당 리뷰 0~5개, Q&A 0~3개.
 실제 이미지가 없는 동안에는 3:4 비율의 회색 임시 이미지를 쓰되, 상품 컷과 착용 컷은 호버 전환이 눈에 보이도록 서로 다른 명도로 구분한다.
 
 ## 8. 공통 레이아웃
 
 ### Header
-- PC: 왼쪽 로고(메인으로 이동), 오른쪽에 1뎁스 3개, 간격을 두고 글로벌 메뉴 3개. 상단 고정.
+- PC: 왼쪽 로고(메인으로 이동), 오른쪽에 1뎁스 3개, 간격을 두고 글로벌 메뉴 3개, 맨 오른쪽 SEARCH 입력. 상단 고정. 배경은 반투명 흰색에 블러(backdrop-blur)를 적용해 아래로 지나가는 콘텐츠가 흐리게 비친다.
 - 현재 위치한 1뎁스는 활성 표시.
 - CART는 담긴 수량을 함께 표시한다. 누르면 `/cart`로 이동한다.
 - 모바일(767px 이하): 왼쪽 햄버거, 가운데 로고, 오른쪽 검색 아이콘과 CART.
 
 ### Sidebar (PC, 태블릿)
 - 사이드바가 있는 라우트에서만 노출한다(4장 표 참조).
-- 구성: 2뎁스 메뉴 목록, 그 아래 SEARCH 입력.
+- 구성: 2뎁스 메뉴 목록.
 - 현재 메뉴는 활성 표시. 스크롤 시 헤더 아래에 고정.
-- `/new-arrivals`에서는 SHOP 메뉴를 보여주되 활성 항목은 없다.
+- `/new-arrivals`에서는 사이드바(모바일은 카테고리 탭)를 노출하지 않는다.
 
 ### MobileDrawer
 - 햄버거를 누르면 전체 화면으로 열린다.
 - 구성: 1뎁스(SHOP, COMMUNITY는 아코디언으로 2뎁스 펼침), 구분선, 글로벌 메뉴, SEARCH 입력.
 - 열려 있는 동안 본문 스크롤을 잠근다. 메뉴 이동 시 자동으로 닫힌다.
-- 모바일의 상품 리스트에서는 사이드바 대신 그리드 위에 2뎁스 가로 스크롤 탭을 둔다.
+- 모바일의 상품 리스트(`/shop` 계열)에서는 사이드바 대신 그리드 위에 2뎁스 가로 스크롤 탭을 둔다.
 
 ### Footer
 - 브랜드명, 사업자 정보(임시 문구), 이용약관, 개인정보처리방침 링크(임시), 저작권 표기.
@@ -204,7 +205,7 @@ ProductCard
 
 ### 9-3. 상품 상세 `/product/[id]`
 
-위에서 아래 순서로 배치한다.
+위에서 아래 순서로 배치한다. 페이지 전체의 콘텐츠 폭은 최대 1160px(좌우 여백 포함)로 제한해 PC에서 양옆 여백을 더 둔다.
 
 1. **상단 2단 영역**
    - 왼쪽(약 60%) ProductGallery: `images.gallery`를 좌우 슬라이드. 좌우 화살표, 현재 위치 표시, 모바일은 스와이프.

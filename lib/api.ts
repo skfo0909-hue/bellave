@@ -3,12 +3,14 @@ import productsData from '@/data/products.json';
 import lookbookData from '@/data/lookbook.json';
 import reviewsData from '@/data/reviews.json';
 import qnaData from '@/data/qna.json';
-import type { Category, Lookbook, Product, ProductSummary, Qna, Review, SortKey } from './types';
+import communityData from '@/data/community.json';
+import type { Category, CommunityReview, Faq, Lookbook, Notice, Product, ProductSummary, Qna, Review, SortKey } from './types';
 
 const products = productsData as Product[];
 const lookbook = lookbookData as Lookbook;
 const reviews = reviewsData as Review[];
 const qna = qnaData as Qna[];
+const community = communityData as { notice: Notice[]; faq: Faq[]; review: CommunityReview[] };
 
 export const PAGE_SIZE = 24;
 
@@ -74,4 +76,16 @@ export async function getReviews(productId: string): Promise<Review[]> {
 
 export async function getQna(productId: string): Promise<Qna[]> {
   return qna.filter((q) => q.productId === productId).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+export async function getNotices(): Promise<Notice[]> {
+  return [...community.notice].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+export async function getFaqs(): Promise<Faq[]> {
+  return community.faq;
+}
+
+export async function getCommunityReviews(): Promise<CommunityReview[]> {
+  return [...community.review].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }

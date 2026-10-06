@@ -21,11 +21,13 @@ export async function ProductListPage({
   basePath,
   scope,
   sp,
+  showMenu = true,
 }: {
   title: string;
   basePath: string;
   scope: ProductQuery['scope'];
   sp: { sort?: string; page?: string };
+  showMenu?: boolean; // false면 왼쪽 카테고리(사이드바, 모바일 탭)를 노출하지 않는다
 }) {
   const { sort, page } = parseListParams(sp);
   const result = await getProducts({ scope, sort, page });
@@ -37,10 +39,9 @@ export async function ProductListPage({
     return s ? `${basePath}?${s}` : basePath;
   };
 
-  return (
-    <PageWithSidebar menu="shop">
+  const content = (
       <div className="pt-4 md:pt-6">
-        <CategoryTabs />
+        {showMenu && <CategoryTabs />}
         <div className="mb-6 flex items-center justify-between">
           <h1 className="text-section uppercase">
             {title} <span className="text-gray-600">({result.total})</span>
@@ -56,6 +57,11 @@ export async function ProductListPage({
           </>
         )}
       </div>
-    </PageWithSidebar>
+  );
+
+  return showMenu ? (
+    <PageWithSidebar menu="shop">{content}</PageWithSidebar>
+  ) : (
+    <div className="page-x mx-auto max-w-page pb-30">{content}</div>
   );
 }

@@ -60,6 +60,28 @@ export interface CartItem {
   quantity: number;
 }
 
+export interface Notice {
+  id: string;
+  title: string;
+  body: string;
+  createdAt: string;
+}
+
+export interface Faq {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+export interface CommunityReview {
+  id: string;
+  productId: string;
+  rating: number;
+  content: string;
+  author: string;
+  createdAt: string;
+}
+
 /** 클라이언트 컴포넌트(장바구니 등)가 상품 정보를 읽을 때 쓰는 요약 */
 export interface ProductSummary {
   id: string;

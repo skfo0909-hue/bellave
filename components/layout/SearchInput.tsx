@@ -1,10 +1,11 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useId, useState } from 'react';
 
 export function SearchInput({ className = '', onSubmitted }: { className?: string; onSubmitted?: () => void }) {
   const router = useRouter();
   const [q, setQ] = useState('');
+  const id = useId();
   return (
     <form
       role="search"
@@ -17,10 +18,10 @@ export function SearchInput({ className = '', onSubmitted }: { className?: strin
         onSubmitted?.();
       }}
     >
-      <label className="sr-only" htmlFor="search-q">
+      <label className="sr-only" htmlFor={id}>
         검색어
       </label>
-      <input id="search-q" type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="SEARCH" className="underline-input text-label uppercase" />
+      <input id={id} type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="SEARCH" className="underline-input text-label uppercase" />
     </form>
   );
 }

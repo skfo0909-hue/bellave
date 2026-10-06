@@ -7,8 +7,9 @@ import { MenuIcon, SearchIcon } from '@/components/ui/Icon';
 import { GLOBAL_MENU, MAIN_MENU } from '@/lib/menu';
 import { selectTotalQuantity, useCartStore } from '@/store/cart';
 import { useUiStore } from '@/store/ui';
+import { SearchInput } from './SearchInput';
 
-const item = (active: boolean) => `inline-flex h-[44px] items-center text-label uppercase ${active ? 'font-semibold' : ''} hover:underline`;
+const item = (active: boolean) => `inline-flex h-[44px] items-center whitespace-nowrap text-label uppercase ${active ? 'font-semibold' : ''} hover:underline`;
 
 export function Header() {
   const pathname = usePathname();
@@ -17,7 +18,7 @@ export function Header() {
   const cartLabel = `CART (${count})`;
 
   return (
-    <header className="fixed inset-x-0 top-0 z-header h-[56px] bg-white lg:h-[80px]">
+    <header className="fixed inset-x-0 top-0 z-header h-[56px] bg-white/80 backdrop-blur-md lg:h-[80px]">
       <div className="page-x mx-auto flex h-full max-w-page items-center justify-between">
         {/* 모바일: 햄버거 / 로고 / 검색, CART */}
         <div className="flex items-center md:hidden">
@@ -39,7 +40,7 @@ export function Header() {
 
         {/* 태블릿, PC */}
         <nav aria-label="주 메뉴" className="hidden items-center md:flex">
-          <ul className="flex items-center gap-6">
+          <ul className="flex items-center gap-4 lg:gap-6">
             {MAIN_MENU.map((m) => {
               const active = m.match(pathname);
               return (
@@ -51,7 +52,7 @@ export function Header() {
               );
             })}
           </ul>
-          <ul className="ml-12 flex items-center gap-5">
+          <ul className="ml-6 flex items-center gap-3 lg:ml-12 lg:gap-5">
             {GLOBAL_MENU.map((m) => (
               <li key={m.label}>
                 <Link href={m.href} className={item(false)}>
@@ -63,6 +64,9 @@ export function Header() {
               <Link href="/cart" aria-current={pathname === '/cart' ? 'page' : undefined} className={item(pathname === '/cart')}>
                 {cartLabel}
               </Link>
+            </li>
+            <li>
+              <SearchInput className="w-[80px] lg:w-[120px]" />
             </li>
           </ul>
         </nav>

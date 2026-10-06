@@ -56,13 +56,15 @@ const catalog = {
   dresses: ['Slip Midi Dress', 'Knit Wrap Dress', 'Shirt Dress with Belt', 'Pleated Chiffon Dress', 'A-Line Mini Dress', 'Tweed Sheath Dress', 'Linen Maxi Dress'],
   acc: ['Leather Mini Shoulder Bag', 'Wool Muffler', 'Chain Hoop Earrings', 'Leather Belt', 'Silk Scarf', 'Canvas Tote Bag', 'Knit Beanie'],
 };
+// 카테고리별 상품 수: OUTERWEAR 6 / TOP 6 / BOTTOM 4 / DRESSES 4 / ACC 2 (총 22)
+const counts = { outerwear: 6, top: 6, bottom: 4, dresses: 4, acc: 2 };
 const priceBase = { outerwear: [159000, 329000], top: [39900, 99000], bottom: [59900, 129000], dresses: [89900, 189000], acc: [19900, 169000] };
-const newIdx = { outerwear: [0, 1], top: [0, 1, 2], bottom: [0, 1], dresses: [0, 1, 2], acc: [0, 1] }; // 합계 12
+const newIdx = { outerwear: [0, 1, 2], top: [0, 1, 2], bottom: [0, 1], dresses: [0, 1], acc: [0, 1] }; // 합계 12
 
 const products = [];
 let n = 0;
-for (const [cat, names] of Object.entries(catalog)) {
-  names.forEach((name, i) => {
+for (const [cat, allNames] of Object.entries(catalog)) {
+  allNames.slice(0, counts[cat]).forEach((name, i) => {
     n += 1;
     const id = `p${pad(n)}`;
     const [lo, hi] = priceBase[cat];

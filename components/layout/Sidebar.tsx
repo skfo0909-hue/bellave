@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { COMMUNITY_MENU, SHOP_MENU } from '@/lib/menu';
-import { SearchInput } from './SearchInput';
 
 export function Sidebar({ menu }: { menu: 'shop' | 'community' }) {
   const pathname = usePathname();
@@ -23,7 +22,6 @@ export function Sidebar({ menu }: { menu: 'shop' | 'community' }) {
           })}
         </ul>
       </nav>
-      <SearchInput className="mt-8 w-[120px]" />
     </aside>
   );
 }

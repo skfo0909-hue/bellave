@@ -16,8 +16,8 @@
       "image": "/images/ph/look-2.svg",
       "size": "normal",
       "productIds": [
-        "p08",
-        "p09"
+        "p03",
+        "p07"
       ]
     },
     {
@@ -25,7 +25,7 @@
       "image": "/images/ph/look-3.svg",
       "size": "normal",
       "productIds": [
-        "p10"
+        "p08"
       ]
     },
     {
@@ -33,7 +33,7 @@
       "image": "/images/ph/look-4.svg",
       "size": "normal",
       "productIds": [
-        "p15"
+        "p09"
       ]
     },
     {
@@ -41,7 +41,7 @@
       "image": "/images/ph/look-5.svg",
       "size": "normal",
       "productIds": [
-        "p16"
+        "p13"
       ]
     },
     {
@@ -49,7 +49,7 @@
       "image": "/images/ph/look-1.svg",
       "size": "normal",
       "productIds": [
-        "p22"
+        "p14"
       ]
     },
     {
@@ -57,7 +57,7 @@
       "image": "/images/ph/look-2.svg",
       "size": "large",
       "productIds": [
-        "p23"
+        "p17"
       ]
     },
     {
@@ -65,7 +65,7 @@
       "image": "/images/ph/look-3.svg",
       "size": "normal",
       "productIds": [
-        "p24"
+        "p18"
       ]
     },
     {
@@ -73,7 +73,7 @@
       "image": "/images/ph/look-4.svg",
       "size": "normal",
       "productIds": [
-        "p29"
+        "p21"
       ]
     },
     {
@@ -81,7 +81,7 @@
       "image": "/images/ph/look-5.svg",
       "size": "normal",
       "productIds": [
-        "p30"
+        "p22"
       ]
     }
   ]
