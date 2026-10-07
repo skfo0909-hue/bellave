@@ -3,6 +3,7 @@
  *
  *   npm run build:main              현재 seed로 다시 생성
  *   npm run build:main -- --seed 7  seed를 바꿔 새 배치로 생성
+ *   npm run build:main -- --layout grid  룩북 레이아웃 전환 ('grid' | 'collage'. lookbook.json의 layout을 직접 고쳐도 된다)
  *
  * 읽는 곳
  *   public/images/lookbook/   룩북 컷 12장 (폴더의 이미지 전부)
@@ -23,6 +24,7 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { imageSize } from 'image-size';
+import { shuffle } from '../lib/seeded';
 import type { Category, Lookbook, LookbookChapter, LookbookImage, Product } from '../lib/types';
 
 const ROOT = process.cwd();
@@ -37,11 +39,12 @@ const LARGE_MIN_WIDTH = 1600;
 
 const DEFAULT_CHAPTER = {
   id: 'ch01',
-  title: 'OCTOBER',
+  title: 'COAT WEATHER',
   subline: 'FW26, SEOUL',
-  copy: "Autumn, undone. The air turns, the collar goes up, and the city slows to the pace of falling leaves. A selection of this season's essential pieces in wool, leather and knit, worn the way October asks: layered, unhurried, certain.",
-  copyKo: '가을, 풀어 헤치다. 공기가 바뀌고 깃이 올라가면, 도시는 낙엽이 떨어지는 속도로 느려진다. 울과 레더, 니트로 고른 이번 시즌의 필수 아이템. 겹쳐 입고, 서두르지 않고, 분명하게.',
-  productsTitle: 'SHOP THE LOOK — OCTOBER',
+  copyLead: 'Finally, coat weather.',
+  copy: "Cold at eight, warm by noon, and gone in a few short weeks. This is the season you wait all year to dress for. Twelve looks to end the staring-at-the-closet mornings: the coat you just throw on, the knit made for layering, the one piece you'll reach for again next fall.",
+  layout: 'collage' as 'grid' | 'collage',
+  productsTitle: 'SHOP THE LOOK — COAT WEATHER',
   seed: 1007,
   pinLarge: [] as string[],
 };
@@ -70,26 +73,6 @@ const TEMP_PRODUCTS: ProductMeta[] = [
 const natural = (a: string, b: string) => a.localeCompare(b, undefined, { numeric: true });
 const pad = (n: number) => String(n).padStart(2, '0');
 
-/** mulberry32: 같은 seed면 같은 수열 */
-function rng(seed: number) {
-  let a = seed >>> 0;
-  return () => {
-    a = (a + 0x6d2b79f5) >>> 0;
-    let t = a;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-function shuffle<T>(list: T[], seed: number): T[] {
-  const r = rng(seed);
-  const a = [...list];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(r() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
 const listImages = (dir: string, filter: (f: string) => boolean = () => true) =>
   (existsSync(join(ROOT, dir)) ? readdirSync(join(ROOT, dir)) : []).filter((f) => IMAGE_EXT.test(f) && filter(f)).sort(natural);
 const sizeOf = (dir: string, file: string) => {
@@ -115,17 +98,39 @@ if (lookFiles.length !== EXPECT.lookbook || productFiles.length !== EXPECT.produ
 }
 
 // ---------- 2. 챕터 설정 (기존 lookbook.json이 있으면 유지) ----------
+// copyLead가 있으면 현재 스키마. 없으면 옛 스키마(copyKo 등)라서 seed와 pinLarge만 이어받고 문구와 layout은 기본값으로 교체한다.
 const existing = readJson<Lookbook>('data/lookbook.json');
-const prev = existing?.[0] && 'subline' in existing[0] ? existing[0] : undefined; // 옛 스키마(룩북 씬)는 무시
-const seedArg = process.argv.indexOf('--seed');
-const base = {
+const raw = existing?.[0] as Partial<LookbookChapter> | undefined;
+const current = raw && 'copyLead' in raw ? raw : undefined;
+const legacy = raw && !current ? raw : undefined;
+const base: typeof DEFAULT_CHAPTER = {
   ...DEFAULT_CHAPTER,
-  ...(prev ? { id: prev.id, title: prev.title, subline: prev.subline, copy: prev.copy, copyKo: prev.copyKo, productsTitle: prev.productsTitle, seed: prev.seed, pinLarge: prev.pinLarge ?? [] } : {}),
+  ...(legacy ? { seed: legacy.seed ?? DEFAULT_CHAPTER.seed, pinLarge: legacy.pinLarge ?? [] } : {}),
+  ...(current
+    ? {
+        id: current.id ?? DEFAULT_CHAPTER.id,
+        title: current.title ?? DEFAULT_CHAPTER.title,
+        subline: current.subline ?? DEFAULT_CHAPTER.subline,
+        copyLead: current.copyLead ?? DEFAULT_CHAPTER.copyLead,
+        copy: current.copy ?? DEFAULT_CHAPTER.copy,
+        layout: current.layout === 'grid' ? 'grid' : DEFAULT_CHAPTER.layout,
+        productsTitle: current.productsTitle ?? DEFAULT_CHAPTER.productsTitle,
+        seed: current.seed ?? DEFAULT_CHAPTER.seed,
+        pinLarge: current.pinLarge ?? [],
+      }
+    : {}),
 };
+const seedArg = process.argv.indexOf('--seed');
 if (seedArg > -1) {
   const n = Number(process.argv[seedArg + 1]);
   if (!Number.isInteger(n)) fail('--seed 뒤에는 정수를 적어 주세요.');
   base.seed = n;
+}
+const layoutArg = process.argv.indexOf('--layout');
+if (layoutArg > -1) {
+  const v = process.argv[layoutArg + 1];
+  if (v === 'grid' || v === 'collage') base.layout = v;
+  else fail("--layout 뒤에는 'grid' 또는 'collage'를 적어 주세요.");
 }
 const pins = (base.pinLarge ?? []).slice(0, LARGE_SLOTS.length);
 
@@ -202,8 +207,9 @@ const chapter: LookbookChapter = {
   id: base.id,
   title: base.title,
   subline: base.subline,
+  copyLead: base.copyLead,
   copy: base.copy,
-  copyKo: base.copyKo,
+  layout: base.layout,
   productsTitle: base.productsTitle,
   seed: base.seed,
   ...(pins.length ? { pinLarge: pins } : {}),

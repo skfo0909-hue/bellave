@@ -32,11 +32,12 @@ export interface LookbookImage {
 
 export interface LookbookChapter {
   id: string;
-  title: string; // 키 타이틀, 대문자 한 단어 (예: OCTOBER)
+  title: string; // 키 타이틀, 대문자 1~2단어 (예: COAT WEATHER)
   subline: string; // 서브 라인 (예: FW26, SEOUL)
-  copy: string; // 키 카피 영문
-  copyKo: string; // 키 카피 국문
-  productsTitle: string; // 예: SHOP THE LOOK — OCTOBER
+  copyLead: string; // 키 카피 첫 문장 (영문, 크게)
+  copy: string; // 키 카피 본문 (영문)
+  layout: 'grid' | 'collage'; // 룩북 레이아웃 전환
+  productsTitle: string; // 예: SHOP THE LOOK — COAT WEATHER
   seed: number; // 무작위 순서 결정 값
   pinLarge?: string[]; // 큰 컷으로 고정할 파일명 (최대 2)
   images: LookbookImage[]; // 섞인 뒤의 순서로 12컷. 5번째, 10번째가 큰 컷

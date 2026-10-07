@@ -80,7 +80,7 @@
   product/   ProductCard, ProductGrid, ProductGallery, ProductInfoPanel,
              StyledWith, RelatedProducts, ReviewList, QnaList
   cart/      CartDrawer, CartItemCard, CartSummary
-  home/      MainContainer, LookbookTitle, LookbookGrid, LookbookProducts
+  home/      MainContainer, LookbookTitle, LookbookGrid, LookbookCollage, LookbookProducts
   ui/        Button, Accordion, QuantityStepper, Pagination, ColorChip,
              SizeSelector, IconButton
 /data        products.json, main-products.json, lookbook.json, reviews.json, qna.json, community.json
@@ -127,11 +127,12 @@ interface LookbookImage {
 
 interface LookbookChapter {
   id: string;
-  title: string;              // 키 타이틀, 대문자 한 단어 (예: OCTOBER)
+  title: string;              // 키 타이틀, 대문자 1~2단어 (예: COAT WEATHER)
   subline: string;            // 서브 라인 (예: FW26, SEOUL)
-  copy: string;               // 키 카피 영문
-  copyKo: string;             // 키 카피 국문
-  productsTitle: string;      // 예: SHOP THE LOOK — OCTOBER
+  copyLead: string;           // 키 카피 첫 문장 (영문, 크게)
+  copy: string;               // 키 카피 본문 (영문)
+  layout: 'grid' | 'collage'; // 룩북 레이아웃 전환
+  productsTitle: string;      // 예: SHOP THE LOOK — COAT WEATHER
   seed: number;               // 무작위 순서 결정 값
   pinLarge?: string[];        // 큰 컷으로 고정할 파일명 (최대 2)
   images: LookbookImage[];    // 섞인 뒤의 순서로 12컷. 5번째, 10번째가 큰 컷
@@ -191,8 +192,8 @@ interface CartItem {
 
 | 순서 | 블록 | 컴포넌트 | 내용 |
 |---|---|---|---|
-| 1 | 키 타이틀 | LookbookTitle | 키 타이틀(단어), 서브 라인, 키 카피(문장) |
-| 2 | 룩북 그리드 | LookbookGrid | 화보 12컷 모자이크, 무작위 순서 |
+| 1 | 키 타이틀 | LookbookTitle | 키 타이틀, 서브 라인, 키 카피 |
+| 2 | 룩북 | LookbookCollage 또는 LookbookGrid | 화보 12컷, 무작위 순서. `layout` 값으로 전환 |
 | 3 | 상품 리스트 | LookbookProducts | 상품 8개, 무작위 순서 |
 
 데이터는 챕터 배열 구조를 유지하지만 기본값은 챕터 1개다. 챕터를 추가하면 같은 묶음이 아래로 반복된다.
@@ -221,25 +222,31 @@ interface CartItem {
 - 타이틀, 룩북 그리드, 상품 리스트의 좌우 끝선을 모두 같은 선에 맞춘다.
 
 **LookbookTitle**
-- 맨 위, 헤더 바로 아래에 위치한다. 첫 화면에서 타이틀과 그리드 첫 줄이 함께 보여야 한다(PC 1440x900 기준).
-- 굵고 좁은 대문자 서체로 단어 하나를 크게 세우고, 옆에 같은 서체의 문장을 붙여 힘 있게 구성한다. 서체와 크기는 `DESIGN_GUIDE.md` 3장 "키 타이틀 타이포".
+- 맨 위, 헤더 바로 아래에 위치한다. 첫 화면에서 타이틀과 룩북 첫 컷이 함께 보여야 한다(PC 1440x900 기준).
+- 굵고 좁은 대문자 서체로 짧은 타이틀을 크게 세우고, 옆에 같은 서체의 영문 카피를 붙여 힘 있게 구성한다. 서체와 크기는 `DESIGN_GUIDE.md` 3장 "키 타이틀 타이포".
+- 타이틀과 카피는 모든 기기에서 영문을 쓴다. 카피의 첫 문장(`copyLead`)은 본문보다 크게, 한 줄로 끊어 보여준다.
 - PC: 2단 배치, 위쪽 끝선 정렬.
-  - 왼쪽: 키 타이틀(단어), 바로 아래 서브 라인(시기, 장소).
-  - 오른쪽: 키 카피(문장). 폭 최대 520px, 양쪽 정렬, 컨테이너 오른쪽 끝에 맞춘다.
-- 모바일: 1단. 키 타이틀, 서브 라인, 키 카피 순으로 왼쪽 정렬. 키 카피는 국문을 쓴다.
+  - 왼쪽: 키 타이틀, 바로 아래 서브 라인.
+  - 오른쪽: 키 카피. 폭 최대 480px, 컨테이너 오른쪽 끝에 맞춘다. 첫 문장은 왼쪽 정렬, 본문은 양쪽 정렬.
+- 모바일: 1단. 키 타이틀, 서브 라인, 키 카피 순으로 왼쪽 정렬.
 - 키 타이틀은 섹션 제목(`h2`)으로 마크업한다.
 
 **타이틀 텍스트 (lookbook.json 기본값, 가을 시즌)**
 
 | 항목 | 값 |
 |---|---|
-| 키 타이틀 | OCTOBER |
+| 키 타이틀 | COAT WEATHER |
 | 서브 라인 | FW26, SEOUL |
-| 키 카피 (영문) | Autumn, undone. The air turns, the collar goes up, and the city slows to the pace of falling leaves. A selection of this season's essential pieces in wool, leather and knit, worn the way October asks: layered, unhurried, certain. |
-| 키 카피 (국문) | 가을, 풀어 헤치다. 공기가 바뀌고 깃이 올라가면, 도시는 낙엽이 떨어지는 속도로 느려진다. 울과 레더, 니트로 고른 이번 시즌의 필수 아이템. 겹쳐 입고, 서두르지 않고, 분명하게. |
-| 상품 리스트 제목 | SHOP THE LOOK — OCTOBER |
+| 키 카피 첫 문장 (`copyLead`) | Finally, coat weather. |
+| 키 카피 본문 (`copy`) | Cold at eight, warm by noon, and gone in a few short weeks. This is the season you wait all year to dress for. Twelve looks to end the staring-at-the-closet mornings: the coat you just throw on, the knit made for layering, the one piece you'll reach for again next fall. |
+| 상품 리스트 제목 | SHOP THE LOOK — COAT WEATHER |
 
-챕터를 하나 더 추가할 때 쓸 예비 카피: 키 타이틀 `EMBER`, 서브 라인 `LATE AUTUMN, AFTER DARK`, 키 카피 "The light leaves early now. What stays is warmth. Black wool against bare skin, satin under a heavy coat, a single gleam of gold. Pieces for the long nights between the last leaf and the first snow." (국문: 해는 일찍 지고, 남는 것은 온기다. 맨살 위의 블랙 울, 무거운 코트 아래의 새틴, 한 점의 골드. 마지막 낙엽과 첫눈 사이, 긴 밤을 위한 옷.)
+교체용 카피 (같은 필드에 그대로 넣으면 된다)
+
+| 키 타이틀 | 첫 문장 | 본문 |
+|---|---|---|
+| SHORT SEASON | Fall is short. Dress like it. | One week it's T-shirts, the next it's puffers. The days made for fall clothes are fewer than you think. Here is everything you can wear right now, before they're gone. |
+| LAYER UP | Too cold for one. Too warm for two. | Buttoned up on the way in, carried over your arm by lunch. For the days when the season changes twice before dinner: pieces that go on and come off easily, and look better stacked. |
 
 **LookbookGrid**
 - PC, 태블릿: 3열 모자이크, 총 12컷. 일반 컷 10개와 큰 컷(2열 x 2행) 2개. 6행.
@@ -257,6 +264,39 @@ interface CartItem {
 - 모바일: 2열. 큰 컷은 2열 전체 폭, 일반 컷은 순서대로 2개씩 채운다.
 - 이미지 비율이 제각각이어도 자리 비율에 맞춰 `object-fit: cover`로 채운다.
 - 룩북 컷과 상품의 연결 정보는 선택 사항이다. `productIds`가 있으면 컷을 누를 때 해당 상품 상세로 이동하고 호버 시 상품명을 보여준다. 없으면 `/new-arrivals`로 이동하고 호버 시 상품명은 표시하지 않는다.
+
+**룩북 레이아웃 전환**
+- 룩북 영역은 두 가지 레이아웃을 모두 구현해 두고 `lookbook.json`의 `layout` 값으로 전환한다.
+  - `'grid'`: 위의 LookbookGrid (3열 모자이크). 기존 코드를 삭제하거나 수정하지 않고 그대로 둔다.
+  - `'collage'`: 아래의 LookbookCollage (겹침 콜라주). 현재 기본값.
+- 값만 바꾸면 원래 그리드로 돌아가야 한다. 두 컴포넌트는 같은 데이터(같은 12컷, 같은 seed 순서)를 받는다.
+- 타이틀, 상품 리스트, 좌우 여백은 레이아웃과 무관하게 동일하다.
+
+**LookbookCollage**
+- 사진을 책상 위에 흩어 놓은 듯, 크기가 다른 컷들이 서로 겹치고 좌우로 어긋나게 놓인다. 장식 요소(스티커, 색 배경, 회전)는 쓰지 않는다. 배경은 흰색을 유지한다.
+- 12컷을 3컷씩 4개의 묶음(클러스터)으로 나눠 위에서 아래로 쌓는다. 묶음마다 아래 템플릿 중 하나를 쓰며, A → B → C → D 순서로 적용한다.
+- 컨테이너를 12칸으로 나눈 기준이다. "겹침"은 아래 컷 위에 올라가는 것을 뜻한다.
+
+| 템플릿 | 1번 컷 (바탕) | 2번 컷 | 3번 컷 |
+|---|---|---|---|
+| A | 큰 컷, 3~12칸 (오른쪽 붙임) | 작은 컷, 1~6칸. 1번의 왼쪽 아래 모서리에 겹침 | 넓은 컷, 1~12칸. 2번 컷이 이 컷의 위쪽에도 걸쳐짐 |
+| B | 중간 컷, 1~7칸 (왼쪽 붙임, 오른쪽은 빈 여백) | 중간 컷, 6~12칸. 1번보다 30% 아래에서 시작해 1번의 오른쪽 아래에 겹침 | 작은 컷, 2~6칸. 2번의 왼쪽 아래에 겹침 |
+| C | 큰 컷, 1~9칸 (왼쪽 붙임) | 작은 컷, 7~12칸. 1번의 오른쪽 가운데에 겹침 | 작은 컷, 8~12칸. 2번 바로 아래, 1번의 오른쪽 아래에 겹침 |
+| D | 중간 컷, 5~12칸 (오른쪽 붙임, 왼쪽은 빈 여백) | 작은 컷, 1~6칸. 1번의 왼쪽 위에 겹침 | 넓은 컷, 1~12칸. 1번과 겹치지 않고 바로 아래 |
+
+- 겹침 규칙
+  - 위에 올라가는 컷은 흰색 테두리를 두른다(`DESIGN_GUIDE.md` 8장 "콜라주 컷").
+  - 겹치는 깊이는 위 컷 높이의 20~35%. 아래 컷 면적의 25% 이상을 가리지 않는다.
+  - 쌓임 순서: 바탕 컷 < 중간 컷 < 작은 컷.
+- 이미지는 자르지 않고 원본 비율 그대로 보여준다. 컷의 폭은 칸 수로 정해지고 높이는 비율에 따라 달라진다.
+- 무작위 요소 (모두 `seed`로 결정되어 같은 seed면 같은 결과)
+  - 어느 이미지가 어느 자리에 들어갈지. 단, 가로 사진은 "넓은 컷" 자리에, 세로 사진은 "큰 컷" 자리에 우선 배정한다.
+  - 각 컷의 미세한 어긋남: 가로 ±1칸 이내, 세로 ±24px 이내.
+  - `pinLarge`에 적힌 파일은 큰 컷 자리에 고정한다.
+- 묶음 사이 세로 간격은 `DESIGN_GUIDE.md` 4장을 따른다. 묶음끼리는 겹치지 않는다.
+- 모바일: 같은 템플릿을 6칸 기준으로 줄여 쓴다(칸 번호를 절반으로). 어긋남은 세로 ±12px만 적용한다.
+- 구현: CSS Grid(12칸)와 음수 margin 또는 `transform`으로 겹친다. 컨테이너 밖으로 나가지 않고 가로 스크롤이 생기지 않아야 한다. 이미지 로딩 전후로 자리가 밀리지 않도록 원본 `width`, `height`로 비율을 미리 잡는다.
+- 클릭과 호버 동작은 LookbookGrid와 같다. 겹친 부분은 위에 있는 컷이 클릭을 받는다.
 
 **LookbookProducts**
 - 상단: 왼쪽 상품 리스트 제목, 오른쪽 상품 수.

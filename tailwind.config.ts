@@ -30,6 +30,7 @@ const config: Config = {
       12: '48px',
       16: '64px',
       20: '80px',
+      24: '96px',
       30: '120px',
     },
     fontFamily: {
@@ -45,9 +46,10 @@ const config: Config = {
     },
     fontSize: {
       // 메인 룩북 전용 키 타이틀 타이포 (DESIGN_GUIDE.md 3장)
-      'key-xl': ['clamp(72px, 11vw, 176px)', { lineHeight: '0.9', letterSpacing: '-0.01em' }],
+      'key-xl': ['clamp(64px, 9.5vw, 152px)', { lineHeight: '0.9', letterSpacing: '-0.01em' }],
       'key-sub': ['16px', { lineHeight: '20px', letterSpacing: '0.04em' }],
-      'key-copy': ['18px', { lineHeight: '22px', letterSpacing: '0.01em' }],
+      'key-lead': ['32px', { lineHeight: '36px', letterSpacing: '0' }],
+      'key-copy': ['18px', { lineHeight: '23px', letterSpacing: '0.01em' }],
       display: ['32px', { lineHeight: '40px', letterSpacing: '0.02em', fontWeight: '600' }],
       'display-sm': ['24px', { lineHeight: '32px', letterSpacing: '0.02em', fontWeight: '600' }],
       title: ['18px', { lineHeight: '26px', letterSpacing: '0.02em', fontWeight: '600' }],
@@ -57,7 +59,7 @@ const config: Config = {
       caption: ['12px', { lineHeight: '18px' }],
       micro: ['11px', { lineHeight: '16px', letterSpacing: '0.04em' }],
     },
-    fontWeight: { normal: '400', semibold: '600', bold: '700' }, // 700은 메인 국문 키 카피 전용
+    fontWeight: { normal: '400', semibold: '600' },
     extend: {
       zIndex: { side: '10', header: '100', overlay: '200', drawer: '210' },
       transitionDuration: { 200: '200ms', 300: '300ms' },
