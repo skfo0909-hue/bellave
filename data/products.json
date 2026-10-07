@@ -256,8 +256,8 @@
       "p10",
       "p07"
     ],
-    "isNew": false,
-    "createdAt": "2026-07-13"
+    "isNew": true,
+    "createdAt": "2026-09-09"
   },
   {
     "id": "p05",
@@ -317,8 +317,8 @@
       "p19",
       "p07"
     ],
-    "isNew": false,
-    "createdAt": "2026-07-16"
+    "isNew": true,
+    "createdAt": "2026-09-11"
   },
   {
     "id": "p06",
@@ -628,8 +628,8 @@
       "p20",
       "p13"
     ],
-    "isNew": false,
-    "createdAt": "2026-07-03"
+    "isNew": true,
+    "createdAt": "2026-09-21"
   },
   {
     "id": "p11",
@@ -939,8 +939,8 @@
       "p01",
       "p22"
     ],
-    "isNew": false,
-    "createdAt": "2026-07-18"
+    "isNew": true,
+    "createdAt": "2026-09-03"
   },
   {
     "id": "p16",

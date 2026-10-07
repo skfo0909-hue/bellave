@@ -4,7 +4,7 @@ import lookbookData from '@/data/lookbook.json';
 import reviewsData from '@/data/reviews.json';
 import qnaData from '@/data/qna.json';
 import communityData from '@/data/community.json';
-import type { Category, CommunityReview, Faq, Lookbook, Notice, Product, ProductSummary, Qna, Review, SortKey } from './types';
+import type { Category, CommunityReview, Faq, Lookbook, LookbookChapter, Notice, Product, ProductSummary, Qna, Review, SortKey } from './types';
 
 const products = productsData as Product[];
 const lookbook = lookbookData as Lookbook;
@@ -64,9 +64,9 @@ export async function getLookbook(): Promise<Lookbook> {
   return lookbook;
 }
 
-/** 룩북에 쓰인 상품을 중복 없이 반환 */
-export async function getLookbookProducts(): Promise<Product[]> {
-  const ids = [...new Set(lookbook.items.flatMap((i) => i.productIds))];
+/** 챕터의 모든 이미지 productIds를 중복 없이 모아 상품으로 반환 (최대 limit개) */
+export async function getChapterProducts(chapter: LookbookChapter, limit = 8): Promise<Product[]> {
+  const ids = [...new Set(chapter.images.flatMap((i) => i.productIds))].slice(0, limit);
   return getProductsByIds(ids);
 }
 

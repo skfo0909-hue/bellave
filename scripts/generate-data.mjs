@@ -23,6 +23,9 @@ const tones = {
   'look-3': ['#BFBFBB', 'LOOK 3'],
   'look-4': ['#DCDCD8', 'LOOK 4'],
   'look-5': ['#C2C2BE', 'LOOK 5'],
+  'scene-reverie': ['#CFCFCB', 'REVERIE'],
+  'scene-nocturne-1': ['#BDBDB9', 'NOCTURNE 1'],
+  'scene-nocturne-2': ['#C9C9C5', 'NOCTURNE 2'],
 };
 for (const [name, [fill, label]] of Object.entries(tones)) {
   writeFileSync(
@@ -59,7 +62,12 @@ const catalog = {
 // 카테고리별 상품 수: OUTERWEAR 6 / TOP 6 / BOTTOM 4 / DRESSES 4 / ACC 2 (총 22)
 const counts = { outerwear: 6, top: 6, bottom: 4, dresses: 4, acc: 2 };
 const priceBase = { outerwear: [159000, 329000], top: [39900, 99000], bottom: [59900, 129000], dresses: [89900, 189000], acc: [19900, 169000] };
-const newIdx = { outerwear: [0, 1, 2], top: [0, 1, 2], bottom: [0, 1], dresses: [0, 1], acc: [0, 1] }; // 합계 12
+// 룩북 챕터에 연결되는 상품(챕터당 8개). 이 16개가 신상품이다.
+const chapterProducts = {
+  reverie: ['p01', 'p02', 'p03', 'p07', 'p08', 'p09', 'p13', 'p21'],
+  nocturne: ['p04', 'p05', 'p10', 'p14', 'p15', 'p17', 'p18', 'p22'],
+};
+const newSet = new Set([...chapterProducts.reverie, ...chapterProducts.nocturne]);
 
 const products = [];
 let n = 0;
@@ -80,7 +88,7 @@ for (const [cat, allNames] of Object.entries(catalog)) {
         : ['XS', 'S', 'M', 'L'].map((label) => ({ label, soldOut: rnd() < 0.18 }));
     if (sizes.every((s) => s.soldOut)) sizes[1].soldOut = false;
     const w = pick(['worn-1', 'worn-2', 'worn-3']);
-    const isNew = newIdx[cat].includes(i);
+    const isNew = newSet.has(id);
     const day = isNew ? 1 + ((n * 2) % 28) : 1 + ((n * 3) % 28);
     products.push({
       id,
@@ -116,22 +124,34 @@ products.forEach((p, idx) => {
   p.styledWith = [...picked];
 });
 
-// ---------- 룩북 ----------
-const newIds = products.filter((p) => p.isNew).map((p) => p.id);
-const looks = ['look-1', 'look-2', 'look-3', 'look-4', 'look-5'];
-const lookbook = {
-  title: 'AUTUMN WINTER 26',
-  description: '차분한 톤과 구조적인 실루엣으로 완성한 이번 시즌의 룩. 한 장의 컷에서 시작되는 스타일을 만나보세요.',
-  items: Array.from({ length: 10 }, (_, i) => ({
-    id: `l${pad(i + 1)}`,
-    image: img(looks[i % looks.length]),
-    size: i === 0 || i === 6 ? 'large' : 'normal',
-    productIds: i < 2 ? [newIds[i * 2], newIds[i * 2 + 1]] : [newIds[(i + 2) % newIds.length]],
-  })),
-};
-// 12개 신상품 모두 룩북에 등장하도록 남은 상품을 컷에 나눠 담는다
-const used = new Set(lookbook.items.flatMap((l) => l.productIds));
-newIds.filter((id) => !used.has(id)).forEach((id, k) => lookbook.items[2 + (k % 8)].productIds.push(id));
+// ---------- 룩북 (챕터 배열) ----------
+const lookbook = [
+  {
+    id: 'ch01',
+    layout: 'split',
+    title: 'Reverie',
+    subtitle: 'New Collection',
+    label: 'FW26 · CHAPTER 01',
+    description: 'A quiet afternoon, softened in wool and light. Pieces made to move slowly through the season.',
+    descriptionKo: '느린 오후의 빛, 울과 니트로 부드럽게 흐르는 실루엣.',
+    productsTitle: 'SHOP THE LOOK — REVERIE',
+    images: [{ src: img('scene-reverie'), alt: 'Reverie 룩북 화보', productIds: chapterProducts.reverie }],
+  },
+  {
+    id: 'ch02',
+    layout: 'duo',
+    title: 'Nocturne',
+    subtitle: 'Evening Edit',
+    label: 'FW26 · CHAPTER 02',
+    description: 'After dusk, the line grows sharper. Black, satin and a single gleam of gold.',
+    descriptionKo: '해가 진 뒤 더 선명해지는 선. 블랙과 새틴, 한 점의 골드.',
+    productsTitle: 'SHOP THE LOOK — NOCTURNE',
+    images: [
+      { src: img('scene-nocturne-1'), alt: 'Nocturne 룩북 화보 1', productIds: chapterProducts.nocturne.slice(0, 4) },
+      { src: img('scene-nocturne-2'), alt: 'Nocturne 룩북 화보 2', productIds: chapterProducts.nocturne.slice(4) },
+    ],
+  },
+];
 
 // ---------- 리뷰, Q&A ----------
 const authors = ['kim', 'lee', 'park', 'choi', 'jung', 'han', 'yoon', 'shin'];
@@ -175,4 +195,4 @@ out('products', products);
 out('lookbook', lookbook);
 out('reviews', reviews);
 out('qna', qna);
-console.log(`products ${products.length} (new ${newIds.length}), reviews ${reviews.length}, qna ${qna.length}`);
+console.log(`products ${products.length} (new ${newSet.size}), reviews ${reviews.length}, qna ${qna.length}`);

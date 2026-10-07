@@ -33,6 +33,7 @@ const config: Config = {
       30: '120px',
     },
     fontFamily: {
+      script: ['Pinyon Script', 'cursive'], // 메인 룩북 타이틀 전용
       sans: [
         'Pretendard Variable',
         'Pretendard',
@@ -43,6 +44,9 @@ const config: Config = {
       ],
     },
     fontSize: {
+      // 메인 룩북 전용 스크립트 타이포 (DESIGN_GUIDE.md 3장)
+      'script-xl': ['clamp(88px, 13vw, 220px)', { lineHeight: '1' }],
+      'script-sm': ['28px', { lineHeight: '36px' }],
       display: ['32px', { lineHeight: '40px', letterSpacing: '0.02em', fontWeight: '600' }],
       'display-sm': ['24px', { lineHeight: '32px', letterSpacing: '0.02em', fontWeight: '600' }],
       title: ['18px', { lineHeight: '26px', letterSpacing: '0.02em', fontWeight: '600' }],

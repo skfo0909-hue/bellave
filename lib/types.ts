@@ -21,18 +21,25 @@ export interface Product {
   createdAt: string;
 }
 
-export interface LookbookItem {
-  id: string;
-  image: string;
-  size: 'normal' | 'large'; // large는 2열 x 2행
+export interface LookbookImage {
+  src: string;
+  alt: string;
   productIds: string[]; // 이 컷에 쓰인 상품
 }
 
-export interface Lookbook {
-  title: string; // 시즌 타이틀
-  description: string;
-  items: LookbookItem[];
+export interface LookbookChapter {
+  id: string;
+  layout: 'split' | 'duo'; // split: 이미지 1장 + 여백, duo: 이미지 2장
+  title: string; // 스크립트 대형 타이틀 (예: Reverie)
+  subtitle: string; // 스크립트 소형 (예: New Collection)
+  label: string; // 예: FW26 · CHAPTER 01
+  description: string; // 영문 설명
+  descriptionKo: string; // 국문 설명
+  productsTitle: string; // 예: SHOP THE LOOK — REVERIE
+  images: LookbookImage[]; // split 1장, duo 2장
 }
+
+export type Lookbook = LookbookChapter[];
 
 export interface Review {
   id: string;

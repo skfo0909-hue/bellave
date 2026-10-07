@@ -1,88 +1,60 @@
-{
-  "title": "AUTUMN WINTER 26",
-  "description": "차분한 톤과 구조적인 실루엣으로 완성한 이번 시즌의 룩. 한 장의 컷에서 시작되는 스타일을 만나보세요.",
-  "items": [
-    {
-      "id": "l01",
-      "image": "/images/ph/look-1.svg",
-      "size": "large",
-      "productIds": [
-        "p01",
-        "p02"
-      ]
-    },
-    {
-      "id": "l02",
-      "image": "/images/ph/look-2.svg",
-      "size": "normal",
-      "productIds": [
-        "p03",
-        "p07"
-      ]
-    },
-    {
-      "id": "l03",
-      "image": "/images/ph/look-3.svg",
-      "size": "normal",
-      "productIds": [
-        "p08"
-      ]
-    },
-    {
-      "id": "l04",
-      "image": "/images/ph/look-4.svg",
-      "size": "normal",
-      "productIds": [
-        "p09"
-      ]
-    },
-    {
-      "id": "l05",
-      "image": "/images/ph/look-5.svg",
-      "size": "normal",
-      "productIds": [
-        "p13"
-      ]
-    },
-    {
-      "id": "l06",
-      "image": "/images/ph/look-1.svg",
-      "size": "normal",
-      "productIds": [
-        "p14"
-      ]
-    },
-    {
-      "id": "l07",
-      "image": "/images/ph/look-2.svg",
-      "size": "large",
-      "productIds": [
-        "p17"
-      ]
-    },
-    {
-      "id": "l08",
-      "image": "/images/ph/look-3.svg",
-      "size": "normal",
-      "productIds": [
-        "p18"
-      ]
-    },
-    {
-      "id": "l09",
-      "image": "/images/ph/look-4.svg",
-      "size": "normal",
-      "productIds": [
-        "p21"
-      ]
-    },
-    {
-      "id": "l10",
-      "image": "/images/ph/look-5.svg",
-      "size": "normal",
-      "productIds": [
-        "p22"
-      ]
-    }
-  ]
-}
+[
+  {
+    "id": "ch01",
+    "layout": "split",
+    "title": "Reverie",
+    "subtitle": "New Collection",
+    "label": "FW26 · CHAPTER 01",
+    "description": "A quiet afternoon, softened in wool and light. Pieces made to move slowly through the season.",
+    "descriptionKo": "느린 오후의 빛, 울과 니트로 부드럽게 흐르는 실루엣.",
+    "productsTitle": "SHOP THE LOOK — REVERIE",
+    "images": [
+      {
+        "src": "/images/ph/scene-reverie.svg",
+        "alt": "Reverie 룩북 화보",
+        "productIds": [
+          "p01",
+          "p02",
+          "p03",
+          "p07",
+          "p08",
+          "p09",
+          "p13",
+          "p21"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ch02",
+    "layout": "duo",
+    "title": "Nocturne",
+    "subtitle": "Evening Edit",
+    "label": "FW26 · CHAPTER 02",
+    "description": "After dusk, the line grows sharper. Black, satin and a single gleam of gold.",
+    "descriptionKo": "해가 진 뒤 더 선명해지는 선. 블랙과 새틴, 한 점의 골드.",
+    "productsTitle": "SHOP THE LOOK — NOCTURNE",
+    "images": [
+      {
+        "src": "/images/ph/scene-nocturne-1.svg",
+        "alt": "Nocturne 룩북 화보 1",
+        "productIds": [
+          "p04",
+          "p05",
+          "p10",
+          "p14"
+        ]
+      },
+      {
+        "src": "/images/ph/scene-nocturne-2.svg",
+        "alt": "Nocturne 룩북 화보 2",
+        "productIds": [
+          "p15",
+          "p17",
+          "p18",
+          "p22"
+        ]
+      }
+    ]
+  }
+]
