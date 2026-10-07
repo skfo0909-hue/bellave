@@ -23,9 +23,6 @@ const tones = {
   'look-3': ['#BFBFBB', 'LOOK 3'],
   'look-4': ['#DCDCD8', 'LOOK 4'],
   'look-5': ['#C2C2BE', 'LOOK 5'],
-  'scene-reverie': ['#CFCFCB', 'REVERIE'],
-  'scene-nocturne-1': ['#BDBDB9', 'NOCTURNE 1'],
-  'scene-nocturne-2': ['#C9C9C5', 'NOCTURNE 2'],
 };
 for (const [name, [fill, label]] of Object.entries(tones)) {
   writeFileSync(
@@ -52,69 +49,85 @@ const palette = [
   { name: 'Khaki', hex: '#6B6B4F' },
   { name: 'Burgundy', hex: '#6E1F2B' },
 ];
-const catalog = {
-  outerwear: ['Wool Blend Long Coat', 'Belted Trench Coat', 'Oversized Blazer', 'Cropped Tweed Jacket', 'Padded Puffer Jacket', 'Faux Leather Biker Jacket', 'Single-Breasted Wool Coat'],
-  top: ['Cotton Poplin Shirt', 'Ribbed Knit Top', 'Boat Neck Knit Sweater', 'Cropped Cardigan', 'Linen Blend Blouse', 'Basic Crew Neck Tee', 'Satin Camisole Top'],
-  bottom: ['High-Waist Wide Trousers', 'Pleated Midi Skirt', 'Straight Leg Jeans', 'Tailored Bermuda Shorts', 'Wool Blend Slacks', 'Denim Mini Skirt', 'Pull-On Jersey Pants'],
-  dresses: ['Slip Midi Dress', 'Knit Wrap Dress', 'Shirt Dress with Belt', 'Pleated Chiffon Dress', 'A-Line Mini Dress', 'Tweed Sheath Dress', 'Linen Maxi Dress'],
-  acc: ['Leather Mini Shoulder Bag', 'Wool Muffler', 'Chain Hoop Earrings', 'Leather Belt', 'Silk Scarf', 'Canvas Tote Bag', 'Knit Beanie'],
-};
-// 카테고리별 상품 수: OUTERWEAR 6 / TOP 6 / BOTTOM 4 / DRESSES 4 / ACC 2 (총 22)
-const counts = { outerwear: 6, top: 6, bottom: 4, dresses: 4, acc: 2 };
+// 실제 이미지(public/images/products, lookbook)는 아래 정의에서 상품에 연결한다. 없으면 회색 임시 이미지.
+// 총 13개: OUTERWEAR 2 / TOP 6 / BOTTOM 2 / DRESSES 2 / ACC 1
+const P = (f) => `/images/products/${f}.jpg`;
+const single = (f) => ({ product: P(f), worn: P(f), gallery: [P(f)], detail: [] }); // 컷이 1장뿐인 상품
+const defs = [
+  {
+    id: 'p01',
+    cat: 'outerwear',
+    name: 'Faux Leather Biker Jacket',
+    images: {
+      product: P('faux-leather-biker-jacket-front'),
+      worn: P('faux-leather-biker-jacket-worn'),
+      gallery: ['worn', 'front', 'back', 'detail'].map((k) => P(`faux-leather-biker-jacket-${k}`)),
+      detail: ['detail', 'back', 'front'].map((k) => P(`faux-leather-biker-jacket-${k}`)),
+    },
+  },
+  { id: 'p02', cat: 'outerwear', name: 'Faux Leather Funnel Jacket', images: single('faux-leather-funnel-jacket') },
+  { id: 'p03', cat: 'top', name: 'Scallop Neck Long Sleeve Top', images: single('scallop-neck-long-sleeve-top') },
+  { id: 'p04', cat: 'top', name: 'Hooded Zip-Up Top', images: single('hooded-zip-up-top') },
+  { id: 'p05', cat: 'top', name: 'Cotton Poplin Shirt' },
+  { id: 'p06', cat: 'top', name: 'Ribbed Knit Top' },
+  { id: 'p07', cat: 'top', name: 'Boat Neck Knit Sweater' },
+  { id: 'p08', cat: 'top', name: 'Cropped Cardigan' },
+  { id: 'p09', cat: 'bottom', name: 'Faux Leather Wide Pants', images: single('faux-leather-wide-pants') },
+  { id: 'p10', cat: 'bottom', name: 'Washed Flare Jeans', images: single('washed-flare-jeans') },
+  { id: 'p11', cat: 'dresses', name: 'Bias Cut Maxi Skirt', images: single('bias-cut-maxi-skirt') },
+  { id: 'p12', cat: 'dresses', name: 'Slip Midi Dress' },
+  { id: 'p13', cat: 'acc', name: 'Leather Mini Shoulder Bag' },
+];
 const priceBase = { outerwear: [159000, 329000], top: [39900, 99000], bottom: [59900, 129000], dresses: [89900, 189000], acc: [19900, 169000] };
-// 룩북 챕터에 연결되는 상품(챕터당 8개). 이 16개가 신상품이다.
+// 룩북 챕터에 연결되는 상품: Reverie 4개, Nocturne 2개. 이 6개가 신상품이다.
 const chapterProducts = {
-  reverie: ['p01', 'p02', 'p03', 'p07', 'p08', 'p09', 'p13', 'p21'],
-  nocturne: ['p04', 'p05', 'p10', 'p14', 'p15', 'p17', 'p18', 'p22'],
+  reverie: ['p09', 'p10', 'p11', 'p02'],
+  nocturne: ['p03', 'p04'],
 };
 const newSet = new Set([...chapterProducts.reverie, ...chapterProducts.nocturne]);
 
 const products = [];
-let n = 0;
-for (const [cat, allNames] of Object.entries(catalog)) {
-  allNames.slice(0, counts[cat]).forEach((name, i) => {
-    n += 1;
-    const id = `p${pad(n)}`;
-    const [lo, hi] = priceBase[cat];
-    const price = Math.round((lo + rnd() * (hi - lo)) / 1000) * 1000 - 100;
-    const onSale = n % 4 === 0;
-    const salePrice = onSale ? Math.round((price * (rnd() > 0.5 ? 0.8 : 0.7)) / 1000) * 1000 - 100 : undefined;
-    const colorCount = 1 + Math.floor(rnd() * 3);
-    const start = Math.floor(rnd() * palette.length);
-    const colors = Array.from({ length: colorCount }, (_, k) => palette[(start + k * 3) % palette.length]);
-    const sizes =
+defs.forEach(({ id, cat, name, images }, i) => {
+  const n = i + 1;
+  const [lo, hi] = priceBase[cat];
+  const price = Math.round((lo + rnd() * (hi - lo)) / 1000) * 1000 - 100;
+  const onSale = n % 4 === 0;
+  const salePrice = onSale ? Math.round((price * (rnd() > 0.5 ? 0.8 : 0.7)) / 1000) * 1000 - 100 : undefined;
+  const colorCount = 1 + Math.floor(rnd() * 3);
+  const start = Math.floor(rnd() * palette.length);
+  const colors = Array.from({ length: colorCount }, (_, k) => palette[(start + k * 3) % palette.length]);
+  const sizes =
+    cat === 'acc'
+      ? [{ label: 'ONE SIZE', soldOut: false }]
+      : ['XS', 'S', 'M', 'L'].map((label) => ({ label, soldOut: rnd() < 0.18 }));
+  if (sizes.every((s) => s.soldOut)) sizes[1].soldOut = false;
+  const w = pick(['worn-1', 'worn-2', 'worn-3']);
+  const isNew = newSet.has(id);
+  const day = isNew ? 1 + ((n * 2) % 28) : 1 + ((n * 3) % 28);
+  products.push({
+    id,
+    name,
+    category: cat,
+    price,
+    ...(salePrice ? { salePrice } : {}),
+    colors,
+    sizes,
+    images: images ?? {
+      product: img('product'),
+      worn: img(w),
+      gallery: [img(w), img('product'), img('gallery-1'), img('gallery-2'), img('gallery-3')],
+      detail: [img('detail-1'), img('detail-2'), img('detail-3'), img('detail-4'), img('detail-1')],
+    },
+    description: `${name}. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.`,
+    sizeGuide:
       cat === 'acc'
-        ? [{ label: 'ONE SIZE', soldOut: false }]
-        : ['XS', 'S', 'M', 'L'].map((label) => ({ label, soldOut: rnd() < 0.18 }));
-    if (sizes.every((s) => s.soldOut)) sizes[1].soldOut = false;
-    const w = pick(['worn-1', 'worn-2', 'worn-3']);
-    const isNew = newSet.has(id);
-    const day = isNew ? 1 + ((n * 2) % 28) : 1 + ((n * 3) % 28);
-    products.push({
-      id,
-      name,
-      category: cat,
-      price,
-      ...(salePrice ? { salePrice } : {}),
-      colors,
-      sizes,
-      images: {
-        product: img('product'),
-        worn: img(w),
-        gallery: [img(w), img('product'), img('gallery-1'), img('gallery-2'), img('gallery-3')],
-        detail: [img('detail-1'), img('detail-2'), img('detail-3'), img('detail-4'), img('detail-1')],
-      },
-      description: `${name}. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.`,
-      sizeGuide:
-        cat === 'acc'
-          ? '프리 사이즈 상품입니다. 상세 치수는 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다.'
-          : '모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).',
-      styledWith: [],
-      isNew,
-      createdAt: `2026-${isNew ? '09' : '07'}-${pad(day)}`,
-    });
+        ? '프리 사이즈 상품입니다. 상세 치수는 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다.'
+        : '모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).',
+    styledWith: [],
+    isNew,
+    createdAt: `2026-${isNew ? '09' : '07'}-${pad(day)}`,
   });
-}
+});
 // 같이 입은 상품: 서로 다른 카테고리의 상품 2~4개
 products.forEach((p, idx) => {
   const others = products.filter((o) => o.category !== p.category);
@@ -135,7 +148,7 @@ const lookbook = [
     description: 'A quiet afternoon, softened in wool and light. Pieces made to move slowly through the season.',
     descriptionKo: '느린 오후의 빛, 울과 니트로 부드럽게 흐르는 실루엣.',
     productsTitle: 'SHOP THE LOOK — REVERIE',
-    images: [{ src: img('scene-reverie'), alt: 'Reverie 룩북 화보', productIds: chapterProducts.reverie }],
+    images: [{ src: '/images/lookbook/scene-reverie.jpg', alt: 'Reverie 룩북 화보', productIds: chapterProducts.reverie }],
   },
   {
     id: 'ch02',
@@ -147,8 +160,8 @@ const lookbook = [
     descriptionKo: '해가 진 뒤 더 선명해지는 선. 블랙과 새틴, 한 점의 골드.',
     productsTitle: 'SHOP THE LOOK — NOCTURNE',
     images: [
-      { src: img('scene-nocturne-1'), alt: 'Nocturne 룩북 화보 1', productIds: chapterProducts.nocturne.slice(0, 4) },
-      { src: img('scene-nocturne-2'), alt: 'Nocturne 룩북 화보 2', productIds: chapterProducts.nocturne.slice(4) },
+      { src: '/images/lookbook/scene-nocturne-1.jpg', alt: 'Nocturne 룩북 화보 1', productIds: [chapterProducts.nocturne[0]] },
+      { src: '/images/lookbook/scene-nocturne-2.jpg', alt: 'Nocturne 룩북 화보 2', productIds: [chapterProducts.nocturne[1]] },
     ],
   },
 ];

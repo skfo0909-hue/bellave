@@ -86,7 +86,7 @@
 /data        products.json, lookbook.json, reviews.json, qna.json, community.json
 /lib         api.ts, format.ts (가격 표기), types.ts
 /store       cart.ts, wishlist.ts, ui.ts (드로어 열림 상태)
-/public      logo.svg, images/
+/public      logo.svg, images/ (lookbook/ 화보, products/ 상품 컷, ph/ 회색 임시 이미지)
 ```
 
 ## 7. 데이터 구조
@@ -150,7 +150,7 @@ interface CartItem {
 }
 ```
 
-목업 데이터 분량: 상품 22개(OUTERWEAR 6 / TOP 6 / BOTTOM 4 / DRESSES 4 / ACC 2, 신상품 16개 = 룩북 챕터에 연결된 상품), 룩북 챕터 2개(챕터당 상품 8개 연결), 상품당 리뷰 0~5개, Q&A 0~3개.
+목업 데이터 분량: 상품 13개(OUTERWEAR 2 / TOP 6 / BOTTOM 2 / DRESSES 2 / ACC 1, 신상품 6개 = 룩북 챕터에 연결된 상품), 룩북 챕터 2개(챕터 01 상품 4개, 챕터 02 상품 2개 연결), 상품당 리뷰 0~5개, Q&A 0~3개.
 실제 이미지가 없는 동안에는 3:4 비율의 회색 임시 이미지를 쓰되, 상품 컷과 착용 컷은 호버 전환이 눈에 보이도록 서로 다른 명도로 구분한다.
 
 ## 8. 공통 레이아웃
@@ -222,7 +222,7 @@ interface CartItem {
 
 **LookbookProducts**
 - 상단: 왼쪽 상품 리스트 제목, 오른쪽 상품 수.
-- 해당 챕터의 모든 이미지 `productIds`를 중복 없이 모아 노출한다. ProductGrid 재사용(PC 4열, 최대 8개).
+- 해당 챕터의 모든 이미지 `productIds`를 중복 없이 모아 노출한다. ProductGrid 재사용(PC 4열). 상품 수는 챕터 01이 4개, 챕터 02가 2개.
 - 상품 리스트 02 아래에만 `VIEW ALL` 버튼(→ `/new-arrivals`).
 
 **스크롤 모션 구현**

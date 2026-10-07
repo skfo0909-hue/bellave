@@ -10,17 +10,13 @@
     "productsTitle": "SHOP THE LOOK — REVERIE",
     "images": [
       {
-        "src": "/images/ph/scene-reverie.svg",
+        "src": "/images/lookbook/scene-reverie.jpg",
         "alt": "Reverie 룩북 화보",
         "productIds": [
-          "p01",
-          "p02",
-          "p03",
-          "p07",
-          "p08",
           "p09",
-          "p13",
-          "p21"
+          "p10",
+          "p11",
+          "p02"
         ]
       }
     ]
@@ -36,23 +32,17 @@
     "productsTitle": "SHOP THE LOOK — NOCTURNE",
     "images": [
       {
-        "src": "/images/ph/scene-nocturne-1.svg",
+        "src": "/images/lookbook/scene-nocturne-1.jpg",
         "alt": "Nocturne 룩북 화보 1",
         "productIds": [
-          "p04",
-          "p05",
-          "p10",
-          "p14"
+          "p03"
         ]
       },
       {
-        "src": "/images/ph/scene-nocturne-2.svg",
+        "src": "/images/lookbook/scene-nocturne-2.jpg",
         "alt": "Nocturne 룩북 화보 2",
         "productIds": [
-          "p15",
-          "p17",
-          "p18",
-          "p22"
+          "p04"
         ]
       }
     ]

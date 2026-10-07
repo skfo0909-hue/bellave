@@ -36,16 +36,20 @@ export default async function ProductPage({ params }: { params: { id: string } }
         </div>
       </div>
 
-      <section className={section} aria-label="상품 상세">
-        <DetailImages images={product.images.detail} name={product.name} />
-      </section>
+      {product.images.detail.length > 0 && (
+        <section className={section} aria-label="상품 상세">
+          <DetailImages images={product.images.detail} name={product.name} />
+        </section>
+      )}
 
-      <section className={section} aria-labelledby="related">
-        <h2 id="related" className={heading}>
-          Related Products
-        </h2>
-        <ProductGrid products={related} />
-      </section>
+      {related.length > 0 && (
+        <section className={section} aria-labelledby="related">
+          <h2 id="related" className={heading}>
+            Related Products
+          </h2>
+          <ProductGrid products={related} />
+        </section>
+      )}
 
       <section className={section} aria-labelledby="review">
         <h2 id="review" className={heading}>
