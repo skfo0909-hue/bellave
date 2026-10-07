@@ -1,51 +1,95 @@
 [
   {
     "id": "ch01",
-    "layout": "split",
-    "title": "Reverie",
-    "subtitle": "New Collection",
-    "label": "FW26 · CHAPTER 01",
-    "description": "A quiet afternoon, softened in wool and light. Pieces made to move slowly through the season.",
-    "descriptionKo": "느린 오후의 빛, 울과 니트로 부드럽게 흐르는 실루엣.",
-    "productsTitle": "SHOP THE LOOK — REVERIE",
+    "title": "OCTOBER",
+    "subline": "FW26, SEOUL",
+    "copy": "Autumn, undone. The air turns, the collar goes up, and the city slows to the pace of falling leaves. A selection of this season's essential pieces in wool, leather and knit, worn the way October asks: layered, unhurried, certain.",
+    "copyKo": "가을, 풀어 헤치다. 공기가 바뀌고 깃이 올라가면, 도시는 낙엽이 떨어지는 속도로 느려진다. 울과 레더, 니트로 고른 이번 시즌의 필수 아이템. 겹쳐 입고, 서두르지 않고, 분명하게.",
+    "productsTitle": "SHOP THE LOOK — OCTOBER",
+    "seed": 1007,
     "images": [
       {
-        "src": "/images/lookbook/scene-reverie.mp4",
-        "poster": "/images/lookbook/scene-reverie-poster.jpg",
-        "alt": "Reverie 룩북 영상",
-        "productIds": [
-          "p07",
-          "p08",
-          "p09",
-          "p10"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "ch02",
-    "layout": "duo",
-    "title": "Nocturne",
-    "subtitle": "Evening Edit",
-    "label": "FW26 · CHAPTER 02",
-    "description": "After dusk, the line grows sharper. Black, satin and a single gleam of gold.",
-    "descriptionKo": "해가 진 뒤 더 선명해지는 선. 블랙과 새틴, 한 점의 골드.",
-    "productsTitle": "SHOP THE LOOK — NOCTURNE",
-    "images": [
-      {
-        "src": "/images/lookbook/scene-nocturne-1.jpg",
-        "alt": "Nocturne 룩북 화보 1",
-        "productIds": [
-          "p11"
-        ]
+        "src": "/images/lookbook/look_8.jpg",
+        "alt": "OCTOBER 룩북 컷 1",
+        "width": 375,
+        "height": 563
       },
       {
-        "src": "/images/lookbook/scene-nocturne-2.jpg",
-        "alt": "Nocturne 룩북 화보 2",
-        "productIds": [
-          "p11"
-        ]
+        "src": "/images/lookbook/look_9.jpg",
+        "alt": "OCTOBER 룩북 컷 2",
+        "width": 375,
+        "height": 563
+      },
+      {
+        "src": "/images/lookbook/look_5.jpg",
+        "alt": "OCTOBER 룩북 컷 3",
+        "width": 375,
+        "height": 563
+      },
+      {
+        "src": "/images/lookbook/look_12.jpg",
+        "alt": "OCTOBER 룩북 컷 4",
+        "width": 1280,
+        "height": 1920
+      },
+      {
+        "src": "/images/lookbook/look_2.jpg",
+        "alt": "OCTOBER 룩북 컷 5",
+        "width": 2048,
+        "height": 3072
+      },
+      {
+        "src": "/images/lookbook/look_7.jpg",
+        "alt": "OCTOBER 룩북 컷 6",
+        "width": 375,
+        "height": 563
+      },
+      {
+        "src": "/images/lookbook/look_10.jpg",
+        "alt": "OCTOBER 룩북 컷 7",
+        "width": 750,
+        "height": 1125
+      },
+      {
+        "src": "/images/lookbook/look_4.jpg",
+        "alt": "OCTOBER 룩북 컷 8",
+        "width": 375,
+        "height": 563
+      },
+      {
+        "src": "/images/lookbook/look_1.jpg",
+        "alt": "OCTOBER 룩북 컷 9",
+        "width": 375,
+        "height": 563
+      },
+      {
+        "src": "/images/lookbook/look_6.jpg",
+        "alt": "OCTOBER 룩북 컷 10",
+        "width": 2048,
+        "height": 3072
+      },
+      {
+        "src": "/images/lookbook/look_3.jpg",
+        "alt": "OCTOBER 룩북 컷 11",
+        "width": 2048,
+        "height": 3072
+      },
+      {
+        "src": "/images/lookbook/look_11.jpg",
+        "alt": "OCTOBER 룩북 컷 12",
+        "width": 1280,
+        "height": 1920
       }
+    ],
+    "productIds": [
+      "m03",
+      "m07",
+      "m04",
+      "m01",
+      "m06",
+      "m05",
+      "m02",
+      "m08"
     ]
   }
 ]

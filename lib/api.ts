@@ -4,9 +4,11 @@ import lookbookData from '@/data/lookbook.json';
 import reviewsData from '@/data/reviews.json';
 import qnaData from '@/data/qna.json';
 import communityData from '@/data/community.json';
+import mainProductsData from '@/data/main-products.json';
 import type { Category, CommunityReview, Faq, Lookbook, LookbookChapter, Notice, Product, ProductSummary, Qna, Review, SortKey } from './types';
 
-const products = productsData as Product[];
+// main-products.json은 scripts/build-main-data.ts가 만드는 메인 룩북 상품(신상품, SHOP 목록에서는 숨김)
+const products = [...(productsData as Product[]), ...(mainProductsData as Product[])];
 const lookbook = lookbookData as Lookbook;
 const reviews = reviewsData as Review[];
 const qna = qnaData as Qna[];
@@ -66,10 +68,9 @@ export async function getLookbook(): Promise<Lookbook> {
   return lookbook;
 }
 
-/** 챕터의 모든 이미지 productIds를 중복 없이 모아 상품으로 반환 (최대 limit개) */
-export async function getChapterProducts(chapter: LookbookChapter, limit = 8): Promise<Product[]> {
-  const ids = [...new Set(chapter.images.flatMap((i) => i.productIds))].slice(0, limit);
-  return getProductsByIds(ids);
+/** 챕터의 상품을 데이터에 적힌(섞인) 순서대로 반환 */
+export async function getChapterProducts(chapter: LookbookChapter): Promise<Product[]> {
+  return getProductsByIds(chapter.productIds);
 }
 
 export async function getReviews(productId: string): Promise<Review[]> {

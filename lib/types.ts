@@ -10,7 +10,7 @@ export interface Product {
   sizes: { label: string; soldOut: boolean }[];
   images: {
     product: string; // 상품 컷 (리스트 기본 이미지)
-    worn: string; // 착용 컷 (리스트 호버 이미지)
+    worn?: string; // 착용 컷 (리스트 호버 이미지). 없으면 호버 전환 없음
     gallery: string[]; // 상세 상단 갤러리
     detail: string[]; // 상세 본문 이미지
   };
@@ -23,22 +23,24 @@ export interface Product {
 }
 
 export interface LookbookImage {
-  src: string;
+  src: string; // public/images/lookbook/ 의 파일
   alt: string;
-  productIds: string[]; // 이 컷에 쓰인 상품
-  poster?: string; // src가 영상일 때 로딩 전, 모션 줄이기 설정에서 보여줄 이미지
+  width: number; // 원본 크기 (큰 컷 자리 판정, next/image 용)
+  height: number;
+  productIds?: string[]; // 연결된 상품 (선택)
 }
 
 export interface LookbookChapter {
   id: string;
-  layout: 'split' | 'duo'; // split: 이미지 1장 + 여백, duo: 이미지 2장
-  title: string; // 스크립트 대형 타이틀 (예: Reverie)
-  subtitle: string; // 스크립트 소형 (예: New Collection)
-  label: string; // 예: FW26 · CHAPTER 01
-  description: string; // 영문 설명
-  descriptionKo: string; // 국문 설명
-  productsTitle: string; // 예: SHOP THE LOOK — REVERIE
-  images: LookbookImage[]; // split 1장, duo 2장
+  title: string; // 키 타이틀, 대문자 한 단어 (예: OCTOBER)
+  subline: string; // 서브 라인 (예: FW26, SEOUL)
+  copy: string; // 키 카피 영문
+  copyKo: string; // 키 카피 국문
+  productsTitle: string; // 예: SHOP THE LOOK — OCTOBER
+  seed: number; // 무작위 순서 결정 값
+  pinLarge?: string[]; // 큰 컷으로 고정할 파일명 (최대 2)
+  images: LookbookImage[]; // 섞인 뒤의 순서로 12컷. 5번째, 10번째가 큰 컷
+  productIds: string[]; // 섞인 뒤의 순서로 상품 8개
 }
 
 export type Lookbook = LookbookChapter[];

@@ -51,10 +51,9 @@ const palette = [
 ];
 // 실제 이미지는 public/images/products, lookbook에 있고 아래 정의에서 상품에 연결한다.
 // SHOP 6개: OUTERWEAR 2 / TOP 2 / BOTTOM 1 / DRESSES 1 / ACC 0
-// 룩북 전용 5개(hiddenInShop): SHOP 목록에는 나오지 않고, 룩북과 NEW ARRIVALS에서 상세로 연결된다.
+// 메인 룩북 상품 8개와 lookbook.json은 scripts/build-main-data.ts가 만든다.
 const P = (f) => `/images/products/${f}.jpg`;
 const pair = (slug) => ({ product: P(`${slug}-product`), worn: P(`${slug}-worn`), gallery: [P(`${slug}-worn`), P(`${slug}-product`)], detail: [] });
-const single = (slug) => ({ product: P(slug), worn: P(slug), gallery: [P(slug)], detail: [] }); // 컷이 1장뿐인 상품
 const biker = (k) => P(`faux-leather-biker-jacket-${k}`);
 const defs = [
   {
@@ -66,21 +65,8 @@ const defs = [
   { id: 'p04', cat: 'top', name: 'Hooded Knit Top', colors: [{ name: 'Navy', hex: '#1F2A44' }], images: pair('hooded-knit-top') },
   { id: 'p05', cat: 'bottom', name: 'Black Flare Pants', colors: [{ name: 'Black', hex: '#111111' }], images: pair('black-flare-pants') },
   { id: 'p06', cat: 'dresses', name: 'Pinstripe Mini Skirt', colors: [{ name: 'Charcoal', hex: '#5E5E5E' }], images: pair('pinstripe-mini-skirt') },
-  // 룩북 전용
-  { id: 'p07', cat: 'bottom', name: 'Washed Flare Jeans', colors: [{ name: 'Indigo', hex: '#4A6B8A' }], images: pair('washed-flare-jeans') },
-  { id: 'p08', cat: 'bottom', name: 'Satin Midi Skirt', colors: [{ name: 'Black', hex: '#111111' }, { name: 'Brown', hex: '#4A2B26' }], images: pair('satin-midi-skirt') },
-  { id: 'p09', cat: 'bottom', name: 'Washed Wide Leg Jeans', colors: [{ name: 'Charcoal', hex: '#3A3F44' }], images: pair('washed-wide-leg-jeans') },
-  { id: 'p10', cat: 'outerwear', name: 'Faux Leather Funnel Jacket', colors: [{ name: 'Brown', hex: '#3E2A22' }], images: single('faux-leather-funnel-jacket') },
-  { id: 'p11', cat: 'outerwear', name: 'Hooded Zip-Up Jacket', colors: [{ name: 'Navy', hex: '#1F2A44' }], images: single('hooded-zip-up-jacket') },
 ];
 const priceBase = { outerwear: [159000, 329000], top: [39900, 99000], bottom: [59900, 129000], dresses: [89900, 189000], acc: [19900, 169000] };
-// 룩북 챕터에 연결되는 상품: Reverie 4개, Nocturne 1개. 이 5개가 신상품이며 SHOP 목록에서는 숨긴다.
-const chapterProducts = {
-  reverie: ['p07', 'p08', 'p09', 'p10'],
-  nocturne: ['p11'],
-};
-const newSet = new Set([...chapterProducts.reverie, ...chapterProducts.nocturne]);
-
 const products = [];
 defs.forEach(({ id, cat, name, colors, images }, i) => {
   const n = i + 1;
@@ -90,8 +76,8 @@ defs.forEach(({ id, cat, name, colors, images }, i) => {
   const salePrice = onSale ? Math.round((price * (rnd() > 0.5 ? 0.8 : 0.7)) / 1000) * 1000 - 100 : undefined;
   const sizes = ['XS', 'S', 'M', 'L'].map((label) => ({ label, soldOut: rnd() < 0.18 }));
   if (sizes.every((s) => s.soldOut)) sizes[1].soldOut = false;
-  const isNew = newSet.has(id);
-  const day = isNew ? 1 + ((n * 2) % 28) : 1 + ((n * 3) % 28);
+  const isNew = false;
+  const day = 1 + ((n * 3) % 28);
   products.push({
     id,
     name,
@@ -105,8 +91,7 @@ defs.forEach(({ id, cat, name, colors, images }, i) => {
     sizeGuide: '모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).',
     styledWith: [],
     isNew,
-    ...(isNew ? { hiddenInShop: true } : {}),
-    createdAt: `2026-${isNew ? '09' : '07'}-${pad(day)}`,
+    createdAt: `2026-07-${pad(day)}`,
   });
 });
 // 같이 입은 상품: 서로 다른 카테고리의 상품 2~4개
@@ -117,42 +102,6 @@ products.forEach((p, idx) => {
   while (picked.size < count) picked.add(others[Math.floor(rnd() * others.length)].id);
   p.styledWith = [...picked];
 });
-
-// ---------- 룩북 (챕터 배열) ----------
-const lookbook = [
-  {
-    id: 'ch01',
-    layout: 'split',
-    title: 'Reverie',
-    subtitle: 'New Collection',
-    label: 'FW26 · CHAPTER 01',
-    description: 'A quiet afternoon, softened in wool and light. Pieces made to move slowly through the season.',
-    descriptionKo: '느린 오후의 빛, 울과 니트로 부드럽게 흐르는 실루엣.',
-    productsTitle: 'SHOP THE LOOK — REVERIE',
-    images: [
-      {
-        src: '/images/lookbook/scene-reverie.mp4', // 무음 영상 (H.264, 오디오 트랙 없음)
-        poster: '/images/lookbook/scene-reverie-poster.jpg',
-        alt: 'Reverie 룩북 영상',
-        productIds: chapterProducts.reverie,
-      },
-    ],
-  },
-  {
-    id: 'ch02',
-    layout: 'duo',
-    title: 'Nocturne',
-    subtitle: 'Evening Edit',
-    label: 'FW26 · CHAPTER 02',
-    description: 'After dusk, the line grows sharper. Black, satin and a single gleam of gold.',
-    descriptionKo: '해가 진 뒤 더 선명해지는 선. 블랙과 새틴, 한 점의 골드.',
-    productsTitle: 'SHOP THE LOOK — NOCTURNE',
-    images: [
-      { src: '/images/lookbook/scene-nocturne-1.jpg', alt: 'Nocturne 룩북 화보 1', productIds: chapterProducts.nocturne },
-      { src: '/images/lookbook/scene-nocturne-2.jpg', alt: 'Nocturne 룩북 화보 2', productIds: chapterProducts.nocturne },
-    ],
-  },
-];
 
 // ---------- 리뷰, Q&A ----------
 const authors = ['kim', 'lee', 'park', 'choi', 'jung', 'han', 'yoon', 'shin'];
@@ -193,7 +142,6 @@ products.forEach((p, idx) => {
 
 const out = (f, d) => writeFileSync(`data/${f}.json`, JSON.stringify(d, null, 2) + '\n');
 out('products', products);
-out('lookbook', lookbook);
 out('reviews', reviews);
 out('qna', qna);
-console.log(`products ${products.length} (new ${newSet.size}), reviews ${reviews.length}, qna ${qna.length}`);
+console.log(`products ${products.length}, reviews ${reviews.length}, qna ${qna.length}`);

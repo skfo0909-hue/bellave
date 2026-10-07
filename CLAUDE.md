@@ -18,7 +18,7 @@
 - Zustand + persist 미들웨어: 장바구니, 위시리스트 (localStorage 저장)
 - 데이터: `/data` 폴더의 목업 JSON. 화면은 반드시 `/lib/api.ts`의 조회 함수를 거쳐 데이터를 읽는다. 이후 실제 API로 교체할 때 화면을 수정하지 않기 위함이다.
 - 이미지: `next/image` 사용
-- 모션: `motion` (Framer Motion). 메인 룩북의 스크롤 연출에만 사용한다.
+- 모션: `motion` (Framer Motion). 메인 페이지의 등장 연출에만 사용한다.
 
 ## 3. 이번 작업 범위 (1차)
 
@@ -80,10 +80,11 @@
   product/   ProductCard, ProductGrid, ProductGallery, ProductInfoPanel,
              StyledWith, RelatedProducts, ReviewList, QnaList
   cart/      CartDrawer, CartItemCard, CartSummary
-  home/      LookbookScene (split, duo), ScriptTitle, LookbookProducts
+  home/      MainContainer, LookbookTitle, LookbookGrid, LookbookProducts
   ui/        Button, Accordion, QuantityStepper, Pagination, ColorChip,
              SizeSelector, IconButton
-/data        products.json, lookbook.json, reviews.json, qna.json, community.json
+/data        products.json, main-products.json, lookbook.json, reviews.json, qna.json, community.json
+/scripts     build-main-data.ts (이미지 폴더를 읽어 lookbook.json, main-products.json 생성. npm run build:main)
 /lib         api.ts, format.ts (가격 표기), types.ts
 /store       cart.ts, wishlist.ts, ui.ts (드로어 열림 상태)
 /public      logo.svg, images/ (lookbook/ 화보, products/ 상품 컷, ph/ 회색 임시 이미지)
@@ -104,7 +105,7 @@ interface Product {
   sizes: { label: string; soldOut: boolean }[];
   images: {
     product: string;          // 상품 컷 (리스트 기본 이미지)
-    worn: string;             // 착용 컷 (리스트 호버 이미지)
+    worn?: string;            // 착용 컷 (리스트 호버 이미지). 없으면 호버 전환 없음
     gallery: string[];        // 상세 상단 갤러리
     detail: string[];         // 상세 본문 이미지
   };
@@ -117,22 +118,24 @@ interface Product {
 }
 
 interface LookbookImage {
-  src: string;
+  src: string;                // public/images/lookbook/ 의 파일
   alt: string;
-  productIds: string[];       // 이 컷에 쓰인 상품
-  poster?: string;            // src가 영상일 때의 대체 이미지
+  width: number;              // 원본 크기 (큰 컷 자리 판정, next/image 용)
+  height: number;
+  productIds?: string[];      // 연결된 상품 (선택)
 }
 
 interface LookbookChapter {
   id: string;
-  layout: 'split' | 'duo';    // split: 이미지 1장 + 여백, duo: 이미지 2장
-  title: string;              // 스크립트 대형 타이틀 (예: Reverie)
-  subtitle: string;           // 스크립트 소형 (예: New Collection)
-  label: string;              // 예: FW26 · CHAPTER 01
-  description: string;        // 영문 설명
-  descriptionKo: string;      // 국문 설명
-  productsTitle: string;      // 예: SHOP THE LOOK — REVERIE
-  images: LookbookImage[];    // split 1장, duo 2장
+  title: string;              // 키 타이틀, 대문자 한 단어 (예: OCTOBER)
+  subline: string;            // 서브 라인 (예: FW26, SEOUL)
+  copy: string;               // 키 카피 영문
+  copyKo: string;             // 키 카피 국문
+  productsTitle: string;      // 예: SHOP THE LOOK — OCTOBER
+  seed: number;               // 무작위 순서 결정 값
+  pinLarge?: string[];        // 큰 컷으로 고정할 파일명 (최대 2)
+  images: LookbookImage[];    // 섞인 뒤의 순서로 12컷. 5번째, 10번째가 큰 컷
+  productIds: string[];       // 섞인 뒤의 순서로 상품 8개
 }
 
 type Lookbook = LookbookChapter[];
@@ -152,7 +155,7 @@ interface CartItem {
 }
 ```
 
-목업 데이터 분량: SHOP 상품 6개(OUTERWEAR 2 / TOP 2 / BOTTOM 1 / DRESSES 1 / ACC 0)와 룩북 전용 상품 5개(`hiddenInShop`, 신상품)로 총 11개, 룩북 챕터 2개(챕터 01 상품 4개, 챕터 02 상품 1개 연결), 상품당 리뷰 0~5개, Q&A 0~3개.
+목업 데이터 분량: SHOP 상품 6개(OUTERWEAR 2 / TOP 2 / BOTTOM 1 / DRESSES 1 / ACC 0)와 메인 룩북 상품 8개(`hiddenInShop`, 신상품)로 총 14개, 룩북 챕터 1개(저장소의 실제 화보 12컷과 상품 컷 8개 사용), 상품당 리뷰 0~5개, Q&A 0~3개.
 실제 이미지가 없는 동안에는 3:4 비율의 회색 임시 이미지를 쓰되, 상품 컷과 착용 컷은 호버 전환이 눈에 보이도록 서로 다른 명도로 구분한다.
 
 ## 8. 공통 레이아웃
@@ -182,59 +185,92 @@ interface CartItem {
 
 ### 9-1. 메인 `/`
 
-화보 이미지와 스크립트 타이포가 겹쳐지는 에디토리얼 구성이다. 챕터 2개가 `룩북 → 상품 리스트 → 룩북 → 상품 리스트` 순서로 이어진다. 모션의 수치와 타이포 규칙은 `DESIGN_GUIDE.md` 3장, 10장을 따른다.
+키 타이틀을 맨 위에 두고, 그 아래 룩북 12컷을 모자이크 그리드로, 다시 그 아래 상품 8개를 나열한다. 타이포와 모션 수치는 `DESIGN_GUIDE.md` 3장, 5장, 10장을 따른다.
 
-**섹션 순서**
+**구성 (위에서 아래)**
 
-| 순서 | 섹션 | 컴포넌트 | 내용 |
+| 순서 | 블록 | 컴포넌트 | 내용 |
 |---|---|---|---|
-| 1 | 룩북 01 | LookbookScene (`layout: 'split'`) | 타이틀 `Reverie` |
-| 2 | 상품 리스트 01 | LookbookProducts | 룩북 01에 쓰인 상품 |
-| 3 | 룩북 02 | LookbookScene (`layout: 'duo'`) | 타이틀 `Nocturne` |
-| 4 | 상품 리스트 02 | LookbookProducts | 룩북 02에 쓰인 상품, 마지막에 `VIEW ALL` |
+| 1 | 키 타이틀 | LookbookTitle | 키 타이틀(단어), 서브 라인, 키 카피(문장) |
+| 2 | 룩북 그리드 | LookbookGrid | 화보 12컷 모자이크, 무작위 순서 |
+| 3 | 상품 리스트 | LookbookProducts | 상품 8개, 무작위 순서 |
 
-**타이틀 텍스트 (lookbook.json 기본값)**
+데이터는 챕터 배열 구조를 유지하지만 기본값은 챕터 1개다. 챕터를 추가하면 같은 묶음이 아래로 반복된다.
 
-| 항목 | 룩북 01 | 룩북 02 |
+**이미지 소스 (GitHub 저장소에 업로드된 실제 컷 사용)**
+
+| 용도 | 수량 | 저장소 내 위치 |
 |---|---|---|
-| 타이틀 (스크립트) | Reverie | Nocturne |
-| 서브 타이틀 (스크립트, 작게) | New Collection | Evening Edit |
-| 라벨 | FW26 · CHAPTER 01 | FW26 · CHAPTER 02 |
-| 설명 (영문) | A quiet afternoon, softened in wool and light. Pieces made to move slowly through the season. | After dusk, the line grows sharper. Black, satin and a single gleam of gold. |
-| 설명 (국문, 모바일과 대체 텍스트용) | 느린 오후의 빛, 울과 니트로 부드럽게 흐르는 실루엣. | 해가 진 뒤 더 선명해지는 선. 블랙과 새틴, 한 점의 골드. |
-| 상품 리스트 제목 | SHOP THE LOOK — REVERIE | SHOP THE LOOK — NOCTURNE |
+| 룩북 컷 | 12 | `public/images/lookbook/` |
+| 상품 컷 | 8 | `public/images/products/` |
 
-**LookbookScene: split 레이아웃 (룩북 01)**
-- 한 화면(뷰포트 높이에서 헤더 제외)을 채운다.
-- 왼쪽 약 60%: 화보 1장. 이미지 또는 mp4 영상(룩북 01은 영상: 무음, 자동 재생, 반복, 화면 밖에서는 일시정지, 모션 줄이기에서는 포스터 이미지). 화면 왼쪽 여백부터 시작해 위아래를 채운다.
-- 오른쪽 약 40%: 흰 여백. 세로 가운데에 서브 타이틀과 설명을 가운데 정렬로 둔다(폭 최대 280px). 상단에 라벨.
-- 타이틀: 화면 오른쪽 아래에 크게 놓고, 왼쪽 끝이 이미지 위로 겹쳐지게 한다.
-- 모바일: 이미지 전체 폭(4:5), 타이틀이 이미지 하단에 절반 걸치고, 그 아래 라벨, 서브 타이틀, 국문 설명.
+- 실제 업로드 위치가 위와 다르면 먼저 저장소에서 이미지 폴더를 찾아 보고하고, 위 경로로 옮길지 확인받은 뒤 진행한다.
+- 상품 컷은 `public/images/products/`에 SHOP 상품 컷과 함께 있으므로 파일명이 `look_list_`로 시작하는 것만 메인 상품으로 읽는다. 룩북 컷은 `public/images/lookbook/`의 이미지 전부다.
+- 파일명을 코드에 직접 적지 않는다. 폴더의 파일 목록을 읽어 `lookbook.json`과 상품 데이터를 생성하는 스크립트(`scripts/build-main-data.ts`)를 만들고, 이미지가 교체되거나 추가되면 스크립트만 다시 실행하면 되게 한다.
+- 수량이 12컷, 8컷과 다르면 임의로 채우거나 버리지 말고 보고한다.
+- 메인에서는 임시 회색 이미지를 쓰지 않는다. 다른 페이지의 목업 이미지는 그대로 둔다.
 
-**LookbookScene: duo 레이아웃 (룩북 02)**
-- 한 화면을 채운다. 이미지 2장을 좌우 50%씩 여백 없이 붙이고, 가운데 1px 세로 라인.
-- 타이틀: 두 이미지의 경계 위에 가운데 정렬로 크게 겹친다.
-- 타이틀 바로 아래에 흰색 카드(폭 280px, 1px 검정 테두리)를 겹쳐 놓고, 안에 라벨, 서브 타이틀, 설명.
-- 모바일: 이미지 2장을 세로로 쌓고(각 4:5), 타이틀은 두 이미지 경계에 겹침, 카드는 두 번째 이미지 아래 일반 흐름으로.
+**무작위 순서**
+- 룩북 12컷과 상품 8개의 배치 순서는 무작위로 섞는다.
+- 섞기는 접속할 때마다 하지 않고 데이터 생성 시 한 번만 한다. `lookbook.json`의 `seed` 값으로 순서가 결정되며(같은 seed면 같은 순서), seed를 바꾸고 스크립트를 다시 실행하면 새 배치가 나온다. 접속마다 섞으면 서버와 클라이언트 화면이 어긋나고, 확인한 배치를 다시 볼 수 없기 때문이다.
+- 큰 컷 자리에 어떤 이미지가 들어갈지도 무작위다. 단, 원본 가로가 1600px 미만인 이미지는 큰 컷 자리에서 제외하고 다시 뽑는다.
+- 특정 컷을 큰 컷으로 고정하고 싶으면 `lookbook.json`의 `pinLarge`에 파일명을 적는다(최대 2개). 나머지는 무작위로 채운다.
 
-**공통 동작**
-- 씬의 이미지를 누르면 해당 이미지 `productIds[0]`의 상세로 이동한다.
-- 타이틀은 이미지 위에 겹쳐도 클릭을 가로막지 않는다(`pointer-events: none`).
-- 타이틀은 장식 텍스트가 아니라 섹션 제목(`h2`)으로 마크업한다.
+**좌우 여백**
+- 메인의 모든 블록은 가운데 정렬된 좁은 컨테이너(MainContainer) 안에 둔다. 폭 규칙은 `DESIGN_GUIDE.md` 5장 "메인 컨테이너".
+- 타이틀, 룩북 그리드, 상품 리스트의 좌우 끝선을 모두 같은 선에 맞춘다.
+
+**LookbookTitle**
+- 맨 위, 헤더 바로 아래에 위치한다. 첫 화면에서 타이틀과 그리드 첫 줄이 함께 보여야 한다(PC 1440x900 기준).
+- 굵고 좁은 대문자 서체로 단어 하나를 크게 세우고, 옆에 같은 서체의 문장을 붙여 힘 있게 구성한다. 서체와 크기는 `DESIGN_GUIDE.md` 3장 "키 타이틀 타이포".
+- PC: 2단 배치, 위쪽 끝선 정렬.
+  - 왼쪽: 키 타이틀(단어), 바로 아래 서브 라인(시기, 장소).
+  - 오른쪽: 키 카피(문장). 폭 최대 520px, 양쪽 정렬, 컨테이너 오른쪽 끝에 맞춘다.
+- 모바일: 1단. 키 타이틀, 서브 라인, 키 카피 순으로 왼쪽 정렬. 키 카피는 국문을 쓴다.
+- 키 타이틀은 섹션 제목(`h2`)으로 마크업한다.
+
+**타이틀 텍스트 (lookbook.json 기본값, 가을 시즌)**
+
+| 항목 | 값 |
+|---|---|
+| 키 타이틀 | OCTOBER |
+| 서브 라인 | FW26, SEOUL |
+| 키 카피 (영문) | Autumn, undone. The air turns, the collar goes up, and the city slows to the pace of falling leaves. A selection of this season's essential pieces in wool, leather and knit, worn the way October asks: layered, unhurried, certain. |
+| 키 카피 (국문) | 가을, 풀어 헤치다. 공기가 바뀌고 깃이 올라가면, 도시는 낙엽이 떨어지는 속도로 느려진다. 울과 레더, 니트로 고른 이번 시즌의 필수 아이템. 겹쳐 입고, 서두르지 않고, 분명하게. |
+| 상품 리스트 제목 | SHOP THE LOOK — OCTOBER |
+
+챕터를 하나 더 추가할 때 쓸 예비 카피: 키 타이틀 `EMBER`, 서브 라인 `LATE AUTUMN, AFTER DARK`, 키 카피 "The light leaves early now. What stays is warmth. Black wool against bare skin, satin under a heavy coat, a single gleam of gold. Pieces for the long nights between the last leaf and the first snow." (국문: 해는 일찍 지고, 남는 것은 온기다. 맨살 위의 블랙 울, 무거운 코트 아래의 새틴, 한 점의 골드. 마지막 낙엽과 첫눈 사이, 긴 밤을 위한 옷.)
+
+**LookbookGrid**
+- PC, 태블릿: 3열 모자이크, 총 12컷. 일반 컷 10개와 큰 컷(2열 x 2행) 2개. 6행.
+- 자리 배치는 고정이고, 어느 이미지가 어느 자리에 들어갈지만 무작위다. 큰 컷 자리는 5번과 10번.
+
+```
+[ 1 ][ 2 ][ 3 ]
+[ 4 ][   5    ]
+[ 6 ][  (큰)  ]
+[ 7 ][ 8 ][ 9 ]
+[   10   ][ 11 ]
+[  (큰)  ][ 12 ]
+```
+
+- 모바일: 2열. 큰 컷은 2열 전체 폭, 일반 컷은 순서대로 2개씩 채운다.
+- 이미지 비율이 제각각이어도 자리 비율에 맞춰 `object-fit: cover`로 채운다.
+- 룩북 컷과 상품의 연결 정보는 선택 사항이다. `productIds`가 있으면 컷을 누를 때 해당 상품 상세로 이동하고 호버 시 상품명을 보여준다. 없으면 `/new-arrivals`로 이동하고 호버 시 상품명은 표시하지 않는다.
 
 **LookbookProducts**
 - 상단: 왼쪽 상품 리스트 제목, 오른쪽 상품 수.
-- 해당 챕터의 모든 이미지 `productIds`를 중복 없이 모아 노출한다. ProductGrid 재사용(PC 4열). 상품 수는 챕터 01이 4개, 챕터 02가 1개.
-- 상품 리스트 02 아래에만 `VIEW ALL` 버튼(→ `/new-arrivals`).
+- 업로드된 상품 컷 8개를 무작위 순서로 노출한다. ProductGrid 재사용, PC 4열 2줄, 태블릿 3열, 모바일 2열.
+- 이 8개는 실제 상품으로 등록한다(`data/main-products.json`, `isNew: true`, `hiddenInShop: true`로 SHOP 목록에서는 숨기고 `/new-arrivals`에서 노출). 상품명, 가격, 컬러, 사이즈가 주어지지 않았으면 임시 값으로 채우고 채운 목록을 보고한다. 실제 값은 `data/main-products.meta.json`(파일명 기준)에 적고 스크립트를 다시 실행한다.
+- 착용 컷이 없는 상품은 `images.worn`을 비워 두고, ProductCard는 착용 컷이 없으면 호버 전환을 하지 않는다. 이 처리는 ProductCard에 추가해도 되는 유일한 변경이다.
+- 리스트 아래에 `VIEW ALL` 버튼(→ `/new-arrivals`).
 
-**스크롤 모션 구현**
-- 라이브러리: `motion` (Framer Motion)의 `useScroll`, `useTransform`, `whileInView` 사용.
-- PC(1024px 이상): 각 LookbookScene은 높이 200vh의 바깥 래퍼 안에 `position: sticky` 100vh 씬을 두어, 스크롤 100vh 동안 화면이 고정된 채 연출이 진행된다. 진행도(0~1)는 `useScroll({ target, offset: ['start start', 'end end'] })`로 얻는다.
-- 첫 번째 룩북(`Reverie`)만 PC에서 로드 시 진행도 0 → 0.8을 시간(1.4초)으로 자동 재생하고, 이후 스크롤이 0.8 → 1을 이어받는다. 첫 화면이 비어 보이지 않게 하기 위함이며 `DESIGN_GUIDE.md` 10장의 구간 수치는 그대로다.
-- 태블릿, 모바일: 고정 없음. 뷰포트 진입 시 한 번 재생되는 단순 등장으로 대체한다.
-- `prefers-reduced-motion`: 모든 연출을 끄고 최종 상태로 바로 보여준다.
-- 모션은 `transform`과 `opacity`만 사용한다. 레이아웃 속성은 애니메이션하지 않는다.
-- 스크롤 가로채기(스냅, 휠 하이재킹)는 쓰지 않는다. 브라우저 기본 스크롤을 유지한다.
+**모션 구현**
+- 라이브러리: `motion` (Framer Motion)의 `whileInView`, `useScroll`, `useTransform` 사용.
+- 화면 고정(sticky pin) 연출은 쓰지 않는다. 뷰포트 진입 시 1회 재생되는 등장 연출과, 큰 컷의 가벼운 패럴랙스만 쓴다.
+- 타이틀은 페이지 로드 직후 재생한다.
+- `prefers-reduced-motion`: 모든 연출을 끄고 최종 상태로 보여준다.
+- `transform`, `opacity`, `clip-path`만 애니메이션한다. 스크롤 가로채기는 쓰지 않는다.
 
 ### 9-2. 상품 리스트 `/new-arrivals` `/shop` `/shop/[category]`
 
@@ -252,7 +288,7 @@ interface CartItem {
 
 ProductCard
 - 구성 순서: 이미지, 상품명, 가격, 컬러 칩.
-- 이미지 기본은 상품 컷, 마우스 오버 시 착용 컷으로 페이드 전환(호버 가능한 기기에서만).
+- 이미지 기본은 상품 컷, 마우스 오버 시 착용 컷으로 페이드 전환(호버 가능한 기기에서만). 착용 컷(`images.worn`)이 없으면 호버 전환을 하지 않는다.
 - 할인 상품은 정가 취소선과 할인가를 함께 표시한다.
 - 카드 전체를 누르면 `/product/[id]`로 이동한다.
 
@@ -331,5 +367,5 @@ ProductCard
 - 375px, 768px, 1024px, 1440px, 1920px에서 레이아웃이 깨지지 않고 가로 스크롤이 생기지 않는다.
 - 색상, 간격, 글자 크기를 임의 값으로 쓰지 않고 `DESIGN_GUIDE.md`의 토큰만 사용한다.
 - 키보드만으로 메뉴 이동, 드로어 열고 닫기, 옵션 선택이 가능하다.
-- 메인 룩북의 스크롤 연출이 PC에서 끊김 없이 동작하고, 모바일과 모션 줄이기 설정에서는 단순 등장으로 대체된다.
+- 메인에서 타이틀, 룩북 그리드, 상품 리스트의 좌우 끝선이 일치하고, 등장 연출은 모션 줄이기 설정에서 꺼진다.
 - 콘솔 오류와 타입 오류가 없다.

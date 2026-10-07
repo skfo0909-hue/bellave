@@ -5,13 +5,13 @@ import { useEffect, useRef } from 'react';
 import { ProductGrid } from '@/components/product/ProductGrid';
 import { ButtonLink } from '@/components/ui/Button';
 import type { Product } from '@/lib/types';
-import { ENTER_EASE } from './useSceneMode';
+import { ENTER_EASE } from './useMainMotion';
 
 /**
  * 룩북 챕터의 상품 리스트. ProductGrid/ProductCard는 수정 없이 재사용하므로,
  * 카드 등장 연출은 래퍼에서 그리드의 li를 대상으로 처리한다. (요소의 20%가 보일 때 1회)
  */
-export function LookbookProducts({ title, products, showViewAll = false }: { title: string; products: Product[]; showViewAll?: boolean }) {
+export function LookbookProducts({ title, products }: { title: string; products: Product[] }) {
   const reduce = useReducedMotion();
   const gridRef = useRef<HTMLDivElement>(null);
   const enter = { duration: reduce ? 0 : 0.6, ease: ENTER_EASE };
@@ -35,7 +35,7 @@ export function LookbookProducts({ title, products, showViewAll = false }: { tit
   }, [reduce, products]);
 
   return (
-    <section aria-label={title} className="page-x mx-auto mt-12 max-w-page md:mt-16 lg:mt-20">
+    <section aria-label={title} className="mt-12 md:mt-16 lg:mt-20">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -51,19 +51,17 @@ export function LookbookProducts({ title, products, showViewAll = false }: { tit
         <ProductGrid products={products} />
       </div>
 
-      {showViewAll && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: reduce ? 0 : 0.4, ease: ENTER_EASE }}
-          className="mt-12 flex justify-center"
-        >
-          <ButtonLink href="/new-arrivals" variant="secondary" className="min-w-[200px]">
-            VIEW ALL
-          </ButtonLink>
-        </motion.div>
-      )}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: reduce ? 0 : 0.4, ease: ENTER_EASE }}
+        className="mt-12 flex justify-center"
+      >
+        <ButtonLink href="/new-arrivals" variant="secondary" className="min-w-[200px]">
+          VIEW ALL
+        </ButtonLink>
+      </motion.div>
     </section>
   );
 }

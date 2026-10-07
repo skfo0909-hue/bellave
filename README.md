@@ -7,5 +7,7 @@
 npm install
 npm run dev      # http://localhost:3000
 npm run build
-node scripts/generate-data.mjs   # 목업 데이터와 임시 이미지 재생성
+node scripts/generate-data.mjs   # SHOP 목업 데이터와 임시 이미지 재생성
+npm run build:main               # 메인 데이터 생성 (lookbook.json, main-products.json)
+npm run build:main -- --seed 7   # seed를 바꿔 룩북 배치를 새로 섞기
 ```

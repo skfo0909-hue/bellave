@@ -46,8 +46,8 @@
     "description": "Faux Leather Biker Jacket. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
     "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
     "styledWith": [
-      "p08",
-      "p05"
+      "p03",
+      "p04"
     ],
     "isNew": false,
     "createdAt": "2026-07-04"
@@ -93,8 +93,8 @@
     "description": "Frayed Hem Cropped Jacket. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
     "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
     "styledWith": [
-      "p09",
-      "p08",
+      "p05",
+      "p04",
       "p06"
     ],
     "isNew": false,
@@ -141,9 +141,9 @@
     "description": "Fine Knit V-Neck Top. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
     "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
     "styledWith": [
-      "p08",
-      "p10",
-      "p09",
+      "p05",
+      "p02",
+      "p01",
       "p06"
     ],
     "isNew": false,
@@ -192,7 +192,7 @@
     "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
     "styledWith": [
       "p06",
-      "p09"
+      "p01"
     ],
     "isNew": false,
     "createdAt": "2026-07-13"
@@ -238,9 +238,9 @@
     "description": "Black Flare Pants. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
     "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
     "styledWith": [
-      "p01",
       "p03",
-      "p04"
+      "p01",
+      "p06"
     ],
     "isNew": false,
     "createdAt": "2026-07-16"
@@ -286,256 +286,12 @@
     "description": "Pinstripe Mini Skirt. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
     "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
     "styledWith": [
-      "p04",
-      "p10",
+      "p01",
+      "p03",
       "p05",
-      "p08"
+      "p04"
     ],
     "isNew": false,
     "createdAt": "2026-07-19"
-  },
-  {
-    "id": "p07",
-    "name": "Washed Flare Jeans",
-    "category": "bottom",
-    "price": 64900,
-    "colors": [
-      {
-        "name": "Indigo",
-        "hex": "#4A6B8A"
-      }
-    ],
-    "sizes": [
-      {
-        "label": "XS",
-        "soldOut": true
-      },
-      {
-        "label": "S",
-        "soldOut": false
-      },
-      {
-        "label": "M",
-        "soldOut": false
-      },
-      {
-        "label": "L",
-        "soldOut": false
-      }
-    ],
-    "images": {
-      "product": "/images/products/washed-flare-jeans-product.jpg",
-      "worn": "/images/products/washed-flare-jeans-worn.jpg",
-      "gallery": [
-        "/images/products/washed-flare-jeans-worn.jpg",
-        "/images/products/washed-flare-jeans-product.jpg"
-      ],
-      "detail": []
-    },
-    "description": "Washed Flare Jeans. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
-    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
-    "styledWith": [],
-    "isNew": true,
-    "hiddenInShop": true,
-    "createdAt": "2026-09-15"
-  },
-  {
-    "id": "p08",
-    "name": "Satin Midi Skirt",
-    "category": "bottom",
-    "price": 85900,
-    "salePrice": 68900,
-    "colors": [
-      {
-        "name": "Black",
-        "hex": "#111111"
-      },
-      {
-        "name": "Brown",
-        "hex": "#4A2B26"
-      }
-    ],
-    "sizes": [
-      {
-        "label": "XS",
-        "soldOut": false
-      },
-      {
-        "label": "S",
-        "soldOut": false
-      },
-      {
-        "label": "M",
-        "soldOut": false
-      },
-      {
-        "label": "L",
-        "soldOut": false
-      }
-    ],
-    "images": {
-      "product": "/images/products/satin-midi-skirt-product.jpg",
-      "worn": "/images/products/satin-midi-skirt-worn.jpg",
-      "gallery": [
-        "/images/products/satin-midi-skirt-worn.jpg",
-        "/images/products/satin-midi-skirt-product.jpg"
-      ],
-      "detail": []
-    },
-    "description": "Satin Midi Skirt. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
-    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
-    "styledWith": [
-      "p04",
-      "p11",
-      "p10"
-    ],
-    "isNew": true,
-    "hiddenInShop": true,
-    "createdAt": "2026-09-17"
-  },
-  {
-    "id": "p09",
-    "name": "Washed Wide Leg Jeans",
-    "category": "bottom",
-    "price": 96900,
-    "colors": [
-      {
-        "name": "Charcoal",
-        "hex": "#3A3F44"
-      }
-    ],
-    "sizes": [
-      {
-        "label": "XS",
-        "soldOut": false
-      },
-      {
-        "label": "S",
-        "soldOut": true
-      },
-      {
-        "label": "M",
-        "soldOut": false
-      },
-      {
-        "label": "L",
-        "soldOut": false
-      }
-    ],
-    "images": {
-      "product": "/images/products/washed-wide-leg-jeans-product.jpg",
-      "worn": "/images/products/washed-wide-leg-jeans-worn.jpg",
-      "gallery": [
-        "/images/products/washed-wide-leg-jeans-worn.jpg",
-        "/images/products/washed-wide-leg-jeans-product.jpg"
-      ],
-      "detail": []
-    },
-    "description": "Washed Wide Leg Jeans. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
-    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
-    "styledWith": [
-      "p06",
-      "p03",
-      "p02",
-      "p10"
-    ],
-    "isNew": true,
-    "hiddenInShop": true,
-    "createdAt": "2026-09-19"
-  },
-  {
-    "id": "p10",
-    "name": "Faux Leather Funnel Jacket",
-    "category": "outerwear",
-    "price": 270900,
-    "colors": [
-      {
-        "name": "Brown",
-        "hex": "#3E2A22"
-      }
-    ],
-    "sizes": [
-      {
-        "label": "XS",
-        "soldOut": false
-      },
-      {
-        "label": "S",
-        "soldOut": false
-      },
-      {
-        "label": "M",
-        "soldOut": false
-      },
-      {
-        "label": "L",
-        "soldOut": true
-      }
-    ],
-    "images": {
-      "product": "/images/products/faux-leather-funnel-jacket.jpg",
-      "worn": "/images/products/faux-leather-funnel-jacket.jpg",
-      "gallery": [
-        "/images/products/faux-leather-funnel-jacket.jpg"
-      ],
-      "detail": []
-    },
-    "description": "Faux Leather Funnel Jacket. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
-    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
-    "styledWith": [
-      "p04",
-      "p07"
-    ],
-    "isNew": true,
-    "hiddenInShop": true,
-    "createdAt": "2026-09-21"
-  },
-  {
-    "id": "p11",
-    "name": "Hooded Zip-Up Jacket",
-    "category": "outerwear",
-    "price": 257900,
-    "colors": [
-      {
-        "name": "Navy",
-        "hex": "#1F2A44"
-      }
-    ],
-    "sizes": [
-      {
-        "label": "XS",
-        "soldOut": true
-      },
-      {
-        "label": "S",
-        "soldOut": false
-      },
-      {
-        "label": "M",
-        "soldOut": true
-      },
-      {
-        "label": "L",
-        "soldOut": false
-      }
-    ],
-    "images": {
-      "product": "/images/products/hooded-zip-up-jacket.jpg",
-      "worn": "/images/products/hooded-zip-up-jacket.jpg",
-      "gallery": [
-        "/images/products/hooded-zip-up-jacket.jpg"
-      ],
-      "detail": []
-    },
-    "description": "Hooded Zip-Up Jacket. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
-    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
-    "styledWith": [
-      "p09",
-      "p05",
-      "p06"
-    ],
-    "isNew": true,
-    "hiddenInShop": true,
-    "createdAt": "2026-09-23"
   }
 ]

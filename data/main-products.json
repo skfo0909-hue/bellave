@@ -1,0 +1,343 @@
+[
+  {
+    "id": "m01",
+    "name": "Zip-Up Bomber Jacket",
+    "category": "outerwear",
+    "price": 129000,
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#111111"
+      }
+    ],
+    "sizes": [
+      {
+        "label": "XS",
+        "soldOut": false
+      },
+      {
+        "label": "S",
+        "soldOut": false
+      },
+      {
+        "label": "M",
+        "soldOut": false
+      },
+      {
+        "label": "L",
+        "soldOut": false
+      }
+    ],
+    "images": {
+      "product": "/images/products/look_list_1.jpg",
+      "gallery": [
+        "/images/products/look_list_1.jpg"
+      ],
+      "detail": []
+    },
+    "description": "Zip-Up Bomber Jacket. 이번 시즌 필수 아이템으로, 일상에서 편안하게 입을 수 있는 실루엣입니다. (임시 설명)",
+    "sizeGuide": "측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. (임시 안내)",
+    "styledWith": [],
+    "isNew": true,
+    "hiddenInShop": true,
+    "createdAt": "2026-10-08"
+  },
+  {
+    "id": "m02",
+    "name": "Satin Midi Skirt",
+    "category": "bottom",
+    "price": 89000,
+    "colors": [
+      {
+        "name": "Aubergine",
+        "hex": "#2B1F2A"
+      }
+    ],
+    "sizes": [
+      {
+        "label": "XS",
+        "soldOut": false
+      },
+      {
+        "label": "S",
+        "soldOut": false
+      },
+      {
+        "label": "M",
+        "soldOut": false
+      },
+      {
+        "label": "L",
+        "soldOut": false
+      }
+    ],
+    "images": {
+      "product": "/images/products/look_list_2.jpg",
+      "gallery": [
+        "/images/products/look_list_2.jpg"
+      ],
+      "detail": []
+    },
+    "description": "Satin Midi Skirt. 이번 시즌 필수 아이템으로, 일상에서 편안하게 입을 수 있는 실루엣입니다. (임시 설명)",
+    "sizeGuide": "측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. (임시 안내)",
+    "styledWith": [],
+    "isNew": true,
+    "hiddenInShop": true,
+    "createdAt": "2026-10-07"
+  },
+  {
+    "id": "m03",
+    "name": "Faux Leather Belted Jacket",
+    "category": "outerwear",
+    "price": 199000,
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#111111"
+      }
+    ],
+    "sizes": [
+      {
+        "label": "XS",
+        "soldOut": false
+      },
+      {
+        "label": "S",
+        "soldOut": false
+      },
+      {
+        "label": "M",
+        "soldOut": false
+      },
+      {
+        "label": "L",
+        "soldOut": false
+      }
+    ],
+    "images": {
+      "product": "/images/products/look_list_3.jpg",
+      "gallery": [
+        "/images/products/look_list_3.jpg"
+      ],
+      "detail": []
+    },
+    "description": "Faux Leather Belted Jacket. 이번 시즌 필수 아이템으로, 일상에서 편안하게 입을 수 있는 실루엣입니다. (임시 설명)",
+    "sizeGuide": "측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. (임시 안내)",
+    "styledWith": [],
+    "isNew": true,
+    "hiddenInShop": true,
+    "createdAt": "2026-10-06"
+  },
+  {
+    "id": "m04",
+    "name": "Wool Blend Cropped Jacket",
+    "category": "outerwear",
+    "price": 169000,
+    "colors": [
+      {
+        "name": "Beige",
+        "hex": "#CBB8A0"
+      }
+    ],
+    "sizes": [
+      {
+        "label": "XS",
+        "soldOut": false
+      },
+      {
+        "label": "S",
+        "soldOut": false
+      },
+      {
+        "label": "M",
+        "soldOut": false
+      },
+      {
+        "label": "L",
+        "soldOut": false
+      }
+    ],
+    "images": {
+      "product": "/images/products/look_list_4.jpg",
+      "gallery": [
+        "/images/products/look_list_4.jpg"
+      ],
+      "detail": []
+    },
+    "description": "Wool Blend Cropped Jacket. 이번 시즌 필수 아이템으로, 일상에서 편안하게 입을 수 있는 실루엣입니다. (임시 설명)",
+    "sizeGuide": "측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. (임시 안내)",
+    "styledWith": [],
+    "isNew": true,
+    "hiddenInShop": true,
+    "createdAt": "2026-10-05"
+  },
+  {
+    "id": "m05",
+    "name": "Suede Slouch Ankle Boots",
+    "category": "acc",
+    "price": 119000,
+    "colors": [
+      {
+        "name": "Khaki Brown",
+        "hex": "#7A6A50"
+      }
+    ],
+    "sizes": [
+      {
+        "label": "230",
+        "soldOut": false
+      },
+      {
+        "label": "240",
+        "soldOut": false
+      },
+      {
+        "label": "250",
+        "soldOut": false
+      }
+    ],
+    "images": {
+      "product": "/images/products/look_list_5.jpg",
+      "gallery": [
+        "/images/products/look_list_5.jpg"
+      ],
+      "detail": []
+    },
+    "description": "Suede Slouch Ankle Boots. 이번 시즌 필수 아이템으로, 일상에서 편안하게 입을 수 있는 실루엣입니다. (임시 설명)",
+    "sizeGuide": "측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. (임시 안내)",
+    "styledWith": [],
+    "isNew": true,
+    "hiddenInShop": true,
+    "createdAt": "2026-10-04"
+  },
+  {
+    "id": "m06",
+    "name": "Straight Leg Jeans",
+    "category": "bottom",
+    "price": 79000,
+    "colors": [
+      {
+        "name": "Indigo",
+        "hex": "#4A6B8A"
+      }
+    ],
+    "sizes": [
+      {
+        "label": "XS",
+        "soldOut": false
+      },
+      {
+        "label": "S",
+        "soldOut": false
+      },
+      {
+        "label": "M",
+        "soldOut": false
+      },
+      {
+        "label": "L",
+        "soldOut": false
+      }
+    ],
+    "images": {
+      "product": "/images/products/look_list_6.jpg",
+      "gallery": [
+        "/images/products/look_list_6.jpg"
+      ],
+      "detail": []
+    },
+    "description": "Straight Leg Jeans. 이번 시즌 필수 아이템으로, 일상에서 편안하게 입을 수 있는 실루엣입니다. (임시 설명)",
+    "sizeGuide": "측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. (임시 안내)",
+    "styledWith": [],
+    "isNew": true,
+    "hiddenInShop": true,
+    "createdAt": "2026-10-03"
+  },
+  {
+    "id": "m07",
+    "name": "Distressed Barrel Jeans",
+    "category": "bottom",
+    "price": 99000,
+    "salePrice": 79000,
+    "colors": [
+      {
+        "name": "Washed Blue",
+        "hex": "#6C8CAB"
+      }
+    ],
+    "sizes": [
+      {
+        "label": "XS",
+        "soldOut": false
+      },
+      {
+        "label": "S",
+        "soldOut": false
+      },
+      {
+        "label": "M",
+        "soldOut": false
+      },
+      {
+        "label": "L",
+        "soldOut": false
+      }
+    ],
+    "images": {
+      "product": "/images/products/look_list_7.jpg",
+      "gallery": [
+        "/images/products/look_list_7.jpg"
+      ],
+      "detail": []
+    },
+    "description": "Distressed Barrel Jeans. 이번 시즌 필수 아이템으로, 일상에서 편안하게 입을 수 있는 실루엣입니다. (임시 설명)",
+    "sizeGuide": "측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. (임시 안내)",
+    "styledWith": [],
+    "isNew": true,
+    "hiddenInShop": true,
+    "createdAt": "2026-10-02"
+  },
+  {
+    "id": "m08",
+    "name": "Lace Trim V-Neck Top",
+    "category": "top",
+    "price": 59000,
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#111111"
+      }
+    ],
+    "sizes": [
+      {
+        "label": "XS",
+        "soldOut": false
+      },
+      {
+        "label": "S",
+        "soldOut": false
+      },
+      {
+        "label": "M",
+        "soldOut": false
+      },
+      {
+        "label": "L",
+        "soldOut": false
+      }
+    ],
+    "images": {
+      "product": "/images/products/look_list_8.jpg",
+      "gallery": [
+        "/images/products/look_list_8.jpg"
+      ],
+      "detail": []
+    },
+    "description": "Lace Trim V-Neck Top. 이번 시즌 필수 아이템으로, 일상에서 편안하게 입을 수 있는 실루엣입니다. (임시 설명)",
+    "sizeGuide": "측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. (임시 안내)",
+    "styledWith": [],
+    "isNew": true,
+    "hiddenInShop": true,
+    "createdAt": "2026-10-01"
+  }
+]

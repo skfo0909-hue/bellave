@@ -13,14 +13,16 @@ export function ProductCard({ product, priority = false }: { product: Product; p
       <Link href={href} className="block">
         <div className="relative aspect-[3/4] overflow-hidden bg-gray-100">
           <Image src={product.images.product} alt={product.name} fill sizes={sizes} priority={priority} className="object-cover" />
-          {/* 호버 가능한 기기에서만 착용 컷을 0.3초 페이드로 겹친다 */}
-          <Image
-            src={product.images.worn}
-            alt=""
-            fill
-            sizes={sizes}
-            className="object-cover opacity-0 transition-opacity duration-300 ease-out [@media(hover:hover)]:group-hover:opacity-100"
-          />
+          {/* 호버 가능한 기기에서만 착용 컷을 0.3초 페이드로 겹친다. 착용 컷이 없으면 전환하지 않는다. */}
+          {product.images.worn && product.images.worn !== product.images.product && (
+            <Image
+              src={product.images.worn}
+              alt=""
+              fill
+              sizes={sizes}
+              className="object-cover opacity-0 transition-opacity duration-300 ease-out [@media(hover:hover)]:group-hover:opacity-100"
+            />
+          )}
         </div>
         <h3 className="mt-3 truncate text-caption">{product.name}</h3>
         <p className="mt-1 text-caption">
