@@ -27,7 +27,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
   ]);
 
   return (
-    <div className="page-x mx-auto max-w-[1160px] pb-30">
+    <div className="page-x mx-auto max-w-[1280px] pb-30">
       {/* 상단 2단: 정보 패널은 헤더 아래에 고정되고 이 영역이 끝나면 풀린다 */}
       <div className="pt-4 md:grid md:grid-cols-[3fr_2fr] md:items-start md:pt-6">
         <ProductGallery images={product.images.gallery} name={product.name} />

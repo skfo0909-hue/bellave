@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
-import { motion, useScroll, useTransform, type HTMLMotionProps, type MotionValue } from 'motion/react';
-import { useRef } from 'react';
+import { animate, motion, useMotionValue, useScroll, useTransform, type HTMLMotionProps, type MotionValue } from 'motion/react';
+import { useEffect, useRef } from 'react';
 import { Img as Image } from '@/components/ui/Img';
 import type { LookbookChapter } from '@/lib/types';
 import { ScriptSub, ScriptTitle } from './ScriptTitle';
@@ -38,8 +38,18 @@ export function LookbookScene({ chapter, priority = false }: { chapter: Lookbook
 /* ---------- split (룩북 01) ---------- */
 function Split({ chapter, mode, priority }: { chapter: LookbookChapter; mode: SceneMode; priority: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: p } = useScroll({ target: ref, offset: ['start 80px', 'end end'] });
+  const { scrollYProgress: scroll } = useScroll({ target: ref, offset: ['start 80px', 'end end'] });
   const image = chapter.images[0];
+
+  // 첫 화면이 비어 보이지 않도록, 첫 룩북은 로드 시 진행도 0 → 0.8(타이틀, 라벨, 설명까지 등장 완료)을 시간으로 재생한다.
+  // 이후 스크롤이 나머지 0.8 → 1을 이어받는다. 구간 표의 수치는 그대로다.
+  const intro = useMotionValue(0);
+  useEffect(() => {
+    if (mode !== 'scroll' || !priority) return;
+    const controls = animate(intro, 0.8, { duration: 1.4, ease: ENTER_EASE });
+    return () => controls.stop();
+  }, [mode, priority, intro]);
+  const p = useTransform([scroll, intro], ([s, i]: number[]) => i + s * (1 - i));
 
   // DESIGN_GUIDE.md 10장 표: 룩북 01
   const clipPath = useRange(p, 0, 0.5, 'inset(100% 0% 0% 0%)', 'inset(0% 0% 0% 0%)');
