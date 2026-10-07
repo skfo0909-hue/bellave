@@ -6,16 +6,8 @@
     "price": 232900,
     "colors": [
       {
-        "name": "Ivory",
-        "hex": "#F4F1EA"
-      },
-      {
-        "name": "Navy",
-        "hex": "#1F2A44"
-      },
-      {
-        "name": "Burgundy",
-        "hex": "#6E1F2B"
+        "name": "Brown",
+        "hex": "#5B4A3A"
       }
     ],
     "sizes": [
@@ -54,29 +46,69 @@
     "description": "Faux Leather Biker Jacket. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
     "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
     "styledWith": [
-      "p04",
-      "p08"
+      "p08",
+      "p05"
     ],
     "isNew": false,
     "createdAt": "2026-07-04"
   },
   {
     "id": "p02",
-    "name": "Faux Leather Funnel Jacket",
+    "name": "Frayed Hem Cropped Jacket",
     "category": "outerwear",
-    "price": 307900,
+    "price": 326900,
     "colors": [
       {
-        "name": "Burgundy",
-        "hex": "#6E1F2B"
+        "name": "Black",
+        "hex": "#111111"
+      }
+    ],
+    "sizes": [
+      {
+        "label": "XS",
+        "soldOut": false
       },
       {
-        "name": "Beige",
-        "hex": "#D8C7AE"
+        "label": "S",
+        "soldOut": false
       },
       {
-        "name": "Grey",
-        "hex": "#8C8C8C"
+        "label": "M",
+        "soldOut": false
+      },
+      {
+        "label": "L",
+        "soldOut": false
+      }
+    ],
+    "images": {
+      "product": "/images/products/frayed-hem-cropped-jacket-product.jpg",
+      "worn": "/images/products/frayed-hem-cropped-jacket-worn.jpg",
+      "gallery": [
+        "/images/products/frayed-hem-cropped-jacket-worn.jpg",
+        "/images/products/frayed-hem-cropped-jacket-product.jpg"
+      ],
+      "detail": []
+    },
+    "description": "Frayed Hem Cropped Jacket. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
+    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
+    "styledWith": [
+      "p09",
+      "p08",
+      "p06"
+    ],
+    "isNew": false,
+    "createdAt": "2026-07-07"
+  },
+  {
+    "id": "p03",
+    "name": "Fine Knit V-Neck Top",
+    "category": "top",
+    "price": 91900,
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#111111"
       }
     ],
     "sizes": [
@@ -95,6 +127,349 @@
       {
         "label": "L",
         "soldOut": false
+      }
+    ],
+    "images": {
+      "product": "/images/products/fine-knit-v-neck-top-product.jpg",
+      "worn": "/images/products/fine-knit-v-neck-top-worn.jpg",
+      "gallery": [
+        "/images/products/fine-knit-v-neck-top-worn.jpg",
+        "/images/products/fine-knit-v-neck-top-product.jpg"
+      ],
+      "detail": []
+    },
+    "description": "Fine Knit V-Neck Top. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
+    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
+    "styledWith": [
+      "p08",
+      "p10",
+      "p09",
+      "p06"
+    ],
+    "isNew": false,
+    "createdAt": "2026-07-10"
+  },
+  {
+    "id": "p04",
+    "name": "Hooded Knit Top",
+    "category": "top",
+    "price": 77900,
+    "salePrice": 54900,
+    "colors": [
+      {
+        "name": "Navy",
+        "hex": "#1F2A44"
+      }
+    ],
+    "sizes": [
+      {
+        "label": "XS",
+        "soldOut": false
+      },
+      {
+        "label": "S",
+        "soldOut": false
+      },
+      {
+        "label": "M",
+        "soldOut": false
+      },
+      {
+        "label": "L",
+        "soldOut": true
+      }
+    ],
+    "images": {
+      "product": "/images/products/hooded-knit-top-product.jpg",
+      "worn": "/images/products/hooded-knit-top-worn.jpg",
+      "gallery": [
+        "/images/products/hooded-knit-top-worn.jpg",
+        "/images/products/hooded-knit-top-product.jpg"
+      ],
+      "detail": []
+    },
+    "description": "Hooded Knit Top. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
+    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
+    "styledWith": [
+      "p06",
+      "p09"
+    ],
+    "isNew": false,
+    "createdAt": "2026-07-13"
+  },
+  {
+    "id": "p05",
+    "name": "Black Flare Pants",
+    "category": "bottom",
+    "price": 127900,
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#111111"
+      }
+    ],
+    "sizes": [
+      {
+        "label": "XS",
+        "soldOut": false
+      },
+      {
+        "label": "S",
+        "soldOut": true
+      },
+      {
+        "label": "M",
+        "soldOut": false
+      },
+      {
+        "label": "L",
+        "soldOut": false
+      }
+    ],
+    "images": {
+      "product": "/images/products/black-flare-pants-product.jpg",
+      "worn": "/images/products/black-flare-pants-worn.jpg",
+      "gallery": [
+        "/images/products/black-flare-pants-worn.jpg",
+        "/images/products/black-flare-pants-product.jpg"
+      ],
+      "detail": []
+    },
+    "description": "Black Flare Pants. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
+    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
+    "styledWith": [
+      "p01",
+      "p03",
+      "p04"
+    ],
+    "isNew": false,
+    "createdAt": "2026-07-16"
+  },
+  {
+    "id": "p06",
+    "name": "Pinstripe Mini Skirt",
+    "category": "dresses",
+    "price": 172900,
+    "colors": [
+      {
+        "name": "Charcoal",
+        "hex": "#5E5E5E"
+      }
+    ],
+    "sizes": [
+      {
+        "label": "XS",
+        "soldOut": false
+      },
+      {
+        "label": "S",
+        "soldOut": false
+      },
+      {
+        "label": "M",
+        "soldOut": false
+      },
+      {
+        "label": "L",
+        "soldOut": false
+      }
+    ],
+    "images": {
+      "product": "/images/products/pinstripe-mini-skirt-product.jpg",
+      "worn": "/images/products/pinstripe-mini-skirt-worn.jpg",
+      "gallery": [
+        "/images/products/pinstripe-mini-skirt-worn.jpg",
+        "/images/products/pinstripe-mini-skirt-product.jpg"
+      ],
+      "detail": []
+    },
+    "description": "Pinstripe Mini Skirt. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
+    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
+    "styledWith": [
+      "p04",
+      "p10",
+      "p05",
+      "p08"
+    ],
+    "isNew": false,
+    "createdAt": "2026-07-19"
+  },
+  {
+    "id": "p07",
+    "name": "Washed Flare Jeans",
+    "category": "bottom",
+    "price": 64900,
+    "colors": [
+      {
+        "name": "Indigo",
+        "hex": "#4A6B8A"
+      }
+    ],
+    "sizes": [
+      {
+        "label": "XS",
+        "soldOut": true
+      },
+      {
+        "label": "S",
+        "soldOut": false
+      },
+      {
+        "label": "M",
+        "soldOut": false
+      },
+      {
+        "label": "L",
+        "soldOut": false
+      }
+    ],
+    "images": {
+      "product": "/images/products/washed-flare-jeans-product.jpg",
+      "worn": "/images/products/washed-flare-jeans-worn.jpg",
+      "gallery": [
+        "/images/products/washed-flare-jeans-worn.jpg",
+        "/images/products/washed-flare-jeans-product.jpg"
+      ],
+      "detail": []
+    },
+    "description": "Washed Flare Jeans. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
+    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
+    "styledWith": [],
+    "isNew": true,
+    "hiddenInShop": true,
+    "createdAt": "2026-09-15"
+  },
+  {
+    "id": "p08",
+    "name": "Satin Midi Skirt",
+    "category": "bottom",
+    "price": 85900,
+    "salePrice": 68900,
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#111111"
+      },
+      {
+        "name": "Brown",
+        "hex": "#4A2B26"
+      }
+    ],
+    "sizes": [
+      {
+        "label": "XS",
+        "soldOut": false
+      },
+      {
+        "label": "S",
+        "soldOut": false
+      },
+      {
+        "label": "M",
+        "soldOut": false
+      },
+      {
+        "label": "L",
+        "soldOut": false
+      }
+    ],
+    "images": {
+      "product": "/images/products/satin-midi-skirt-product.jpg",
+      "worn": "/images/products/satin-midi-skirt-worn.jpg",
+      "gallery": [
+        "/images/products/satin-midi-skirt-worn.jpg",
+        "/images/products/satin-midi-skirt-product.jpg"
+      ],
+      "detail": []
+    },
+    "description": "Satin Midi Skirt. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
+    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
+    "styledWith": [
+      "p04",
+      "p11",
+      "p10"
+    ],
+    "isNew": true,
+    "hiddenInShop": true,
+    "createdAt": "2026-09-17"
+  },
+  {
+    "id": "p09",
+    "name": "Washed Wide Leg Jeans",
+    "category": "bottom",
+    "price": 96900,
+    "colors": [
+      {
+        "name": "Charcoal",
+        "hex": "#3A3F44"
+      }
+    ],
+    "sizes": [
+      {
+        "label": "XS",
+        "soldOut": false
+      },
+      {
+        "label": "S",
+        "soldOut": true
+      },
+      {
+        "label": "M",
+        "soldOut": false
+      },
+      {
+        "label": "L",
+        "soldOut": false
+      }
+    ],
+    "images": {
+      "product": "/images/products/washed-wide-leg-jeans-product.jpg",
+      "worn": "/images/products/washed-wide-leg-jeans-worn.jpg",
+      "gallery": [
+        "/images/products/washed-wide-leg-jeans-worn.jpg",
+        "/images/products/washed-wide-leg-jeans-product.jpg"
+      ],
+      "detail": []
+    },
+    "description": "Washed Wide Leg Jeans. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
+    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
+    "styledWith": [
+      "p06",
+      "p03",
+      "p02",
+      "p10"
+    ],
+    "isNew": true,
+    "hiddenInShop": true,
+    "createdAt": "2026-09-19"
+  },
+  {
+    "id": "p10",
+    "name": "Faux Leather Funnel Jacket",
+    "category": "outerwear",
+    "price": 270900,
+    "colors": [
+      {
+        "name": "Brown",
+        "hex": "#3E2A22"
+      }
+    ],
+    "sizes": [
+      {
+        "label": "XS",
+        "soldOut": false
+      },
+      {
+        "label": "S",
+        "soldOut": false
+      },
+      {
+        "label": "M",
+        "soldOut": false
+      },
+      {
+        "label": "L",
+        "soldOut": true
       }
     ],
     "images": {
@@ -108,499 +483,28 @@
     "description": "Faux Leather Funnel Jacket. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
     "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
     "styledWith": [
-      "p10",
       "p04",
-      "p08"
+      "p07"
     ],
     "isNew": true,
-    "createdAt": "2026-09-05"
-  },
-  {
-    "id": "p03",
-    "name": "Scallop Neck Long Sleeve Top",
-    "category": "top",
-    "price": 46900,
-    "colors": [
-      {
-        "name": "Burgundy",
-        "hex": "#6E1F2B"
-      },
-      {
-        "name": "Beige",
-        "hex": "#D8C7AE"
-      },
-      {
-        "name": "Grey",
-        "hex": "#8C8C8C"
-      }
-    ],
-    "sizes": [
-      {
-        "label": "XS",
-        "soldOut": false
-      },
-      {
-        "label": "S",
-        "soldOut": true
-      },
-      {
-        "label": "M",
-        "soldOut": false
-      },
-      {
-        "label": "L",
-        "soldOut": false
-      }
-    ],
-    "images": {
-      "product": "/images/products/scallop-neck-long-sleeve-top.jpg",
-      "worn": "/images/products/scallop-neck-long-sleeve-top.jpg",
-      "gallery": [
-        "/images/products/scallop-neck-long-sleeve-top.jpg"
-      ],
-      "detail": []
-    },
-    "description": "Scallop Neck Long Sleeve Top. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
-    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
-    "styledWith": [
-      "p10",
-      "p01",
-      "p13",
-      "p12"
-    ],
-    "isNew": true,
-    "createdAt": "2026-09-07"
-  },
-  {
-    "id": "p04",
-    "name": "Hooded Zip-Up Top",
-    "category": "top",
-    "price": 95900,
-    "salePrice": 66900,
-    "colors": [
-      {
-        "name": "Camel",
-        "hex": "#B58B5A"
-      },
-      {
-        "name": "Khaki",
-        "hex": "#6B6B4F"
-      },
-      {
-        "name": "Ivory",
-        "hex": "#F4F1EA"
-      }
-    ],
-    "sizes": [
-      {
-        "label": "XS",
-        "soldOut": false
-      },
-      {
-        "label": "S",
-        "soldOut": false
-      },
-      {
-        "label": "M",
-        "soldOut": false
-      },
-      {
-        "label": "L",
-        "soldOut": true
-      }
-    ],
-    "images": {
-      "product": "/images/products/hooded-zip-up-top.jpg",
-      "worn": "/images/products/hooded-zip-up-top.jpg",
-      "gallery": [
-        "/images/products/hooded-zip-up-top.jpg"
-      ],
-      "detail": []
-    },
-    "description": "Hooded Zip-Up Top. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
-    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
-    "styledWith": [
-      "p02",
-      "p12"
-    ],
-    "isNew": true,
-    "createdAt": "2026-09-09"
-  },
-  {
-    "id": "p05",
-    "name": "Cotton Poplin Shirt",
-    "category": "top",
-    "price": 68900,
-    "colors": [
-      {
-        "name": "Navy",
-        "hex": "#1F2A44"
-      },
-      {
-        "name": "Burgundy",
-        "hex": "#6E1F2B"
-      }
-    ],
-    "sizes": [
-      {
-        "label": "XS",
-        "soldOut": false
-      },
-      {
-        "label": "S",
-        "soldOut": false
-      },
-      {
-        "label": "M",
-        "soldOut": false
-      },
-      {
-        "label": "L",
-        "soldOut": false
-      }
-    ],
-    "images": {
-      "product": "/images/ph/product.svg",
-      "worn": "/images/ph/worn-2.svg",
-      "gallery": [
-        "/images/ph/worn-2.svg",
-        "/images/ph/product.svg",
-        "/images/ph/gallery-1.svg",
-        "/images/ph/gallery-2.svg",
-        "/images/ph/gallery-3.svg"
-      ],
-      "detail": [
-        "/images/ph/detail-1.svg",
-        "/images/ph/detail-2.svg",
-        "/images/ph/detail-3.svg",
-        "/images/ph/detail-4.svg",
-        "/images/ph/detail-1.svg"
-      ]
-    },
-    "description": "Cotton Poplin Shirt. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
-    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
-    "styledWith": [
-      "p09",
-      "p02",
-      "p12"
-    ],
-    "isNew": false,
-    "createdAt": "2026-07-16"
-  },
-  {
-    "id": "p06",
-    "name": "Ribbed Knit Top",
-    "category": "top",
-    "price": 73900,
-    "colors": [
-      {
-        "name": "Grey",
-        "hex": "#8C8C8C"
-      },
-      {
-        "name": "Black",
-        "hex": "#111111"
-      }
-    ],
-    "sizes": [
-      {
-        "label": "XS",
-        "soldOut": true
-      },
-      {
-        "label": "S",
-        "soldOut": false
-      },
-      {
-        "label": "M",
-        "soldOut": false
-      },
-      {
-        "label": "L",
-        "soldOut": false
-      }
-    ],
-    "images": {
-      "product": "/images/ph/product.svg",
-      "worn": "/images/ph/worn-3.svg",
-      "gallery": [
-        "/images/ph/worn-3.svg",
-        "/images/ph/product.svg",
-        "/images/ph/gallery-1.svg",
-        "/images/ph/gallery-2.svg",
-        "/images/ph/gallery-3.svg"
-      ],
-      "detail": [
-        "/images/ph/detail-1.svg",
-        "/images/ph/detail-2.svg",
-        "/images/ph/detail-3.svg",
-        "/images/ph/detail-4.svg",
-        "/images/ph/detail-1.svg"
-      ]
-    },
-    "description": "Ribbed Knit Top. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
-    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
-    "styledWith": [
-      "p11",
-      "p09",
-      "p10",
-      "p13"
-    ],
-    "isNew": false,
-    "createdAt": "2026-07-19"
-  },
-  {
-    "id": "p07",
-    "name": "Boat Neck Knit Sweater",
-    "category": "top",
-    "price": 85900,
-    "colors": [
-      {
-        "name": "Black",
-        "hex": "#111111"
-      },
-      {
-        "name": "Camel",
-        "hex": "#B58B5A"
-      },
-      {
-        "name": "Khaki",
-        "hex": "#6B6B4F"
-      }
-    ],
-    "sizes": [
-      {
-        "label": "XS",
-        "soldOut": false
-      },
-      {
-        "label": "S",
-        "soldOut": true
-      },
-      {
-        "label": "M",
-        "soldOut": false
-      },
-      {
-        "label": "L",
-        "soldOut": true
-      }
-    ],
-    "images": {
-      "product": "/images/ph/product.svg",
-      "worn": "/images/ph/worn-2.svg",
-      "gallery": [
-        "/images/ph/worn-2.svg",
-        "/images/ph/product.svg",
-        "/images/ph/gallery-1.svg",
-        "/images/ph/gallery-2.svg",
-        "/images/ph/gallery-3.svg"
-      ],
-      "detail": [
-        "/images/ph/detail-1.svg",
-        "/images/ph/detail-2.svg",
-        "/images/ph/detail-3.svg",
-        "/images/ph/detail-4.svg",
-        "/images/ph/detail-1.svg"
-      ]
-    },
-    "description": "Boat Neck Knit Sweater. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
-    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
-    "styledWith": [],
-    "isNew": false,
-    "createdAt": "2026-07-22"
-  },
-  {
-    "id": "p08",
-    "name": "Cropped Cardigan",
-    "category": "top",
-    "price": 88900,
-    "salePrice": 61900,
-    "colors": [
-      {
-        "name": "Burgundy",
-        "hex": "#6E1F2B"
-      },
-      {
-        "name": "Beige",
-        "hex": "#D8C7AE"
-      },
-      {
-        "name": "Grey",
-        "hex": "#8C8C8C"
-      }
-    ],
-    "sizes": [
-      {
-        "label": "XS",
-        "soldOut": false
-      },
-      {
-        "label": "S",
-        "soldOut": false
-      },
-      {
-        "label": "M",
-        "soldOut": false
-      },
-      {
-        "label": "L",
-        "soldOut": false
-      }
-    ],
-    "images": {
-      "product": "/images/ph/product.svg",
-      "worn": "/images/ph/worn-3.svg",
-      "gallery": [
-        "/images/ph/worn-3.svg",
-        "/images/ph/product.svg",
-        "/images/ph/gallery-1.svg",
-        "/images/ph/gallery-2.svg",
-        "/images/ph/gallery-3.svg"
-      ],
-      "detail": [
-        "/images/ph/detail-1.svg",
-        "/images/ph/detail-2.svg",
-        "/images/ph/detail-3.svg",
-        "/images/ph/detail-4.svg",
-        "/images/ph/detail-1.svg"
-      ]
-    },
-    "description": "Cropped Cardigan. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
-    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
-    "styledWith": [
-      "p01",
-      "p02",
-      "p11"
-    ],
-    "isNew": false,
-    "createdAt": "2026-07-25"
-  },
-  {
-    "id": "p09",
-    "name": "Faux Leather Wide Pants",
-    "category": "bottom",
-    "price": 87900,
-    "colors": [
-      {
-        "name": "Grey",
-        "hex": "#8C8C8C"
-      },
-      {
-        "name": "Black",
-        "hex": "#111111"
-      }
-    ],
-    "sizes": [
-      {
-        "label": "XS",
-        "soldOut": true
-      },
-      {
-        "label": "S",
-        "soldOut": false
-      },
-      {
-        "label": "M",
-        "soldOut": false
-      },
-      {
-        "label": "L",
-        "soldOut": false
-      }
-    ],
-    "images": {
-      "product": "/images/products/faux-leather-wide-pants.jpg",
-      "worn": "/images/products/faux-leather-wide-pants.jpg",
-      "gallery": [
-        "/images/products/faux-leather-wide-pants.jpg"
-      ],
-      "detail": []
-    },
-    "description": "Faux Leather Wide Pants. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
-    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
-    "styledWith": [
-      "p13",
-      "p03",
-      "p06",
-      "p05"
-    ],
-    "isNew": true,
-    "createdAt": "2026-09-19"
-  },
-  {
-    "id": "p10",
-    "name": "Washed Flare Jeans",
-    "category": "bottom",
-    "price": 93900,
-    "colors": [
-      {
-        "name": "Navy",
-        "hex": "#1F2A44"
-      },
-      {
-        "name": "Burgundy",
-        "hex": "#6E1F2B"
-      }
-    ],
-    "sizes": [
-      {
-        "label": "XS",
-        "soldOut": false
-      },
-      {
-        "label": "S",
-        "soldOut": false
-      },
-      {
-        "label": "M",
-        "soldOut": false
-      },
-      {
-        "label": "L",
-        "soldOut": false
-      }
-    ],
-    "images": {
-      "product": "/images/products/washed-flare-jeans.jpg",
-      "worn": "/images/products/washed-flare-jeans.jpg",
-      "gallery": [
-        "/images/products/washed-flare-jeans.jpg"
-      ],
-      "detail": []
-    },
-    "description": "Washed Flare Jeans. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
-    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
-    "styledWith": [
-      "p06",
-      "p04"
-    ],
-    "isNew": true,
+    "hiddenInShop": true,
     "createdAt": "2026-09-21"
   },
   {
     "id": "p11",
-    "name": "Bias Cut Maxi Skirt",
-    "category": "dresses",
-    "price": 111900,
+    "name": "Hooded Zip-Up Jacket",
+    "category": "outerwear",
+    "price": 257900,
     "colors": [
-      {
-        "name": "Ivory",
-        "hex": "#F4F1EA"
-      },
       {
         "name": "Navy",
         "hex": "#1F2A44"
-      },
-      {
-        "name": "Burgundy",
-        "hex": "#6E1F2B"
       }
     ],
     "sizes": [
       {
         "label": "XS",
-        "soldOut": false
+        "soldOut": true
       },
       {
         "label": "S",
@@ -608,7 +512,7 @@
       },
       {
         "label": "M",
-        "soldOut": false
+        "soldOut": true
       },
       {
         "label": "L",
@@ -616,140 +520,22 @@
       }
     ],
     "images": {
-      "product": "/images/products/bias-cut-maxi-skirt.jpg",
-      "worn": "/images/products/bias-cut-maxi-skirt.jpg",
+      "product": "/images/products/hooded-zip-up-jacket.jpg",
+      "worn": "/images/products/hooded-zip-up-jacket.jpg",
       "gallery": [
-        "/images/products/bias-cut-maxi-skirt.jpg"
+        "/images/products/hooded-zip-up-jacket.jpg"
       ],
       "detail": []
     },
-    "description": "Bias Cut Maxi Skirt. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
-    "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
-    "styledWith": [
-      "p03",
-      "p06",
-      "p02"
-    ],
-    "isNew": true,
-    "createdAt": "2026-09-23"
-  },
-  {
-    "id": "p12",
-    "name": "Slip Midi Dress",
-    "category": "dresses",
-    "price": 145900,
-    "salePrice": 101900,
-    "colors": [
-      {
-        "name": "Ivory",
-        "hex": "#F4F1EA"
-      },
-      {
-        "name": "Navy",
-        "hex": "#1F2A44"
-      },
-      {
-        "name": "Burgundy",
-        "hex": "#6E1F2B"
-      }
-    ],
-    "sizes": [
-      {
-        "label": "XS",
-        "soldOut": true
-      },
-      {
-        "label": "S",
-        "soldOut": false
-      },
-      {
-        "label": "M",
-        "soldOut": false
-      },
-      {
-        "label": "L",
-        "soldOut": true
-      }
-    ],
-    "images": {
-      "product": "/images/ph/product.svg",
-      "worn": "/images/ph/worn-2.svg",
-      "gallery": [
-        "/images/ph/worn-2.svg",
-        "/images/ph/product.svg",
-        "/images/ph/gallery-1.svg",
-        "/images/ph/gallery-2.svg",
-        "/images/ph/gallery-3.svg"
-      ],
-      "detail": [
-        "/images/ph/detail-1.svg",
-        "/images/ph/detail-2.svg",
-        "/images/ph/detail-3.svg",
-        "/images/ph/detail-4.svg",
-        "/images/ph/detail-1.svg"
-      ]
-    },
-    "description": "Slip Midi Dress. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
+    "description": "Hooded Zip-Up Jacket. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
     "sizeGuide": "모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).",
     "styledWith": [
       "p09",
-      "p13",
-      "p04",
-      "p01"
+      "p05",
+      "p06"
     ],
-    "isNew": false,
-    "createdAt": "2026-07-09"
-  },
-  {
-    "id": "p13",
-    "name": "Leather Mini Shoulder Bag",
-    "category": "acc",
-    "price": 73900,
-    "colors": [
-      {
-        "name": "Burgundy",
-        "hex": "#6E1F2B"
-      },
-      {
-        "name": "Beige",
-        "hex": "#D8C7AE"
-      },
-      {
-        "name": "Grey",
-        "hex": "#8C8C8C"
-      }
-    ],
-    "sizes": [
-      {
-        "label": "ONE SIZE",
-        "soldOut": false
-      }
-    ],
-    "images": {
-      "product": "/images/ph/product.svg",
-      "worn": "/images/ph/worn-1.svg",
-      "gallery": [
-        "/images/ph/worn-1.svg",
-        "/images/ph/product.svg",
-        "/images/ph/gallery-1.svg",
-        "/images/ph/gallery-2.svg",
-        "/images/ph/gallery-3.svg"
-      ],
-      "detail": [
-        "/images/ph/detail-1.svg",
-        "/images/ph/detail-2.svg",
-        "/images/ph/detail-3.svg",
-        "/images/ph/detail-4.svg",
-        "/images/ph/detail-1.svg"
-      ]
-    },
-    "description": "Leather Mini Shoulder Bag. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.",
-    "sizeGuide": "프리 사이즈 상품입니다. 상세 치수는 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다.",
-    "styledWith": [
-      "p10",
-      "p02"
-    ],
-    "isNew": false,
-    "createdAt": "2026-07-12"
+    "isNew": true,
+    "hiddenInShop": true,
+    "createdAt": "2026-09-23"
   }
 ]

@@ -30,7 +30,9 @@ export interface ProductPage {
 const price = (p: Product) => p.salePrice ?? p.price;
 
 export async function getProducts({ scope, sort = 'new', page = 1 }: ProductQuery): Promise<ProductPage> {
-  let list = products.filter((p) => (scope === 'new' ? p.isNew : scope === 'all' ? true : p.category === scope));
+  // 신상품 목록은 룩북 전용 상품을 포함하고, SHOP(전체, 카테고리)에서는 숨긴 상품을 뺀다.
+  const inShop = (p: Product) => !p.hiddenInShop;
+  let list = products.filter((p) => (scope === 'new' ? p.isNew : scope === 'all' ? inShop(p) : inShop(p) && p.category === scope));
   list = [...list].sort((a, b) => {
     if (sort === 'price-asc') return price(a) - price(b);
     if (sort === 'price-desc') return price(b) - price(a);
@@ -51,7 +53,7 @@ export async function getProductsByIds(ids: string[]): Promise<Product[]> {
 }
 
 export async function getRelatedProducts(product: Product, limit = 4): Promise<Product[]> {
-  return products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, limit);
+  return products.filter((p) => p.category === product.category && p.id !== product.id && !p.hiddenInShop).slice(0, limit);
 }
 
 export async function getProductSummaries(): Promise<Record<string, ProductSummary>> {

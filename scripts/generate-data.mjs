@@ -49,59 +49,47 @@ const palette = [
   { name: 'Khaki', hex: '#6B6B4F' },
   { name: 'Burgundy', hex: '#6E1F2B' },
 ];
-// 실제 이미지(public/images/products, lookbook)는 아래 정의에서 상품에 연결한다. 없으면 회색 임시 이미지.
-// 총 13개: OUTERWEAR 2 / TOP 6 / BOTTOM 2 / DRESSES 2 / ACC 1
+// 실제 이미지는 public/images/products, lookbook에 있고 아래 정의에서 상품에 연결한다.
+// SHOP 6개: OUTERWEAR 2 / TOP 2 / BOTTOM 1 / DRESSES 1 / ACC 0
+// 룩북 전용 5개(hiddenInShop): SHOP 목록에는 나오지 않고, 룩북과 NEW ARRIVALS에서 상세로 연결된다.
 const P = (f) => `/images/products/${f}.jpg`;
-const single = (f) => ({ product: P(f), worn: P(f), gallery: [P(f)], detail: [] }); // 컷이 1장뿐인 상품
+const pair = (slug) => ({ product: P(`${slug}-product`), worn: P(`${slug}-worn`), gallery: [P(`${slug}-worn`), P(`${slug}-product`)], detail: [] });
+const single = (slug) => ({ product: P(slug), worn: P(slug), gallery: [P(slug)], detail: [] }); // 컷이 1장뿐인 상품
+const biker = (k) => P(`faux-leather-biker-jacket-${k}`);
 const defs = [
   {
-    id: 'p01',
-    cat: 'outerwear',
-    name: 'Faux Leather Biker Jacket',
-    images: {
-      product: P('faux-leather-biker-jacket-front'),
-      worn: P('faux-leather-biker-jacket-worn'),
-      gallery: ['worn', 'front', 'back', 'detail'].map((k) => P(`faux-leather-biker-jacket-${k}`)),
-      detail: ['detail', 'back', 'front'].map((k) => P(`faux-leather-biker-jacket-${k}`)),
-    },
+    id: 'p01', cat: 'outerwear', name: 'Faux Leather Biker Jacket', colors: [{ name: 'Brown', hex: '#5B4A3A' }],
+    images: { product: biker('front'), worn: biker('worn'), gallery: ['worn', 'front', 'back', 'detail'].map(biker), detail: ['detail', 'back', 'front'].map(biker) },
   },
-  { id: 'p02', cat: 'outerwear', name: 'Faux Leather Funnel Jacket', images: single('faux-leather-funnel-jacket') },
-  { id: 'p03', cat: 'top', name: 'Scallop Neck Long Sleeve Top', images: single('scallop-neck-long-sleeve-top') },
-  { id: 'p04', cat: 'top', name: 'Hooded Zip-Up Top', images: single('hooded-zip-up-top') },
-  { id: 'p05', cat: 'top', name: 'Cotton Poplin Shirt' },
-  { id: 'p06', cat: 'top', name: 'Ribbed Knit Top' },
-  { id: 'p07', cat: 'top', name: 'Boat Neck Knit Sweater' },
-  { id: 'p08', cat: 'top', name: 'Cropped Cardigan' },
-  { id: 'p09', cat: 'bottom', name: 'Faux Leather Wide Pants', images: single('faux-leather-wide-pants') },
-  { id: 'p10', cat: 'bottom', name: 'Washed Flare Jeans', images: single('washed-flare-jeans') },
-  { id: 'p11', cat: 'dresses', name: 'Bias Cut Maxi Skirt', images: single('bias-cut-maxi-skirt') },
-  { id: 'p12', cat: 'dresses', name: 'Slip Midi Dress' },
-  { id: 'p13', cat: 'acc', name: 'Leather Mini Shoulder Bag' },
+  { id: 'p02', cat: 'outerwear', name: 'Frayed Hem Cropped Jacket', colors: [{ name: 'Black', hex: '#111111' }], images: pair('frayed-hem-cropped-jacket') },
+  { id: 'p03', cat: 'top', name: 'Fine Knit V-Neck Top', colors: [{ name: 'Black', hex: '#111111' }], images: pair('fine-knit-v-neck-top') },
+  { id: 'p04', cat: 'top', name: 'Hooded Knit Top', colors: [{ name: 'Navy', hex: '#1F2A44' }], images: pair('hooded-knit-top') },
+  { id: 'p05', cat: 'bottom', name: 'Black Flare Pants', colors: [{ name: 'Black', hex: '#111111' }], images: pair('black-flare-pants') },
+  { id: 'p06', cat: 'dresses', name: 'Pinstripe Mini Skirt', colors: [{ name: 'Charcoal', hex: '#5E5E5E' }], images: pair('pinstripe-mini-skirt') },
+  // 룩북 전용
+  { id: 'p07', cat: 'bottom', name: 'Washed Flare Jeans', colors: [{ name: 'Indigo', hex: '#4A6B8A' }], images: pair('washed-flare-jeans') },
+  { id: 'p08', cat: 'bottom', name: 'Satin Midi Skirt', colors: [{ name: 'Black', hex: '#111111' }, { name: 'Brown', hex: '#4A2B26' }], images: pair('satin-midi-skirt') },
+  { id: 'p09', cat: 'bottom', name: 'Washed Wide Leg Jeans', colors: [{ name: 'Charcoal', hex: '#3A3F44' }], images: pair('washed-wide-leg-jeans') },
+  { id: 'p10', cat: 'outerwear', name: 'Faux Leather Funnel Jacket', colors: [{ name: 'Brown', hex: '#3E2A22' }], images: single('faux-leather-funnel-jacket') },
+  { id: 'p11', cat: 'outerwear', name: 'Hooded Zip-Up Jacket', colors: [{ name: 'Navy', hex: '#1F2A44' }], images: single('hooded-zip-up-jacket') },
 ];
 const priceBase = { outerwear: [159000, 329000], top: [39900, 99000], bottom: [59900, 129000], dresses: [89900, 189000], acc: [19900, 169000] };
-// 룩북 챕터에 연결되는 상품: Reverie 4개, Nocturne 2개. 이 6개가 신상품이다.
+// 룩북 챕터에 연결되는 상품: Reverie 4개, Nocturne 1개. 이 5개가 신상품이며 SHOP 목록에서는 숨긴다.
 const chapterProducts = {
-  reverie: ['p09', 'p10', 'p11', 'p02'],
-  nocturne: ['p03', 'p04'],
+  reverie: ['p07', 'p08', 'p09', 'p10'],
+  nocturne: ['p11'],
 };
 const newSet = new Set([...chapterProducts.reverie, ...chapterProducts.nocturne]);
 
 const products = [];
-defs.forEach(({ id, cat, name, images }, i) => {
+defs.forEach(({ id, cat, name, colors, images }, i) => {
   const n = i + 1;
   const [lo, hi] = priceBase[cat];
   const price = Math.round((lo + rnd() * (hi - lo)) / 1000) * 1000 - 100;
   const onSale = n % 4 === 0;
   const salePrice = onSale ? Math.round((price * (rnd() > 0.5 ? 0.8 : 0.7)) / 1000) * 1000 - 100 : undefined;
-  const colorCount = 1 + Math.floor(rnd() * 3);
-  const start = Math.floor(rnd() * palette.length);
-  const colors = Array.from({ length: colorCount }, (_, k) => palette[(start + k * 3) % palette.length]);
-  const sizes =
-    cat === 'acc'
-      ? [{ label: 'ONE SIZE', soldOut: false }]
-      : ['XS', 'S', 'M', 'L'].map((label) => ({ label, soldOut: rnd() < 0.18 }));
+  const sizes = ['XS', 'S', 'M', 'L'].map((label) => ({ label, soldOut: rnd() < 0.18 }));
   if (sizes.every((s) => s.soldOut)) sizes[1].soldOut = false;
-  const w = pick(['worn-1', 'worn-2', 'worn-3']);
   const isNew = newSet.has(id);
   const day = isNew ? 1 + ((n * 2) % 28) : 1 + ((n * 3) % 28);
   products.push({
@@ -112,19 +100,12 @@ defs.forEach(({ id, cat, name, images }, i) => {
     ...(salePrice ? { salePrice } : {}),
     colors,
     sizes,
-    images: images ?? {
-      product: img('product'),
-      worn: img(w),
-      gallery: [img(w), img('product'), img('gallery-1'), img('gallery-2'), img('gallery-3')],
-      detail: [img('detail-1'), img('detail-2'), img('detail-3'), img('detail-4'), img('detail-1')],
-    },
+    images,
     description: `${name}. 부드러운 촉감의 소재로 제작했으며 일상에서 편안하게 입을 수 있는 실루엣입니다. 소재: 폴리에스터 60%, 면 40%. 모델 착용 사이즈 S. 드라이클리닝을 권장합니다.`,
-    sizeGuide:
-      cat === 'acc'
-        ? '프리 사이즈 상품입니다. 상세 치수는 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다.'
-        : '모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).',
+    sizeGuide: '모델 신장 172cm, 체중 52kg, S 사이즈 착용. 측정 방법에 따라 1~2cm 오차가 있을 수 있습니다. XS 총장 62 / S 64 / M 66 / L 68 (cm).',
     styledWith: [],
     isNew,
+    ...(isNew ? { hiddenInShop: true } : {}),
     createdAt: `2026-${isNew ? '09' : '07'}-${pad(day)}`,
   });
 });
@@ -167,8 +148,8 @@ const lookbook = [
     descriptionKo: '해가 진 뒤 더 선명해지는 선. 블랙과 새틴, 한 점의 골드.',
     productsTitle: 'SHOP THE LOOK — NOCTURNE',
     images: [
-      { src: '/images/lookbook/scene-nocturne-1.jpg', alt: 'Nocturne 룩북 화보 1', productIds: [chapterProducts.nocturne[0]] },
-      { src: '/images/lookbook/scene-nocturne-2.jpg', alt: 'Nocturne 룩북 화보 2', productIds: [chapterProducts.nocturne[1]] },
+      { src: '/images/lookbook/scene-nocturne-1.jpg', alt: 'Nocturne 룩북 화보 1', productIds: chapterProducts.nocturne },
+      { src: '/images/lookbook/scene-nocturne-2.jpg', alt: 'Nocturne 룩북 화보 2', productIds: chapterProducts.nocturne },
     ],
   },
 ];

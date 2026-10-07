@@ -18,6 +18,7 @@ export interface Product {
   sizeGuide: string; // SIZE GUIDE 아코디언
   styledWith: string[]; // 같이 입은 상품 id
   isNew: boolean;
+  hiddenInShop?: boolean; // true면 SHOP 목록과 관련 상품에서 숨긴다 (룩북 전용 상품)
   createdAt: string;
 }
 

@@ -14,10 +14,10 @@
         "poster": "/images/lookbook/scene-reverie-poster.jpg",
         "alt": "Reverie 룩북 영상",
         "productIds": [
+          "p07",
+          "p08",
           "p09",
-          "p10",
-          "p11",
-          "p02"
+          "p10"
         ]
       }
     ]
@@ -36,14 +36,14 @@
         "src": "/images/lookbook/scene-nocturne-1.jpg",
         "alt": "Nocturne 룩북 화보 1",
         "productIds": [
-          "p03"
+          "p11"
         ]
       },
       {
         "src": "/images/lookbook/scene-nocturne-2.jpg",
         "alt": "Nocturne 룩북 화보 2",
         "productIds": [
-          "p04"
+          "p11"
         ]
       }
     ]

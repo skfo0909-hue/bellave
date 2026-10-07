@@ -44,7 +44,7 @@ export function LookbookProducts({ title, products, showViewAll = false }: { tit
         className="mb-6 flex items-baseline justify-between lg:mb-8"
       >
         <h2 className="text-section uppercase">{title}</h2>
-        <p className="text-label text-gray-600">{products.length} ITEMS</p>
+        <p className="text-label text-gray-600">{products.length} {products.length === 1 ? 'ITEM' : 'ITEMS'}</p>
       </motion.div>
 
       <div ref={gridRef} className={reduce ? '' : '[&_li]:translate-y-[24px] [&_li]:opacity-0'}>

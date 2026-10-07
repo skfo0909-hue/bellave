@@ -112,6 +112,7 @@ interface Product {
   sizeGuide: string;          // SIZE GUIDE 아코디언
   styledWith: string[];       // 같이 입은 상품 id
   isNew: boolean;
+  hiddenInShop?: boolean;     // true면 SHOP 목록과 관련 상품에서 숨김 (룩북 전용 상품)
   createdAt: string;
 }
 
@@ -151,7 +152,7 @@ interface CartItem {
 }
 ```
 
-목업 데이터 분량: 상품 13개(OUTERWEAR 2 / TOP 6 / BOTTOM 2 / DRESSES 2 / ACC 1, 신상품 6개 = 룩북 챕터에 연결된 상품), 룩북 챕터 2개(챕터 01 상품 4개, 챕터 02 상품 2개 연결), 상품당 리뷰 0~5개, Q&A 0~3개.
+목업 데이터 분량: SHOP 상품 6개(OUTERWEAR 2 / TOP 2 / BOTTOM 1 / DRESSES 1 / ACC 0)와 룩북 전용 상품 5개(`hiddenInShop`, 신상품)로 총 11개, 룩북 챕터 2개(챕터 01 상품 4개, 챕터 02 상품 1개 연결), 상품당 리뷰 0~5개, Q&A 0~3개.
 실제 이미지가 없는 동안에는 3:4 비율의 회색 임시 이미지를 쓰되, 상품 컷과 착용 컷은 호버 전환이 눈에 보이도록 서로 다른 명도로 구분한다.
 
 ## 8. 공통 레이아웃
@@ -223,7 +224,7 @@ interface CartItem {
 
 **LookbookProducts**
 - 상단: 왼쪽 상품 리스트 제목, 오른쪽 상품 수.
-- 해당 챕터의 모든 이미지 `productIds`를 중복 없이 모아 노출한다. ProductGrid 재사용(PC 4열). 상품 수는 챕터 01이 4개, 챕터 02가 2개.
+- 해당 챕터의 모든 이미지 `productIds`를 중복 없이 모아 노출한다. ProductGrid 재사용(PC 4열). 상품 수는 챕터 01이 4개, 챕터 02가 1개.
 - 상품 리스트 02 아래에만 `VIEW ALL` 버튼(→ `/new-arrivals`).
 
 **스크롤 모션 구현**
@@ -239,9 +240,9 @@ interface CartItem {
 
 하나의 템플릿을 공유한다. 데이터 조건만 다르다.
 
-- `/new-arrivals`: `isNew`가 true인 상품
-- `/shop`: 전체
-- `/shop/[category]`: 해당 카테고리. 없는 slug는 404.
+- `/new-arrivals`: `isNew`가 true인 상품 (룩북 전용 상품 포함)
+- `/shop`: 전체 (`hiddenInShop` 상품 제외)
+- `/shop/[category]`: 해당 카테고리 (`hiddenInShop` 상품 제외). 없는 slug는 404. 상품이 없는 카테고리는 안내 문구를 보여준다.
 
 구성
 - 그리드 상단 바: 왼쪽 카테고리명과 상품 수, 오른쪽 정렬 선택(신상품순, 낮은 가격순, 높은 가격순). 정렬 값은 URL 쿼리 `?sort=`에 반영한다.
