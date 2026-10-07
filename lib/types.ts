@@ -25,6 +25,7 @@ export interface LookbookImage {
   src: string;
   alt: string;
   productIds: string[]; // 이 컷에 쓰인 상품
+  poster?: string; // src가 영상일 때 로딩 전, 모션 줄이기 설정에서 보여줄 이미지
 }
 
 export interface LookbookChapter {

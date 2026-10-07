@@ -148,7 +148,14 @@ const lookbook = [
     description: 'A quiet afternoon, softened in wool and light. Pieces made to move slowly through the season.',
     descriptionKo: '느린 오후의 빛, 울과 니트로 부드럽게 흐르는 실루엣.',
     productsTitle: 'SHOP THE LOOK — REVERIE',
-    images: [{ src: '/images/lookbook/scene-reverie.jpg', alt: 'Reverie 룩북 화보', productIds: chapterProducts.reverie }],
+    images: [
+      {
+        src: '/images/lookbook/scene-reverie.mp4', // 무음 영상 (H.264, 오디오 트랙 없음)
+        poster: '/images/lookbook/scene-reverie-poster.jpg',
+        alt: 'Reverie 룩북 영상',
+        productIds: chapterProducts.reverie,
+      },
+    ],
   },
   {
     id: 'ch02',

@@ -2,8 +2,8 @@
 import Link from 'next/link';
 import { animate, motion, useMotionValue, useScroll, useTransform, type HTMLMotionProps, type MotionValue } from 'motion/react';
 import { useEffect, useRef } from 'react';
-import { Img as Image } from '@/components/ui/Img';
 import type { LookbookChapter } from '@/lib/types';
+import { SceneMedia } from './SceneMedia';
 import { ScriptSub, ScriptTitle } from './ScriptTitle';
 import { ENTER_EASE, useSceneMode, type SceneMode } from './useSceneMode';
 
@@ -72,7 +72,7 @@ function Split({ chapter, mode, priority }: { chapter: LookbookChapter; mode: Sc
                 {...pick(mode, { scale: zoom }, { opacity: 0, scale: 1.05 }, { opacity: 1, scale: 1 })}
                 className="relative h-full w-full"
               >
-                <Image src={image.src} alt={image.alt} fill sizes="(min-width:768px) 60vw, 100vw" priority={priority} className="object-cover" style={{ objectPosition: '50% 30%' }} />
+                <SceneMedia image={image} sizes="(min-width:768px) 60vw, 100vw" priority={priority} />
               </motion.div>
             </Link>
           </motion.div>
@@ -140,7 +140,7 @@ function Duo({ chapter, mode }: { chapter: LookbookChapter; mode: SceneMode }) {
                   {...pick(mode, { y: i === 0 ? yLeft : yRight }, { opacity: 0, scale: 1.05 }, { opacity: 1, scale: 1 })}
                   className="absolute inset-x-0 top-0 h-full md:-top-[8%] md:h-[116%]"
                 >
-                  <Image src={image.src} alt={image.alt} fill sizes="(min-width:768px) 50vw, 100vw" priority={i === 0} className="object-cover" style={{ objectPosition: '50% 30%' }} />
+                  <SceneMedia image={image} sizes="(min-width:768px) 50vw, 100vw" priority={i === 0} />
                 </motion.div>
               </Link>
             </div>

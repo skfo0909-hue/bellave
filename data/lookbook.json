@@ -10,8 +10,9 @@
     "productsTitle": "SHOP THE LOOK — REVERIE",
     "images": [
       {
-        "src": "/images/lookbook/scene-reverie.jpg",
-        "alt": "Reverie 룩북 화보",
+        "src": "/images/lookbook/scene-reverie.mp4",
+        "poster": "/images/lookbook/scene-reverie-poster.jpg",
+        "alt": "Reverie 룩북 영상",
         "productIds": [
           "p09",
           "p10",
