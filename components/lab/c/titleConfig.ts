@@ -4,7 +4,7 @@
 
 /** 타이틀 영역 색. 두 색은 여기서만 바꾼다. */
 export const TITLE_COLORS = {
-  background: '#4A0C00', // 타이틀 블록 배경 (화면 전체 폭)
+  background: '#000000', // 타이틀 블록 배경 (화면 전체 폭)
   text: '#767DFC', // 키 타이틀, 서브 라인, 카피 첫 문장, 카피 본문
 } as const;
 
@@ -32,5 +32,5 @@ export const TITLE_BOIL = {
   /** 타이틀이 차지하는 폭. PC는 오른쪽 카피 열(480px)과 겹치지 않는 범위 */
   width: 'min(100%, 560px)',
   /** 그림 가장자리 여백만큼 왼쪽으로 당겨 글자 왼쪽 끝을 컨테이너 선에 맞춘다 (폭의 %) */
-  pullLeft: 3.2,
+  pullLeft: 2.4,
 } as const;
