@@ -1,6 +1,6 @@
 import { LookbookCollage } from '@/components/home/LookbookCollage';
 import { LabMain } from '../LabMain';
-import { HeaderOnScroll } from './HeaderOnScroll';
+import { HeaderWhite } from './HeaderWhite';
 import { LabTitle } from './LabTitle';
 import { SteelBackground } from './SteelBackground';
 import { WhiteProducts } from './WhiteProducts';
@@ -12,7 +12,7 @@ export function LabC() {
       before={
         <>
           <SteelBackground />
-          <HeaderOnScroll />
+          <HeaderWhite />
         </>
       }
       title={(chapter) => <LabTitle chapter={chapter} />}
