@@ -1,5 +1,6 @@
 import { LookbookCollage } from '@/components/home/LookbookCollage';
 import { LabMain } from '../LabMain';
+import { LabTitle } from './LabTitle';
 import { SteelBackground } from './SteelBackground';
 import { WhiteProducts } from './WhiteProducts';
 
@@ -8,6 +9,7 @@ export function LabC() {
   return (
     <LabMain
       before={<SteelBackground />}
+      title={(chapter) => <LabTitle chapter={chapter} />}
       className=""
       productsWrap={(children) => <WhiteProducts>{children}</WhiteProducts>}
       lookbook={({ chapter, productNames }) => (

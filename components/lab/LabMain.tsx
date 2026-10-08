@@ -19,12 +19,15 @@ export async function LabMain({
   before,
   productsWrap,
   className = 'pb-30',
+  title,
 }: {
   lookbook: (props: LabLookbookProps) => ReactNode;
   before?: ReactNode;
   /** 상품 리스트 구간을 감싸는 래퍼 (배경 처리 등) */
   productsWrap?: (children: ReactNode) => ReactNode;
   className?: string;
+  /** 키 타이틀을 시안 전용 컴포넌트로 바꿀 때 (기본: 공용 LookbookTitle) */
+  title?: (chapter: LookbookChapter, first: boolean) => ReactNode;
 }) {
   const chapters = await getLookbook();
   const [productLists, summaries] = await Promise.all([Promise.all(chapters.map((c) => getChapterProducts(c))), getProductSummaries()]);
@@ -39,7 +42,7 @@ export async function LabMain({
       <MainContainer>
         {chapters.map((chapter, i) => (
           <section key={chapter.id} aria-label={chapter.title} className={i > 0 ? 'mt-16 md:mt-20 lg:mt-30' : ''}>
-            <LookbookTitle chapter={chapter} first={i === 0} />
+            {title ? title(chapter, i === 0) : <LookbookTitle chapter={chapter} first={i === 0} />}
             {lookbook({ chapter, productNames })}
             {(productsWrap ?? ((c: ReactNode) => c))(<LookbookProducts title={chapter.productsTitle} products={productLists[i]} />)}
           </section>
