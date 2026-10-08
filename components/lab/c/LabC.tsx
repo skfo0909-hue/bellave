@@ -10,7 +10,7 @@ export function LabC() {
     <LabMain
       before={<SteelBackground />}
       title={(chapter) => <LabTitle chapter={chapter} />}
-      className=""
+      className="overflow-x-clip"
       productsWrap={(children) => <WhiteProducts>{children}</WhiteProducts>}
       lookbook={({ chapter, productNames }) => (
         <LookbookCollage
