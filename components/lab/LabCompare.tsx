@@ -8,7 +8,7 @@ const DEVICES: Record<Device, { label: string; width: number; height: number }> 
   mobile: { label: '모바일 375', width: 375, height: 2400 },
 };
 /** 화면에 보이는 시안 폭(px). iframe은 실제 폭으로 렌더하고 scale로 줄인다. */
-const SHOWN_WIDTH: Record<Device, number> = { pc: 400, mobile: 300 };
+const SHOWN_WIDTH: Record<Device, number> = { pc: 312, mobile: 300 };
 
 export function LabCompare() {
   const [device, setDevice] = useState<Device>('pc');
