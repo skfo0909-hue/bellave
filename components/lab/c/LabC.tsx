@@ -11,7 +11,14 @@ export function LabC() {
       className=""
       productsWrap={(children) => <WhiteProducts>{children}</WhiteProducts>}
       lookbook={({ chapter, productNames }) => (
-        <LookbookCollage images={chapter.images} seed={chapter.seed} pinLarge={chapter.pinLarge} productNames={productNames} />
+        <LookbookCollage
+          images={chapter.images}
+          seed={chapter.seed}
+          pinLarge={chapter.pinLarge}
+          productNames={productNames}
+          frame
+          blurReveal
+        />
       )}
     />
   );

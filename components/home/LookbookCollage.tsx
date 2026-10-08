@@ -214,11 +214,17 @@ export function LookbookCollage({
   seed,
   pinLarge,
   productNames = {},
+  frame = false,
+  blurReveal = false,
 }: {
   images: LookbookImage[];
   seed: number;
   pinLarge?: string[];
   productNames?: Record<string, string>;
+  /** 시안 옵션: 모든 컷에 두꺼운 흰색 테두리 (기본 꺼짐: 겹친 컷만 얇은 테두리) */
+  frame?: boolean;
+  /** 시안 옵션: 스크롤 진입 시 블러 → 선명 (기본 꺼짐) */
+  blurReveal?: boolean;
 }) {
   const { reduced, desktop } = useMainMotion();
   const clusters = useMemo(() => buildClusters(images, seed, pinLarge), [images, seed, pinLarge]);
@@ -240,6 +246,8 @@ export function LookbookCollage({
               index={k}
               reduced={reduced}
               desktop={desktop}
+              frame={frame}
+              blurReveal={blurReveal}
               priority={ci === 0 && k === 0}
               name={cut.image.productIds?.[0] ? productNames[cut.image.productIds[0]] : undefined}
             />
@@ -257,6 +265,8 @@ function Cut({
   index,
   reduced,
   desktop,
+  frame,
+  blurReveal,
   priority,
   name,
 }: {
@@ -266,6 +276,8 @@ function Cut({
   index: number;
   reduced: boolean;
   desktop: boolean;
+  frame: boolean;
+  blurReveal: boolean;
   priority: boolean;
   name?: string;
 }) {
@@ -280,6 +292,13 @@ function Cut({
   const { scrollYProgress } = useScroll({ target: li, offset: ['start end', 'end start'] });
   const parallaxY = useTransform(scrollYProgress, [0, 1], [24, -24]);
   const parallax = over && desktop && !reduced;
+
+  // 시안 옵션(blurReveal): 컷 윗변이 화면 아래에서 올라와 화면 높이 40% 지점에 닿을 때까지 블러 16px → 0, 크기 1.06 → 1 (블러 가장자리 비침 방지)
+  const { scrollYProgress: revealProgress } = useScroll({ target: li, offset: ['start end', 'start 40%'] });
+  const blurPx = useTransform(revealProgress, [0, 1], [16, 0]);
+  const blurFilter = useTransform(blurPx, (v) => `blur(${v.toFixed(2)}px)`);
+  const blurScale = useTransform(revealProgress, [0, 1], [1.06, 1]);
+  const reveal = blurReveal && !reduced;
 
   const vars = (v: Variant) => ({ ...v.geo[index], top: `calc(${pct(v.geo[index].top / v.height)} + ${v.geo[index].dy.toFixed(1)}px)` });
   const m = vars(mobile);
@@ -321,20 +340,24 @@ function Cut({
       <motion.div className="h-full w-full" {...enter}>
         <motion.div className="h-full w-full" style={parallax ? { y: parallaxY } : undefined}>
           {/* 위에 올라가는 컷은 흰색 테두리 4px(모바일 3px). 그림자와 회전은 쓰지 않는다. 바탕 컷은 테두리 없음. */}
-          <div className={`group relative h-full w-full overflow-hidden bg-gray-100 ${over ? 'border-[3px] border-white md:border-4' : ''}`}>
+          <div
+            className={`group relative h-full w-full overflow-hidden bg-gray-100 ${frame ? 'border-[6px] border-white md:border-8' : over ? 'border-[3px] border-white md:border-4' : ''}`}
+          >
             <Link href={href} className="absolute inset-0 block" aria-label={name ?? image.alt}>
               {/* 호버(PC만): 이미지 1.0 → 1.03 (0.4초) */}
               <div className="absolute inset-0 transition-transform duration-[400ms] ease-out lg:[@media(hover:hover)]:group-hover:scale-[1.03]">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  width={image.width}
-                  height={image.height}
-                  sizes={`(min-width:1024px) ${spanDesktop}px, ${Math.round(m.width * 100)}vw`}
-                  priority={priority}
-                  className="h-full w-full object-cover"
-                  style={{ objectPosition: 'center 25%' }}
-                />
+                <motion.div className="absolute inset-0" style={reveal ? { filter: blurFilter, scale: blurScale } : undefined}>
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    width={image.width}
+                    height={image.height}
+                    sizes={`(min-width:1024px) ${spanDesktop}px, ${Math.round(m.width * 100)}vw`}
+                    priority={priority}
+                    className="h-full w-full object-cover"
+                    style={{ objectPosition: 'center 25%' }}
+                  />
+                </motion.div>
               </div>
               {name && (
                 <span className="pointer-events-none absolute bottom-2 left-2 hidden text-micro text-white opacity-0 transition-opacity duration-200 lg:block lg:[@media(hover:hover)]:group-hover:opacity-100">
