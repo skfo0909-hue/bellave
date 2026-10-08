@@ -14,13 +14,24 @@ export interface LabLookbookProps {
   productNames: Record<string, string>;
 }
 
-export async function LabMain({ lookbook, before }: { lookbook: (props: LabLookbookProps) => ReactNode; before?: ReactNode }) {
+export async function LabMain({
+  lookbook,
+  before,
+  productsWrap,
+  className = 'pb-30',
+}: {
+  lookbook: (props: LabLookbookProps) => ReactNode;
+  before?: ReactNode;
+  /** 상품 리스트 구간을 감싸는 래퍼 (배경 처리 등) */
+  productsWrap?: (children: ReactNode) => ReactNode;
+  className?: string;
+}) {
   const chapters = await getLookbook();
   const [productLists, summaries] = await Promise.all([Promise.all(chapters.map((c) => getChapterProducts(c))), getProductSummaries()]);
   const productNames = Object.fromEntries(Object.values(summaries).map((p) => [p.id, p.name]));
 
   return (
-    <div className="pb-30">
+    <div className={className}>
       {before}
       {/* eslint-disable-next-line @next/next/no-page-custom-font */}
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap" />
@@ -30,7 +41,7 @@ export async function LabMain({ lookbook, before }: { lookbook: (props: LabLookb
           <section key={chapter.id} aria-label={chapter.title} className={i > 0 ? 'mt-16 md:mt-20 lg:mt-30' : ''}>
             <LookbookTitle chapter={chapter} first={i === 0} />
             {lookbook({ chapter, productNames })}
-            <LookbookProducts title={chapter.productsTitle} products={productLists[i]} />
+            {(productsWrap ?? ((c: ReactNode) => c))(<LookbookProducts title={chapter.productsTitle} products={productLists[i]} />)}
           </section>
         ))}
       </MainContainer>
