@@ -80,7 +80,7 @@
   product/   ProductCard, ProductGrid, ProductGallery, ProductInfoPanel,
              StyledWith, RelatedProducts, ReviewList, QnaList
   cart/      CartDrawer, CartItemCard, CartSummary
-  home/      MainContainer, LookbookTitle, LookbookGrid, LookbookCollage, LookbookProducts
+  home/      MainContainer, LookbookTitle, LookbookCollage, LookbookProducts
   ui/        Button, Accordion, QuantityStepper, Pagination, ColorChip,
              SizeSelector, IconButton
 /data        products.json, main-products.json, lookbook.json, reviews.json, qna.json, community.json
@@ -120,7 +120,7 @@ interface Product {
 interface LookbookImage {
   src: string;                // public/images/lookbook/ 의 파일
   alt: string;
-  width: number;              // 원본 크기 (큰 컷 자리 판정, next/image 용)
+  width: number;              // 원본 크기 (큰 컷 자리 판정, 콜라주 비율, next/image 용)
   height: number;
   productIds?: string[];      // 연결된 상품 (선택)
 }
@@ -131,11 +131,10 @@ interface LookbookChapter {
   subline: string;            // 서브 라인 (예: FW26, SEOUL)
   copyLead: string;           // 키 카피 첫 문장 (영문, 크게)
   copy: string;               // 키 카피 본문 (영문)
-  layout: 'grid' | 'collage'; // 룩북 레이아웃 전환
   productsTitle: string;      // 예: SHOP THE LOOK — COAT WEATHER
   seed: number;               // 무작위 순서 결정 값
   pinLarge?: string[];        // 큰 컷으로 고정할 파일명 (최대 2)
-  images: LookbookImage[];    // 섞인 뒤의 순서로 12컷. 5번째, 10번째가 큰 컷
+  images: LookbookImage[];    // 섞인 뒤의 순서로 12컷. 5번째, 10번째는 원본 가로 1600px 이상
   productIds: string[];       // 섞인 뒤의 순서로 상품 8개
 }
 
@@ -186,14 +185,14 @@ interface CartItem {
 
 ### 9-1. 메인 `/`
 
-키 타이틀을 맨 위에 두고, 그 아래 룩북 12컷을 모자이크 그리드로, 다시 그 아래 상품 8개를 나열한다. 타이포와 모션 수치는 `DESIGN_GUIDE.md` 3장, 5장, 10장을 따른다.
+키 타이틀을 맨 위에 두고, 그 아래 룩북 12컷을 겹침 콜라주로, 다시 그 아래 상품 8개를 나열한다. 타이포와 모션 수치는 `DESIGN_GUIDE.md` 3장, 5장, 10장을 따른다.
 
 **구성 (위에서 아래)**
 
 | 순서 | 블록 | 컴포넌트 | 내용 |
 |---|---|---|---|
 | 1 | 키 타이틀 | LookbookTitle | 키 타이틀, 서브 라인, 키 카피 |
-| 2 | 룩북 | LookbookCollage 또는 LookbookGrid | 화보 12컷, 무작위 순서. `layout` 값으로 전환 |
+| 2 | 룩북 | LookbookCollage | 화보 12컷, 무작위 순서 |
 | 3 | 상품 리스트 | LookbookProducts | 상품 8개, 무작위 순서 |
 
 데이터는 챕터 배열 구조를 유지하지만 기본값은 챕터 1개다. 챕터를 추가하면 같은 묶음이 아래로 반복된다.
@@ -214,12 +213,12 @@ interface CartItem {
 **무작위 순서**
 - 룩북 12컷과 상품 8개의 배치 순서는 무작위로 섞는다.
 - 섞기는 접속할 때마다 하지 않고 데이터 생성 시 한 번만 한다. `lookbook.json`의 `seed` 값으로 순서가 결정되며(같은 seed면 같은 순서), seed를 바꾸고 스크립트를 다시 실행하면 새 배치가 나온다. 접속마다 섞으면 서버와 클라이언트 화면이 어긋나고, 확인한 배치를 다시 볼 수 없기 때문이다.
-- 큰 컷 자리에 어떤 이미지가 들어갈지도 무작위다. 단, 원본 가로가 1600px 미만인 이미지는 큰 컷 자리에서 제외하고 다시 뽑는다.
-- 특정 컷을 큰 컷으로 고정하고 싶으면 `lookbook.json`의 `pinLarge`에 파일명을 적는다(최대 2개). 나머지는 무작위로 채운다.
+- 섞인 순서의 5번째와 10번째 컷은 원본 가로가 1600px 이상인 이미지로 뽑는다(스크립트가 보장). 콜라주에서 어느 자리에 들어가는지는 아래 LookbookCollage를 따른다.
+- 특정 컷을 큰 컷 자리에 고정하고 싶으면 `lookbook.json`의 `pinLarge`에 파일명을 적는다(최대 2개). 나머지는 무작위로 채운다.
 
 **좌우 여백**
 - 메인의 모든 블록은 가운데 정렬된 좁은 컨테이너(MainContainer) 안에 둔다. 폭 규칙은 `DESIGN_GUIDE.md` 5장 "메인 컨테이너".
-- 타이틀, 룩북 그리드, 상품 리스트의 좌우 끝선을 모두 같은 선에 맞춘다.
+- 타이틀, 룩북, 상품 리스트의 좌우 끝선을 모두 같은 선에 맞춘다.
 
 **LookbookTitle**
 - 맨 위, 헤더 바로 아래에 위치한다. 첫 화면에서 타이틀과 룩북 첫 컷이 함께 보여야 한다(PC 1440x900 기준).
@@ -248,30 +247,6 @@ interface CartItem {
 | SHORT SEASON | Fall is short. Dress like it. | One week it's T-shirts, the next it's puffers. The days made for fall clothes are fewer than you think. Here is everything you can wear right now, before they're gone. |
 | LAYER UP | Too cold for one. Too warm for two. | Buttoned up on the way in, carried over your arm by lunch. For the days when the season changes twice before dinner: pieces that go on and come off easily, and look better stacked. |
 
-**LookbookGrid**
-- PC, 태블릿: 3열 모자이크, 총 12컷. 일반 컷 10개와 큰 컷(2열 x 2행) 2개. 6행.
-- 자리 배치는 고정이고, 어느 이미지가 어느 자리에 들어갈지만 무작위다. 큰 컷 자리는 5번과 10번.
-
-```
-[ 1 ][ 2 ][ 3 ]
-[ 4 ][   5    ]
-[ 6 ][  (큰)  ]
-[ 7 ][ 8 ][ 9 ]
-[   10   ][ 11 ]
-[  (큰)  ][ 12 ]
-```
-
-- 모바일: 2열. 큰 컷은 2열 전체 폭, 일반 컷은 순서대로 2개씩 채운다.
-- 이미지 비율이 제각각이어도 자리 비율에 맞춰 `object-fit: cover`로 채운다.
-- 룩북 컷과 상품의 연결 정보는 선택 사항이다. `productIds`가 있으면 컷을 누를 때 해당 상품 상세로 이동하고 호버 시 상품명을 보여준다. 없으면 `/new-arrivals`로 이동하고 호버 시 상품명은 표시하지 않는다.
-
-**룩북 레이아웃 전환**
-- 룩북 영역은 두 가지 레이아웃을 모두 구현해 두고 `lookbook.json`의 `layout` 값으로 전환한다.
-  - `'grid'`: 위의 LookbookGrid (3열 모자이크). 기존 코드를 삭제하거나 수정하지 않고 그대로 둔다.
-  - `'collage'`: 아래의 LookbookCollage (겹침 콜라주). 현재 기본값.
-- 값만 바꾸면 원래 그리드로 돌아가야 한다. 두 컴포넌트는 같은 데이터(같은 12컷, 같은 seed 순서)를 받는다.
-- 타이틀, 상품 리스트, 좌우 여백은 레이아웃과 무관하게 동일하다.
-
 **LookbookCollage**
 - 사진을 책상 위에 흩어 놓은 듯, 크기가 다른 컷들이 서로 겹치고 좌우로 어긋나게 놓인다. 장식 요소(스티커, 색 배경, 회전)는 쓰지 않는다. 배경은 흰색을 유지한다.
 - 12컷을 3컷씩 4개의 묶음(클러스터)으로 나눠 위에서 아래로 쌓는다. 묶음마다 아래 템플릿 중 하나를 쓰며, A → B → C → D 순서로 적용한다.
@@ -296,7 +271,7 @@ interface CartItem {
 - 묶음 사이 세로 간격은 `DESIGN_GUIDE.md` 4장을 따른다. 묶음끼리는 겹치지 않는다.
 - 모바일: 같은 템플릿을 6칸 기준으로 줄여 쓴다(칸 번호를 절반으로). 어긋남은 세로 ±12px만 적용한다.
 - 구현: CSS Grid(12칸)와 음수 margin 또는 `transform`으로 겹친다. 컨테이너 밖으로 나가지 않고 가로 스크롤이 생기지 않아야 한다. 이미지 로딩 전후로 자리가 밀리지 않도록 원본 `width`, `height`로 비율을 미리 잡는다.
-- 클릭과 호버 동작은 LookbookGrid와 같다. 겹친 부분은 위에 있는 컷이 클릭을 받는다.
+- 룩북 컷과 상품의 연결 정보는 선택 사항이다. `productIds`가 있으면 컷을 누를 때 해당 상품 상세로 이동하고 호버 시 상품명을 보여준다. 없으면 `/new-arrivals`로 이동하고 호버 시 상품명은 표시하지 않는다. 겹친 부분은 위에 있는 컷이 클릭을 받는다.
 
 **LookbookProducts**
 - 상단: 왼쪽 상품 리스트 제목, 오른쪽 상품 수.
@@ -407,5 +382,5 @@ ProductCard
 - 375px, 768px, 1024px, 1440px, 1920px에서 레이아웃이 깨지지 않고 가로 스크롤이 생기지 않는다.
 - 색상, 간격, 글자 크기를 임의 값으로 쓰지 않고 `DESIGN_GUIDE.md`의 토큰만 사용한다.
 - 키보드만으로 메뉴 이동, 드로어 열고 닫기, 옵션 선택이 가능하다.
-- 메인에서 타이틀, 룩북 그리드, 상품 리스트의 좌우 끝선이 일치하고, 등장 연출은 모션 줄이기 설정에서 꺼진다.
+- 메인에서 타이틀, 룩북, 상품 리스트의 좌우 끝선이 일치하고, 등장 연출은 모션 줄이기 설정에서 꺼진다.
 - 콘솔 오류와 타입 오류가 없다.

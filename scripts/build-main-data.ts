@@ -3,7 +3,6 @@
  *
  *   npm run build:main              현재 seed로 다시 생성
  *   npm run build:main -- --seed 7  seed를 바꿔 새 배치로 생성
- *   npm run build:main -- --layout grid  룩북 레이아웃 전환 ('grid' | 'collage'. lookbook.json의 layout을 직접 고쳐도 된다)
  *
  * 읽는 곳
  *   public/images/lookbook/   룩북 컷 12장 (폴더의 이미지 전부)
@@ -43,7 +42,6 @@ const DEFAULT_CHAPTER = {
   subline: 'FW26, SEOUL',
   copyLead: 'Finally, coat weather.',
   copy: "Cold at eight, warm by noon, and gone in a few short weeks. This is the season you wait all year to dress for. Twelve looks to end the staring-at-the-closet mornings: the coat you just throw on, the knit made for layering, the one piece you'll reach for again next fall.",
-  layout: 'collage' as 'grid' | 'collage',
   productsTitle: 'SHOP THE LOOK — COAT WEATHER',
   seed: 1007,
   pinLarge: [] as string[],
@@ -98,7 +96,7 @@ if (lookFiles.length !== EXPECT.lookbook || productFiles.length !== EXPECT.produ
 }
 
 // ---------- 2. 챕터 설정 (기존 lookbook.json이 있으면 유지) ----------
-// copyLead가 있으면 현재 스키마. 없으면 옛 스키마(copyKo 등)라서 seed와 pinLarge만 이어받고 문구와 layout은 기본값으로 교체한다.
+// copyLead가 있으면 현재 스키마. 없으면 옛 스키마(copyKo 등)라서 seed와 pinLarge만 이어받고 문구는 기본값으로 교체한다.
 const existing = readJson<Lookbook>('data/lookbook.json');
 const raw = existing?.[0] as Partial<LookbookChapter> | undefined;
 const current = raw && 'copyLead' in raw ? raw : undefined;
@@ -113,7 +111,6 @@ const base: typeof DEFAULT_CHAPTER = {
         subline: current.subline ?? DEFAULT_CHAPTER.subline,
         copyLead: current.copyLead ?? DEFAULT_CHAPTER.copyLead,
         copy: current.copy ?? DEFAULT_CHAPTER.copy,
-        layout: current.layout === 'grid' ? 'grid' : DEFAULT_CHAPTER.layout,
         productsTitle: current.productsTitle ?? DEFAULT_CHAPTER.productsTitle,
         seed: current.seed ?? DEFAULT_CHAPTER.seed,
         pinLarge: current.pinLarge ?? [],
@@ -125,12 +122,6 @@ if (seedArg > -1) {
   const n = Number(process.argv[seedArg + 1]);
   if (!Number.isInteger(n)) fail('--seed 뒤에는 정수를 적어 주세요.');
   base.seed = n;
-}
-const layoutArg = process.argv.indexOf('--layout');
-if (layoutArg > -1) {
-  const v = process.argv[layoutArg + 1];
-  if (v === 'grid' || v === 'collage') base.layout = v;
-  else fail("--layout 뒤에는 'grid' 또는 'collage'를 적어 주세요.");
 }
 const pins = (base.pinLarge ?? []).slice(0, LARGE_SLOTS.length);
 
@@ -209,7 +200,6 @@ const chapter: LookbookChapter = {
   subline: base.subline,
   copyLead: base.copyLead,
   copy: base.copy,
-  layout: base.layout,
   productsTitle: base.productsTitle,
   seed: base.seed,
   ...(pins.length ? { pinLarge: pins } : {}),

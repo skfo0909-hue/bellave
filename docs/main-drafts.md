@@ -56,7 +56,7 @@
 
 ## 복원 방법
 
-태그 `main-drafts-archive`가 가리키는 커밋이 정리 직전 상태다. (태그는 원격에도 올려 두었다: `git fetch origin tag main-drafts-archive`)
+태그 `main-drafts-archive`가 가리키는 커밋(`76a6b0d`)이 정리 직전 상태다. 이 커밋은 브랜치 `claude/new-session-xxjxfq`의 기록에도 들어 있어서, 태그가 없는 복제본에서는 `main-drafts-archive` 대신 `76a6b0d`를 쓰면 된다. (태그 자체는 원격으로 올라가지 않아 로컬에만 있다. 필요하면 `git tag main-drafts-archive 76a6b0d && git push origin main-drafts-archive`로 만든다.)
 
 1. **전체를 그 시점으로 보기**
    ```bash

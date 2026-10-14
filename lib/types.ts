@@ -36,7 +36,6 @@ export interface LookbookChapter {
   subline: string; // 서브 라인 (예: FW26, SEOUL)
   copyLead: string; // 키 카피 첫 문장 (영문, 크게)
   copy: string; // 키 카피 본문 (영문)
-  layout: 'grid' | 'collage'; // 룩북 레이아웃 전환
   productsTitle: string; // 예: SHOP THE LOOK — COAT WEATHER
   seed: number; // 무작위 순서 결정 값
   pinLarge?: string[]; // 큰 컷으로 고정할 파일명 (최대 2)
