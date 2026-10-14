@@ -11,6 +11,7 @@ const config: Config = {
       black: '#000000',
       ink: '#333333', // 주 버튼 호버
       gray: { 100: '#F2F2F0', 200: '#E5E5E5', 400: '#B3B3B3', 600: '#767676' },
+      mist: { 100: '#EFEFEF', 300: '#C7CDD2' }, // 메인 고정 배경 그라디언트
       error: '#C8102E',
       overlay: 'rgba(0,0,0,0.4)',
     },
@@ -34,7 +35,7 @@ const config: Config = {
       30: '120px',
     },
     fontFamily: {
-      key: ['Anton', 'Pretendard Variable', 'sans-serif'], // 메인 룩북 키 타이틀 전용
+      key: ['Archivo', 'Pretendard Variable', 'sans-serif'], // 메인 룩북 키 타이틀 전용 (넓은 폭, 굵기 900)
       sans: [
         'Pretendard Variable',
         'Pretendard',
@@ -46,8 +47,8 @@ const config: Config = {
     },
     fontSize: {
       // 메인 룩북 전용 키 타이틀 타이포 (DESIGN_GUIDE.md 3장)
-      'key-xl': ['clamp(64px, 9.5vw, 152px)', { lineHeight: '0.9', letterSpacing: '-0.01em' }],
-      'key-sub': ['16px', { lineHeight: '20px', letterSpacing: '0.04em' }],
+      'key-xl': ['clamp(56px, 8.3vw, 120px)', { lineHeight: '0.78', letterSpacing: '-0.03em' }],
+      'key-sub': ['24px', { lineHeight: '28px', letterSpacing: '0' }],
       'key-lead': ['32px', { lineHeight: '36px', letterSpacing: '0' }],
       'key-copy': ['18px', { lineHeight: '23px', letterSpacing: '0.01em' }],
       display: ['32px', { lineHeight: '40px', letterSpacing: '0.02em', fontWeight: '600' }],
@@ -59,7 +60,7 @@ const config: Config = {
       caption: ['12px', { lineHeight: '18px' }],
       micro: ['11px', { lineHeight: '16px', letterSpacing: '0.04em' }],
     },
-    fontWeight: { normal: '400', semibold: '600' },
+    fontWeight: { light: '300', normal: '400', semibold: '600', bold: '700' },
     extend: {
       zIndex: { side: '10', header: '100', overlay: '200', drawer: '210' },
       transitionDuration: { 200: '200ms', 300: '300ms' },

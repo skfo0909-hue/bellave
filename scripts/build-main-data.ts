@@ -9,13 +9,12 @@
  *   public/images/products/   메인 상품 컷 8장 (파일명이 look_list_ 로 시작하는 것. SHOP 상품 컷과 같은 폴더라 접두사로 구분)
  *
  * 만드는 것
- *   data/lookbook.json        챕터 배열. 이미지 12컷과 상품 8개를 seed로 섞은 순서로 담는다.
+ *   data/lookbook.json        챕터 배열. 룩북 6컷(폴더 12컷 중 해상도가 높은 순)과 상품 8개를 seed로 섞은 순서로 담는다.
  *   data/main-products.json   메인 상품 8개 (신상품, SHOP 목록에서는 숨김)
  *
  * 규칙
  *   - 섞기는 이 스크립트에서 한 번만 한다(같은 seed면 같은 순서). 접속마다 섞지 않는다.
- *   - 큰 컷 자리는 5번과 10번. 원본 가로 1600px 미만은 큰 컷에서 제외한다.
- *   - pinLarge(최대 2개)에 적은 파일은 큰 컷으로 고정하고, 나머지는 무작위로 채운다.
+ *   - 메인 룩북에는 폴더의 12컷 중 원본 가로가 큰 6컷만 쓴다(콜라주 큰 자리가 흐려지지 않게). pinLarge(최대 2개)에 적은 파일은 해상도와 상관없이 포함한다.
  *   - 수량이 12컷, 8컷과 다르면 채우거나 버리지 않고 보고한 뒤 멈춘다.
  *   - 이미 있는 lookbook.json의 seed, pinLarge, 문구는 유지한다. 문구를 바꾸려면 lookbook.json을 고치고 다시 실행한다.
  *   - 상품명, 가격 등은 data/main-products.meta.json(파일명 기준)에 적으면 임시 값 대신 쓴다.
@@ -33,8 +32,8 @@ const MAIN_PRODUCT_PREFIX = /^look_list_/i;
 const IMAGE_EXT = /\.(jpe?g|png|webp|avif)$/i;
 
 const EXPECT = { lookbook: 12, products: 8 };
-const LARGE_SLOTS = [5, 10]; // 1부터 센 큰 컷 자리
-const LARGE_MIN_WIDTH = 1600;
+const SHOW_CUTS = 6; // 메인에 쓰는 룩북 컷 수 (콜라주 묶음 2개)
+const MAX_PINS = 2;
 
 const DEFAULT_CHAPTER = {
   id: 'ch01',
@@ -123,32 +122,17 @@ if (seedArg > -1) {
   if (!Number.isInteger(n)) fail('--seed 뒤에는 정수를 적어 주세요.');
   base.seed = n;
 }
-const pins = (base.pinLarge ?? []).slice(0, LARGE_SLOTS.length);
+const pins = (base.pinLarge ?? []).slice(0, MAX_PINS);
 
-// ---------- 3. 룩북 12컷 섞기, 큰 컷 선택 ----------
+// ---------- 3. 룩북 컷 선택(해상도 높은 순 6컷)과 섞기 ----------
 const meta = lookFiles.map((file) => ({ file, ...sizeOf(LOOKBOOK_DIR, file) }));
 const byFile = new Map(meta.map((m) => [m.file, m]));
 for (const pin of pins) if (!byFile.has(pin)) fail(`pinLarge의 파일이 룩북 폴더에 없습니다: ${pin}`);
-for (const pin of pins) {
-  const m = byFile.get(pin)!;
-  if (m.width < LARGE_MIN_WIDTH) console.warn(`  [주의] 고정한 큰 컷 ${pin}은 가로 ${m.width}px로 ${LARGE_MIN_WIDTH}px 미만입니다.`);
-}
 
-const shuffled = shuffle(meta, base.seed);
-// 무작위로 뽑되 원본 가로가 1600px 미만이면 제외하고 다시 뽑는다 (섞인 순서에서 조건에 맞는 것을 앞에서부터 사용)
-const eligible = shuffled.filter((m) => m.width >= LARGE_MIN_WIDTH && !pins.includes(m.file));
 const pinned = pins.map((p) => byFile.get(p)!);
-const need = LARGE_SLOTS.length - pinned.length;
-if (eligible.length < need) {
-  fail(`큰 컷으로 쓸 수 있는 이미지(가로 ${LARGE_MIN_WIDTH}px 이상)가 부족합니다. 필요 ${need}장, 사용 가능 ${eligible.length}장.`);
-}
-const larges = shuffle([...pinned, ...eligible.slice(0, need)], base.seed + 17); // 5번과 10번 중 어디에 들어갈지도 무작위
-const rest = shuffled.filter((m) => !larges.includes(m));
-
-const ordered: typeof meta = [];
-let li = 0;
-let ri = 0;
-for (let slot = 1; slot <= EXPECT.lookbook; slot++) ordered.push(LARGE_SLOTS.includes(slot) ? larges[li++] : rest[ri++]);
+const widest = [...meta].sort((a, b) => b.width - a.width || a.file.localeCompare(b.file)).filter((m) => !pins.includes(m.file));
+const chosen = [...pinned, ...widest].slice(0, SHOW_CUTS);
+const ordered = shuffle(chosen, base.seed);
 
 const images: LookbookImage[] = ordered.map((m, i) => ({
   src: `/${LOOKBOOK_DIR.replace(/^public\//, '')}/${m.file}`,
@@ -211,8 +195,8 @@ writeFileSync(join(ROOT, 'data/main-products.json'), JSON.stringify(products, nu
 
 // ---------- 6. 보고 ----------
 console.log(`\n생성 완료 (seed ${base.seed})`);
-console.log('룩북 순서 (큰 컷 = ★):');
-ordered.forEach((m, i) => console.log(`  ${pad(i + 1)}${LARGE_SLOTS.includes(i + 1) ? '★' : ' '} ${m.file}  ${m.width}x${m.height}`));
+console.log(`룩북 ${ordered.length}컷 (폴더 ${meta.length}컷 중 해상도 높은 순):`);
+ordered.forEach((m, i) => console.log(`  ${pad(i + 1)} ${m.file}  ${m.width}x${m.height}`));
 console.log('\n상품 순서:');
 productIds.forEach((id, i) => {
   const t = usedTemp.find((u) => u.id === id)!;

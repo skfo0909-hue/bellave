@@ -8,7 +8,7 @@ import type { LookbookImage } from '@/lib/types';
 import { ENTER_EASE, useMainMotion } from './useMainMotion';
 
 /**
- * 룩북 콜라주 (CLAUDE.md 9-1장 LookbookCollage). 12컷을 3컷씩 4개 묶음(A, B, C, D 템플릿 순서)으로 나눠 위에서 아래로 쌓는다.
+ * 룩북 콜라주 (CLAUDE.md 9-1장 LookbookCollage). 컷을 3컷씩 묶음(A, B, C, D 템플릿 순서)으로 나눠 (메인은 6컷, 묶음 2개) 위에서 아래로 쌓는다.
  * 컷이 서로 겹치고 좌우로 어긋나며, 이미지는 자르지 않고 원본 비율 그대로 보여준다.
  *
  * 구현 방식
@@ -94,7 +94,10 @@ const basename = (src: string) => src.split('/').pop() ?? src;
  * - 같은 조건이면 원본 해상도가 높은 이미지를 큰 자리(넓은, 큰, 중간, 작은 순)에 먼저 배정해, 확대되어 흐려지는 것을 줄인다.
  */
 function assign(images: LookbookImage[], seed: number, pinLarge: string[] = []): LookbookImage[] {
-  const out: (LookbookImage | undefined)[] = Array(COUNT).fill(undefined);
+  // 컷 수가 12보다 적으면 앞 묶음(A, B, ...)의 자리만 쓴다 (메인은 6컷 = 묶음 2개)
+  const count = Math.min(images.length, COUNT);
+  const kinds = slotKinds.slice(0, count);
+  const out: (LookbookImage | undefined)[] = Array(count).fill(undefined);
   // 해상도 등급 순서(같은 등급은 seed로 섞은 순서 유지)
   let pool = shuffle(images, seed + 31).sort((a, b) => tier(b) - tier(a));
   const take = (pick: (i: LookbookImage) => boolean) => {
@@ -102,7 +105,7 @@ function assign(images: LookbookImage[], seed: number, pinLarge: string[] = []):
     pool = pool.filter((i) => i !== found);
     return found;
   };
-  const indexesOf = (kind: Kind) => slotKinds.map((k, i) => (k === kind ? i : -1)).filter((i) => i >= 0);
+  const indexesOf = (kind: Kind) => kinds.map((k, i) => (k === kind ? i : -1)).filter((i) => i >= 0);
 
   // 1. 큰 컷 자리에 pinLarge 고정
   const larges = shuffle(indexesOf('large'), seed + 7);
@@ -117,7 +120,7 @@ function assign(images: LookbookImage[], seed: number, pinLarge: string[] = []):
   // 2. 넓은 컷, 큰 컷 자리(순서는 섞는다): 해상도가 높은 이미지를 먼저
   const lead = shuffle([...indexesOf('wide'), ...larges.filter((i) => !out[i])], seed + 11);
   lead.forEach((slot) => {
-    out[slot] = slotKinds[slot] === 'wide' ? take((i) => i.width > i.height) : take((i) => i.width <= i.height);
+    out[slot] = kinds[slot] === 'wide' ? take((i) => i.width > i.height) : take((i) => i.width <= i.height);
   });
   // 3. 중간 컷, 작은 컷 자리
   [...shuffle(indexesOf('medium'), seed + 13), ...shuffle(indexesOf('small'), seed + 17)].forEach((slot) => {
@@ -196,7 +199,7 @@ interface ClusterData {
 
 function buildClusters(images: LookbookImage[], seed: number, pinLarge?: string[]): ClusterData[] {
   const ordered = assign(images, seed, pinLarge);
-  return TEMPLATES.map((tpl, ci) => {
+  return TEMPLATES.slice(0, Math.ceil(ordered.length / 3)).map((tpl, ci) => {
     const imgs = ordered.slice(ci * 3, ci * 3 + 3);
     let stack = 0;
     return {
@@ -206,6 +209,12 @@ function buildClusters(images: LookbookImage[], seed: number, pinLarge?: string[
     };
   });
 }
+
+/** 컷 테두리(흰색) 두께: 묶음 순서대로 [PC, 모바일]. 묶음이 더 있으면 마지막 값을 쓴다. */
+const FRAME = [
+  [12, 6],
+  [8, 4],
+];
 
 const pct = (v: number) => `${(v * 100).toFixed(4)}%`;
 
@@ -224,7 +233,7 @@ export function LookbookCollage({
   const clusters = useMemo(() => buildClusters(images, seed, pinLarge), [images, seed, pinLarge]);
   // 모션 줄이기 여부가 바뀌면 다시 마운트해 서버 렌더의 initial 값이 남지 않게 한다.
   return (
-    <div key={reduced ? 'reduced' : 'motion'} className="mt-6 flex flex-col gap-12 md:mt-8 md:gap-16 lg:mt-10 lg:gap-24">
+    <div key={reduced ? 'reduced' : 'motion'} className="mt-12 flex flex-col gap-8 md:mt-16 md:gap-12 lg:mt-20 lg:gap-16">
       {clusters.map((cluster, ci) => (
         <ul
           key={ci}
@@ -274,6 +283,7 @@ function Cut({
   // 가려진(opacity 0) 요소가 아니라 바깥 li를 감지한다. (요소의 20%가 보일 때 한 번)
   const inView = useInView(li, { once: true, amount: 0.2 });
   const over = Boolean(spec.over);
+  const frame = FRAME[Math.min(Math.floor(cut.slot / 3), FRAME.length - 1)];
   const href = image.productIds?.[0] ? `/product/${image.productIds[0]}` : '/new-arrivals';
 
   // 겹친 컷(PC만): 스크롤 연동, 바탕 컷보다 조금 빠르게 y 24px → -24px
@@ -313,6 +323,8 @@ function Cut({
           '--l-d': pct(d.left),
           '--w-d': pct(d.width),
           '--t-d': d.top,
+          '--bw-d': `${frame[0]}px`,
+          '--bw-m': `${frame[1]}px`,
           aspectRatio: `${image.width} / ${image.height}`,
           zIndex: spec.z,
         } as CSSProperties
@@ -320,8 +332,10 @@ function Cut({
     >
       <motion.div className="h-full w-full" {...enter}>
         <motion.div className="h-full w-full" style={parallax ? { y: parallaxY } : undefined}>
-          {/* 위에 올라가는 컷은 흰색 테두리 4px(모바일 3px). 그림자와 회전은 쓰지 않는다. 바탕 컷은 테두리 없음. */}
-          <div className={`group relative h-full w-full overflow-hidden bg-gray-100 ${over ? 'border-[3px] border-white md:border-4' : ''}`}>
+          {/* 모든 컷에 흰색 테두리(묶음별 두께, FRAME). 그림자와 회전은 쓰지 않는다. */}
+          <div
+            className={`group relative h-full w-full overflow-hidden bg-gray-100 border-solid border-white [border-width:var(--bw-m)] md:[border-width:var(--bw-d)]`}
+          >
             <Link href={href} className="absolute inset-0 block" aria-label={name ?? image.alt}>
               {/* 호버(PC만): 이미지 1.0 → 1.03 (0.4초) */}
               <div className="absolute inset-0 transition-transform duration-[400ms] ease-out lg:[@media(hover:hover)]:group-hover:scale-[1.03]">

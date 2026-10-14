@@ -9,76 +9,40 @@
     "seed": 1007,
     "images": [
       {
-        "src": "/images/lookbook/look_8.jpg",
-        "alt": "COAT WEATHER 룩북 컷 1",
-        "width": 375,
-        "height": 563
-      },
-      {
-        "src": "/images/lookbook/look_9.jpg",
-        "alt": "COAT WEATHER 룩북 컷 2",
-        "width": 375,
-        "height": 563
-      },
-      {
-        "src": "/images/lookbook/look_5.jpg",
-        "alt": "COAT WEATHER 룩북 컷 3",
-        "width": 375,
-        "height": 563
-      },
-      {
-        "src": "/images/lookbook/look_12.jpg",
-        "alt": "COAT WEATHER 룩북 컷 4",
-        "width": 1280,
-        "height": 1920
-      },
-      {
-        "src": "/images/lookbook/look_2.jpg",
-        "alt": "COAT WEATHER 룩북 컷 5",
-        "width": 2048,
-        "height": 3072
-      },
-      {
-        "src": "/images/lookbook/look_7.jpg",
-        "alt": "COAT WEATHER 룩북 컷 6",
-        "width": 375,
-        "height": 563
-      },
-      {
-        "src": "/images/lookbook/look_10.jpg",
-        "alt": "COAT WEATHER 룩북 컷 7",
-        "width": 750,
-        "height": 1125
-      },
-      {
-        "src": "/images/lookbook/look_4.jpg",
-        "alt": "COAT WEATHER 룩북 컷 8",
-        "width": 375,
-        "height": 563
-      },
-      {
-        "src": "/images/lookbook/look_1.jpg",
-        "alt": "COAT WEATHER 룩북 컷 9",
-        "width": 375,
-        "height": 563
-      },
-      {
         "src": "/images/lookbook/look_6.jpg",
-        "alt": "COAT WEATHER 룩북 컷 10",
-        "width": 2048,
-        "height": 3072
-      },
-      {
-        "src": "/images/lookbook/look_3.jpg",
-        "alt": "COAT WEATHER 룩북 컷 11",
+        "alt": "COAT WEATHER 룩북 컷 1",
         "width": 2048,
         "height": 3072
       },
       {
         "src": "/images/lookbook/look_11.jpg",
-        "alt": "COAT WEATHER 룩북 컷 12",
+        "alt": "COAT WEATHER 룩북 컷 2",
         "width": 1280,
         "height": 1920
+      },
+      {
+        "src": "/images/lookbook/look_12.jpg",
+        "alt": "COAT WEATHER 룩북 컷 3",
+        "width": 1280,
+        "height": 1920
+      },
+      {
+        "src": "/images/lookbook/look_2.jpg",
+        "alt": "COAT WEATHER 룩북 컷 4",
+        "width": 2048,
+        "height": 3072
+      },
+      {
+        "src": "/images/lookbook/look_3.jpg",
+        "alt": "COAT WEATHER 룩북 컷 5",
+        "width": 2048,
+        "height": 3072
+      },
+      {
+        "src": "/images/lookbook/look_10.jpg",
+        "alt": "COAT WEATHER 룩북 컷 6",
+        "width": 750,
+        "height": 1125
       }
     ],
     "productIds": [
